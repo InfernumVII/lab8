@@ -23,6 +23,11 @@
 
     <target name="compile" depends="clean">
         <mkdir dir="${classes}"/>
+        <copy todir="${classes}">
+            <fileset dir="${src}">
+                <include name="**/*.fxml"/>
+            </fileset>
+        </copy>
         <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="false" encoding="UTF-8">
             <classpath refid="classpath"/>
         </javac>

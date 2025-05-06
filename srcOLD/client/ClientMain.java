@@ -3,6 +3,7 @@ package client;
 import java.io.IOException;
 
 import client.managers.ClientCommandManager;
+import javafx.stage.Stage;
 import network.Settings;
 import network.UdpNetwork;
 import network.exceptions.TimeOutException;
@@ -20,5 +21,10 @@ public class ClientMain {
         ClientTerminal clientTerminal = new ClientTerminalWithAuth(client);
         clientTerminal.startLoop();
         
+    }
+
+    public static Stage getPrimaryStage() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPrimaryStage'");
     }
 }
