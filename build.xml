@@ -1,0 +1,70 @@
+<project name="DragonProject" default="run-server" basedir=".">
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="classes" location="${build}/classes"/>
+    <property name="lib" location="lib"/>
+    
+    <property name="server-main" value="server.ServerMain"/>
+    <property name="client-main" value="client.ClientMain"/>
+    
+
+    <path id="classpath">
+        <fileset dir="${lib}">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement location="${classes}"/>
+    </path>
+
+
+    <target name="clean">
+        <delete dir="${build}"/>
+    </target>
+
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes}"/>
+        <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="false" encoding="UTF-8">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+
+    <target name="run-server" depends="compile">
+        <java classname="${server-main}" fork="true">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+
+    <target name="run-client" depends="compile">
+        <java classname="${client-main}" fork="true">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+ 
+    <target name="package-server" depends="compile">
+        <tstamp/>
+        <jar destfile="${build}/server-${DSTAMP}.jar" basedir="${classes}">
+            <manifest>
+                <attribute name="Main-Class" value="${server-main}"/>
+            </manifest>
+            <include name="server/**"/>
+            <include name="shared/**"/>
+            <zipgroupfileset dir="${lib}" includes="*.jar"/>
+        </jar>
+    </target>
+
+
+    <target name="package-client" depends="compile">
+        <tstamp/>
+        <jar destfile="${build}/client-${DSTAMP}.jar" basedir="${classes}">
+            <manifest>
+                <attribute name="Main-Class" value="${client-main}"/>
+            </manifest>
+            <include name="client/**"/>
+            <include name="shared/**"/>
+            <!-- <zipgroupfileset dir="${lib}" includes="*.jar"/> -->
+        </jar>
+    </target>
+</project>
