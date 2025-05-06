@@ -54,9 +54,20 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </PasswordField>
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="6.0" prefWidth="59.0" style="-fx-background-color: transparent; -fx-font-smoothing-type: gray;" text="Sign Up" textFill="WHITE" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="270.0" top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+               </padding>
+            </Button>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="50.0" prefWidth="350.0" style="-fx-font-smoothing-type: gray;" text="Log In" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets top="65.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="18.0" />
