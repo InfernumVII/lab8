@@ -21,7 +21,7 @@ public class ServerMain {
         }
         return new Manager(settings);
     }
-    public static Manager getManagerInsance(){
+    public static Manager getManagerInsance(){ // Q: Так а зачем из мэйна забирать менеджер, если можно передавать его в конструктор тех объектов, где он используется
         return managerInstance;
     }
     public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class ServerMain {
             ServerTerminalThread sTerminalThread = new ServerTerminalThread(sTerminal);
             
             sTerminalThread.start();
-            server.start(true);
+            server.start(true); // Q: что за кондишон ахахаха
         } catch (IOException | ClassNotFoundException e){
             throw new RuntimeException(e);
         } 

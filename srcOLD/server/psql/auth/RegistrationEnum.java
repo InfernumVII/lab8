@@ -1,6 +1,6 @@
 package server.psql.auth;
 
-public enum RegistrationEnums {
+public enum RegistrationEnum {
     LOGIN_IS_EXIST,
     SUCCESSFUL,
     UNSUCCESSFUL

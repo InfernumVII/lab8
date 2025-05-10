@@ -27,16 +27,16 @@ public class Auth extends PSQL {
         return resultSet.next();
     }
 
-    public RegistrationEnums registerUser(server.psql.auth.User user){
+    public RegistrationEnum registerUser(server.psql.auth.User user){
         try {
             if (checkLoginIsExist(user.getLogin())){
-                return RegistrationEnums.LOGIN_IS_EXIST;
+                return RegistrationEnum.LOGIN_IS_EXIST;
             } else {
                 boolean inserted = insertUser(user);
                 if (inserted == true){
-                    return RegistrationEnums.SUCCESSFUL;
+                    return RegistrationEnum.SUCCESSFUL;
                 } else {
-                    return RegistrationEnums.UNSUCCESSFUL;
+                    return RegistrationEnum.UNSUCCESSFUL;
                 }
             }
         } catch (SQLException e){

@@ -1,8 +1,6 @@
 package client;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Enumeration;
 
 import client.view.login.LoginSceneController;
 import javafx.application.Application;
@@ -10,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import shared.Some;
 
 public class ClientMain extends Application {
 
@@ -23,7 +20,7 @@ public class ClientMain extends Application {
             primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         

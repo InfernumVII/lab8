@@ -71,7 +71,7 @@ public class Settings {
         }
 
         public Settings build() throws BlankCreds{
-            if (this.username.isEmpty() | this.password.isEmpty()){
+            if (this.username.isEmpty() | this.password.isEmpty()){ // Q: здесь надо | или ||? В чем отличие?
                 throw new BlankCreds();
             }
             return new Settings(this);
