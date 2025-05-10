@@ -1,0 +1,12 @@
+.text-field {
+    -fx-background-color:  #37373E;
+    -fx-text-fill:  #FFFFFF;
+    -fx-font-smoothing-type: gray; /*maybe not needed*/
+}
+.login-button {
+    -fx-font-smoothing-type: gray; /*maybe not needed*/
+}
+/* .signup-button {
+    -fx-background-color: transparent;
+    -fx-font-smoothing-type: gray;
+} */

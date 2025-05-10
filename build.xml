@@ -26,6 +26,7 @@
         <copy todir="${classes}">
             <fileset dir="${src}">
                 <include name="**/*.fxml"/>
+                <include name="**/*.css"/>
             </fileset>
         </copy>
         <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="false" encoding="UTF-8">
