@@ -10,3 +10,6 @@
     -fx-background-color: transparent;
     -fx-font-smoothing-type: gray;
 } */
+.background {
+    -fx-background-color: #28272F;
+}

@@ -29,4 +29,8 @@ public class LoginSceneController implements Initializable {
     public void signUpMouseExited(){
         signUp.setStrokeWidth(0);
     }
+
+    public void signUpClicked(){
+        
+    }
 }
