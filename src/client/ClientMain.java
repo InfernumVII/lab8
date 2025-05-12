@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
@@ -18,7 +19,8 @@ public class ClientMain extends Application {
     public void start(Stage primaryStage){ 
         try {
             Parent root = FXMLLoader.load(LoginSceneController.class.getResource("resources/LoginScene.fxml"));
-            Scene scene = new Scene(root);
+            StackPane parent = new StackPane(root);
+            Scene scene = new Scene(parent);
             primaryStage.centerOnScreen();
             primaryStage.setResizable(false);
             primaryStage.setScene(scene);

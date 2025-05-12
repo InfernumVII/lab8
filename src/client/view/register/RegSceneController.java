@@ -15,22 +15,12 @@ public class RegSceneController implements Initializable {
     @FXML
     private PasswordField password;
     @FXML
-    private Text signUp;
+    private Text error;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(username);
     }
 
-    public void signUpMouseEntered(){
-        signUp.setStrokeWidth(0.1);
-    }
 
-    public void signUpMouseExited(){
-        signUp.setStrokeWidth(0);
-    }
-
-    public void signUpClicked(){
-        
-    }
 }
