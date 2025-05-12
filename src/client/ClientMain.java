@@ -52,6 +52,10 @@ public class ClientMain extends Application {
         }
     }
 
+    public static ClientUdpNetwork getClient(){
+        return client;
+    }
+
     public static void main(String[] args) {
         initClient();
         Application.launch(args);

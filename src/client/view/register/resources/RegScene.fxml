@@ -62,7 +62,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" stylesheets="@styles.css" text="Sign Up" VBox.vgrow="ALWAYS">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSignUpClicked" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" stylesheets="@styles.css" text="Sign Up" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets top="40.0" />
                </VBox.margin>

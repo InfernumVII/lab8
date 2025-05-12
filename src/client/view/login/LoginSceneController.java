@@ -1,9 +1,12 @@
 package client.view.login;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import client.ClientMain;
+import client.view.auth.AuthController;
 import client.view.register.RegSceneController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -20,18 +23,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import server.psql.auth.User;
+import shared.network.exceptions.TimeOutException;
+import shared.network.models.Answer;
+import shared.network.models.NetCommandAuth;
 
-public class LoginSceneController implements Initializable {
+public class LoginSceneController extends AuthController implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private TextField username;
-    @FXML
-    private PasswordField password;
-    @FXML
     private Text signUp;
-    @FXML
-    private Text error;
 
     private Parent regScene;
 
@@ -66,5 +67,25 @@ public class LoginSceneController implements Initializable {
             parent.getChildren().remove(rootPane);
         });
         timeline.play();;
+    }
+
+    public void onLoginClicked(){
+        if (validateFields()){
+            final User user = new User(username.getText(), password.getText());
+            NetCommandAuth netCommandAuth = new NetCommandAuth("auth", user, user);
+            try {
+                Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+                boolean answerB = (boolean) answer.answer();
+                if (answerB == true){
+                    printError("Successful authorization"); //TODO should move to the nextScene
+                    AuthController.setCheckUser(user);
+                } else {
+                    printError("Incorrect username or password");
+                }
+            } catch (IOException | ClassNotFoundException | TimeOutException e){
+                e.printStackTrace();
+                System.exit(1);
+            }
+        }
     }
 }
