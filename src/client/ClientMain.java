@@ -11,9 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import shared.network.Settings;
 
 
 public class ClientMain extends Application {
+    private static ClientUdpNetwork client;
 
     @Override
     public void start(Stage primaryStage){ 
@@ -31,8 +33,17 @@ public class ClientMain extends Application {
         
     }
 
+    private static void initClient(){
+        Settings settings = new ClientSettings();
+        try {
+            client = new ClientUdpNetwork(settings);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
-        
+        initClient();
         Application.launch(args);
     }
 }
