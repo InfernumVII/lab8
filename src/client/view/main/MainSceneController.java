@@ -1,9 +1,14 @@
 package client.view.main;
 
 import shared.collection.Color;
+import shared.collection.Coordinates;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
+import shared.collection.DragonHead;
 import shared.collection.DragonType;
+
+import java.time.LocalDate;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -54,10 +59,29 @@ public class MainSceneController {
             return row;
         });
         
-        // Типа пример задания элементов
+
+        // Это просто пример добавления в таблицу, забей, можно вырезать
+
+        // Coordinates coordinates = new Coordinates(100, 200);
+
+        // DragonHead head = new DragonHead(0.1f);
+
+        // // Создание дракона с помощью Builder
+        // Dragon dragon = new Dragon.Builder()
+        //         .withId(1)
+        //         .withName("Smaug")
+        //         .withCoordinates(coordinates)
+        //         .withDate(LocalDate.now())
+        //         .withAge(150L)
+        //         .withColor(Color.BROWN)
+        //         .withType(DragonType.FIRE)
+        //         .withCharacter(DragonCharacter.CHAOTIC_EVIL)
+        //         .withHead(head)
+        //         .withOwnerId(42)
+        //         .build();
+        // //Типа пример задания элементов
         // tableView.setItems(FXCollections.observableArrayList(
-        //     new Dragon.Builder().withId(1).withName("Dragon1").build(),
-        //     new Dragon.Builder().withId(2).withName("Dragon2").build()
+        //     dragon
         // ));
     }
 
