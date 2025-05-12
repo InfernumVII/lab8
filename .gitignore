@@ -2,4 +2,4 @@
 *.class
 /build/
 .vscode
-**/ClientSettings.java
+src/client/ClientSettings.java
