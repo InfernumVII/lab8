@@ -66,6 +66,5 @@ public class LoginSceneController implements Initializable {
             parent.getChildren().remove(rootPane);
         });
         timeline.play();;
-        
     }
 }

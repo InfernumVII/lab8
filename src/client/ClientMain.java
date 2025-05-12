@@ -1,6 +1,7 @@
 package client;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.URL;
 import java.util.Enumeration;
 
@@ -12,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import shared.network.Settings;
+import shared.network.exceptions.TimeOutException;
+import shared.network.models.NetCommandAuth;
 
 
 public class ClientMain extends Application {
@@ -39,6 +42,12 @@ public class ClientMain extends Application {
             client = new ClientUdpNetwork(settings);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+        try {
+            client.sendAndGetAnswer(new NetCommandAuth("help", null, null));
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
         }
     }
 
