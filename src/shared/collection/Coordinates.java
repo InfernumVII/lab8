@@ -37,7 +37,7 @@ public class Coordinates implements Serializable {
      *
      * @return координата x.
      */
-    public long getX() {
+    public Long getX() {
         return x;
     }
 
@@ -55,7 +55,7 @@ public class Coordinates implements Serializable {
      *
      * @return координата y.
      */
-    public long getY() {
+    public Long getY() {
         return y;
     }
 

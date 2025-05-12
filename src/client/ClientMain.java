@@ -17,7 +17,6 @@ import shared.network.Settings;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.NetCommandAuth;
 
-
 public class ClientMain extends Application {
     private static ClientUdpNetwork client;
 
@@ -31,7 +30,7 @@ public class ClientMain extends Application {
             primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         
