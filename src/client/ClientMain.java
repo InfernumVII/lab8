@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import server.psql.auth.User;
 import shared.network.Settings;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.NetCommandAuth;
@@ -44,7 +45,7 @@ public class ClientMain extends Application {
             throw new RuntimeException(e);
         }
         try {
-            client.sendAndGetAnswer(new NetCommandAuth("help", null, null));
+            client.sendAndGetAnswer(new NetCommandAuth("123", new User("123", "123"), new User("123", "123")));
         } catch (ClassNotFoundException | IOException | TimeOutException e) {
             System.err.println(e.getMessage());
             System.exit(1);
