@@ -15,7 +15,7 @@ import shared.network.models.Answer;
 import shared.network.models.NetCommand;
 import shared.network.models.NetCommandAuth;
 import server.managers.exceptions.ParseCommandException;
-import server.psql.auth.RegistrationEnum;
+import server.psql.auth.RegistrationEnums;
 import server.psql.auth.User;
 
 public class ClientTerminalWithAuth extends ClientTerminal {
@@ -52,7 +52,7 @@ public class ClientTerminalWithAuth extends ClientTerminal {
         NetCommandAuth netCommandAuth = new NetCommandAuth("reg", user, user);
         try {
             Answer answer = cUdpNetwork.sendAndGetAnswer(netCommandAuth);
-            RegistrationEnum answerE = (RegistrationEnum) answer.answer();
+            RegistrationEnums answerE = (RegistrationEnums) answer.answer();
             switch (answerE) {
                 case LOGIN_IS_EXIST:
                     System.out.println("Пользователь с таким логином уже существует");

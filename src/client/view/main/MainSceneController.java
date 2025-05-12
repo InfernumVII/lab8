@@ -1,9 +1,9 @@
 package client.view.main;
 
-import collection.Color;
-import collection.Dragon;
-import collection.DragonCharacter;
-import collection.DragonType;
+import shared.collection.Color;
+import shared.collection.Dragon;
+import shared.collection.DragonCharacter;
+import shared.collection.DragonType;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,7 +25,7 @@ public class MainSceneController {
     @FXML private TableColumn<Dragon, Color> colorColumn;
     @FXML private TableColumn<Dragon, DragonType> typeColumn;
     @FXML private TableColumn<Dragon, DragonCharacter> characterColumn;
-    @FXML private TableColumn<Dragon, Integer> numOfEyesColumn;
+    @FXML private TableColumn<Dragon, Float> numOfEyesColumn;
     @FXML private Canvas canvas;
     @FXML private MenuItem logoutMenuItem;
 
