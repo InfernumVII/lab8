@@ -30,8 +30,9 @@ public class ClientMain extends Application {
             primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.exit(1);
         }
         
     }
