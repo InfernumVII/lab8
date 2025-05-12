@@ -8,14 +8,14 @@ import java.io.Serializable;
 public class DragonHead implements Serializable {
     private static final long serialVersionUID = 1L; // уникальный идентификатор версии сериализованного класса. 
 
-    private Float eyesCount; //Поле может быть null и положительным
+    private Integer eyesCount; //Поле может быть null и положительным
 
     /**
      * Конструктор для создания объекта головы дракона.
      *
      * @param eyesCount количество глаз у дракона (может быть null).
      */
-    public DragonHead(float eyesCount) {
+    public DragonHead(Integer eyesCount) {
         this.eyesCount = eyesCount;
     }
 
@@ -34,7 +34,7 @@ public class DragonHead implements Serializable {
      *
      * @return количество глаз у дракона.
      */
-    public Float getEyesCount() {
+    public Integer getEyesCount() {
         return eyesCount;
     }
 

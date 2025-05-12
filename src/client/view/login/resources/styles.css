@@ -5,6 +5,7 @@
 }
 .login-button {
     -fx-font-smoothing-type: gray; /*maybe not needed*/
+    -fx-cursor: hand;
 }
 /* .signup-button {
     -fx-background-color: transparent;
