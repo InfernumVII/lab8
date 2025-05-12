@@ -1,0 +1,74 @@
+/* ===== Базовые стили ===== */
+.root {
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #fdfdfd;
+}
+
+/* ===== MenuBar ===== */
+.menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #333333;
+    -fx-font-weight: semi-bold;
+}
+
+/* ===== MenuItem ===== */
+.menu-item {
+    -fx-padding: 6 12 6 12;
+    -fx-font-size: 13px;
+}
+
+/* ===== TableView ===== */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-table-cell-border-color: #eeeeee;
+}
+
+/* Заголовки колонок */
+.table-view .column-header {
+    -fx-background-color: #f7f7f7;
+    -fx-font-weight: bold;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+/* Строки */
+.table-row-cell {
+    -fx-background-color: white;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #f0f4f8;
+}
+
+.table-row-cell:filled:selected, .table-cell:filled:selected {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+}
+
+/* ===== Canvas ===== */
+.canvas {
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-background-color: #ffffff;
+}
+
+/* ===== SplitPane ===== */
+.split-pane {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.split-pane-divider {
+    -fx-background-color: #dddddd;
+    -fx-pref-width: 1;
+}
+
