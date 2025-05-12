@@ -17,7 +17,7 @@
 
 <!--https://codepen.io/fghty/pen/PojKNEG-->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" style="-fx-background-color: #28272F;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.login.LoginSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.login.LoginSceneController">
    <children>
       <Text fill="WHITE" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" text="Login" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
@@ -55,7 +55,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </PasswordField>
-            <Text fx:id="signUp" fill="WHITE" onMouseEntered="#signUpMouseEntered" onMouseExited="#signUpMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+            <Text fx:id="signUp" fill="WHITE" onMouseClicked="#signUpClicked" onMouseEntered="#signUpMouseEntered" onMouseExited="#signUpMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
