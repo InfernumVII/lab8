@@ -1,4 +1,4 @@
-package client.view.login;
+package client.view.register;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,7 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class LoginSceneController implements Initializable {
+public class RegSceneController implements Initializable {
     @FXML
     private TextField username;
     @FXML
