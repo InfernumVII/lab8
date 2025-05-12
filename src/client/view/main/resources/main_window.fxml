@@ -41,7 +41,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="719.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="719.0" prefWidth="1023.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar prefHeight="29.0" prefWidth="956.0" VBox.vgrow="NEVER">
       <menus>
@@ -54,7 +54,7 @@
     </MenuBar>
       <SplitPane dividerPositions="0.5" prefHeight="692.0" prefWidth="702.0">
          <items>
-            <TableView prefHeight="690.0" prefWidth="602.0">
+            <TableView prefHeight="690.0" prefWidth="651.0">
               <columns>
                 <TableColumn prefWidth="29.0" text="Id" />
                 <TableColumn prefWidth="121.0" text="Name" />
@@ -68,7 +68,7 @@
                   <TableColumn prefWidth="56.0" text="Num of eyes" />
               </columns>
             </TableView>
-            <Canvas height="690.0" width="379.0" />
+            <Canvas height="690.0" width="417.0" />
          </items>
       </SplitPane>
   </children>

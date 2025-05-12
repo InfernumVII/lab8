@@ -14,7 +14,7 @@
 
 .menu-bar .label {
     -fx-text-fill: #333333;
-    -fx-font-weight: semi-bold;
+    -fx-font-weight: bold;
 }
 
 /* ===== MenuItem ===== */
