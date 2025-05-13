@@ -1,4 +1,6 @@
 <project name="DragonProject" default="run-server" basedir=".">
+
+    
     <property name="src" location="src"/>
     <property name="build" location="build"/>
     <property name="classes" location="${build}/classes"/>
@@ -29,7 +31,12 @@
                 <include name="**/*.css"/>
             </fileset>
         </copy>
-        <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="false" encoding="UTF-8">
+        <javac 
+            srcdir="${src}" 
+            destdir="${classes}" 
+            includeAntRuntime="false" 
+            encoding="UTF-8"
+            release="21">
             <classpath refid="classpath"/>
         </javac>
     </target>

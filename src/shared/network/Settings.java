@@ -3,7 +3,7 @@ public abstract class Settings {
     private String ip;
     private int port;
     private final String ipDefault = "0.0.0.0";
-    private final int portDefault = 1111;
+    private final int portDefault = 50000;
 
 
     public Settings(String ip, int port){
