@@ -9,37 +9,34 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="client.view.main.MainSceneController"
-      prefHeight="719.0" prefWidth="1023.0" stylesheets="@styles.css"
-      xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="719.0" prefWidth="1023.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainSceneController">
   <children>
-    <MenuBar prefHeight="29.0" prefWidth="956.0" VBox.vgrow="NEVER">
+    <MenuBar prefHeight="29.0" prefWidth="956.0" styleClass="background" stylesheets="@styles.css" VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="Username">
+        <Menu fx:id="currentUserName" mnemonicParsing="false" styleClass="background" text="Username">
           <items>
-            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Log out" />
+            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" styleClass="background" text="Log out" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <SplitPane dividerPositions="0.5" prefHeight="692.0" prefWidth="702.0">
       <items>
-        <TableView fx:id="tableView" prefHeight="690.0" prefWidth="651.0">
+        <TableView fx:id="tableView" prefHeight="690.0" prefWidth="651.0" styleClass="background">
           <columns>
-            <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
-            <TableColumn fx:id="nameColumn" prefWidth="121.0" text="Name" />
-            <TableColumn fx:id="coordXColumn" prefWidth="61.0" text="Coord X" />
-            <TableColumn fx:id="coordYColumn" prefWidth="60.0" text="Coord Y" />
-            <TableColumn fx:id="creationDateColumn" prefWidth="125.0" text="Creation date" />
-            <TableColumn fx:id="ageColumn" prefWidth="44.0" text="Age" />
-            <TableColumn fx:id="colorColumn" prefWidth="65.0" text="Color" />
-            <TableColumn fx:id="typeColumn" prefWidth="56.0" text="Type" />
-            <TableColumn fx:id="characterColumn" prefWidth="90.0" text="Character" />
+            <TableColumn fx:id="idColumn" prefWidth="29.0" styleClass="background" text="Id" />
+            <TableColumn fx:id="nameColumn" prefWidth="121.0" styleClass="background" text="Name" />
+            <TableColumn fx:id="coordXColumn" prefWidth="61.0" styleClass="background" text="Coord X" />
+            <TableColumn fx:id="coordYColumn" prefWidth="60.0" styleClass="background" text="Coord Y" />
+            <TableColumn fx:id="creationDateColumn" prefWidth="125.0" styleClass="background" text="Creation date" />
+            <TableColumn fx:id="ageColumn" prefWidth="44.0" styleClass="background" text="Age" />
+            <TableColumn fx:id="colorColumn" prefWidth="65.0" styleClass="background" text="Color" />
+            <TableColumn fx:id="typeColumn" prefWidth="56.0" styleClass="background" text="Type" />
+            <TableColumn fx:id="characterColumn" prefWidth="90.0" styleClass="background" text="Character" />
             <TableColumn fx:id="numOfEyesColumn" prefWidth="56.0" text="Num of eyes" />
           </columns>
         </TableView>
-        <Canvas fx:id="canvas" height="690.0" width="417.0" />
+        <Canvas fx:id="canvas" height="690.0" styleClass="background" width="417.0" />
       </items>
     </SplitPane>
   </children>

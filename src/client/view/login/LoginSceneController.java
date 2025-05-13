@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import client.ClientMain;
 import client.view.auth.AuthController;
+import client.view.main.MainSceneController;
 import client.view.register.RegSceneController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -66,8 +67,29 @@ public class LoginSceneController extends AuthController implements Initializabl
         timeline.setOnFinished(event -> {
             parent.getChildren().remove(rootPane);
         });
-        timeline.play();;
+        timeline.play();
     }
+
+
+    public void switchToMainScene() {
+        try {
+            Scene currentScene = username.getScene();
+
+            StackPane parent = (StackPane) currentScene.getRoot();
+            Parent mainScene = FXMLLoader.load(MainSceneController.class.getResource("resources/MainWindow.fxml"));
+
+            mainScene.translateXProperty().set(0);
+
+            parent.getChildren().add(mainScene);
+            parent.getChildren().remove(rootPane);
+
+            currentScene.getWindow().sizeToScene();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void onLoginClicked(){
         if (validateFields()){
@@ -77,8 +99,8 @@ public class LoginSceneController extends AuthController implements Initializabl
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
                 boolean answerB = (boolean) answer.answer();
                 if (answerB == true){
-                    printError("Successful authorization"); //TODO should move to the nextScene
                     AuthController.setCheckUser(user);
+                    switchToMainScene();
                     
                 } else {
                     printError("Incorrect username or password");

@@ -1,17 +1,12 @@
 package client.view.main;
 
 import shared.collection.Color;
-import shared.collection.Coordinates;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
-import shared.collection.DragonHead;
 import shared.collection.DragonType;
-
-import java.time.LocalDate;
-
+import client.view.auth.AuthController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
@@ -33,6 +28,7 @@ public class MainSceneController {
     @FXML private TableColumn<Dragon, Float> numOfEyesColumn;
     @FXML private Canvas canvas;
     @FXML private MenuItem logoutMenuItem;
+    @FXML private Menu currentUserName;
 
     private final ContextMenu contextMenu = new ContextMenu();
 
@@ -49,6 +45,8 @@ public class MainSceneController {
         typeColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getType()));
         characterColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCharacter()));
         numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getHead().getEyesCount()));
+
+        currentUserName.setText(AuthController.getCheckUser().getLogin());
     
         // Инициализация контекстного меню
         setupContextMenu();
@@ -58,6 +56,7 @@ public class MainSceneController {
             row.setOnMouseClicked(event -> handleRowRightClick(event, row));
             return row;
         });
+        
         
 
         // Это просто пример добавления в таблицу, забей, можно вырезать
