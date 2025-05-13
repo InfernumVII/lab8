@@ -79,6 +79,7 @@ public class LoginSceneController extends AuthController implements Initializabl
                 if (answerB == true){
                     printError("Successful authorization"); //TODO should move to the nextScene
                     AuthController.setCheckUser(user);
+                    
                 } else {
                     printError("Incorrect username or password");
                 }
