@@ -4,15 +4,23 @@ import shared.collection.Color;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
 import shared.collection.DragonType;
+import shared.network.exceptions.TimeOutException;
+import shared.network.models.Answer;
+import shared.network.models.NetCommandAuth;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.io.IOException;
 
+import client.ClientMain;
 import client.view.auth.AuthController;
 import client.view.login.LoginSceneController;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +32,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import server.psql.auth.RegistrationEnums;
+
+import java.util.TimerTask;
+import java.util.Timer;
+
 
 public class MainSceneController implements Initializable{
 
@@ -42,6 +55,8 @@ public class MainSceneController implements Initializable{
     @FXML private Canvas canvas;
     @FXML private MenuItem logoutMenuItem;
     @FXML private Menu currentUserName;
+
+    private Timer timer = new Timer();
 
 
     private final ContextMenu contextMenu = new ContextMenu();
@@ -62,40 +77,19 @@ public class MainSceneController implements Initializable{
 
         currentUserName.setText(AuthController.getCheckUser().getLogin());
     
-        // Инициализация контекстного меню
         setupContextMenu();
+
+
+        Updater updater = new Updater(this);
+        timer.scheduleAtFixedRate(updater, 0, 1000);
+
 
         tableView.setRowFactory(tv -> {
             TableRow<Dragon> row = new TableRow<>();
             row.setOnMouseClicked(event -> handleRowRightClick(event, row));
             return row;
         });
-        
-        
 
-        // Это просто пример добавления в таблицу, забей, можно вырезать
-
-        // Coordinates coordinates = new Coordinates(100, 200);
-
-        // DragonHead head = new DragonHead(0.1f);
-
-        // // Создание дракона с помощью Builder
-        // Dragon dragon = new Dragon.Builder()
-        //         .withId(1)
-        //         .withName("Smaug")
-        //         .withCoordinates(coordinates)
-        //         .withDate(LocalDate.now())
-        //         .withAge(150L)
-        //         .withColor(Color.BROWN)
-        //         .withType(DragonType.FIRE)
-        //         .withCharacter(DragonCharacter.CHAOTIC_EVIL)
-        //         .withHead(head)
-        //         .withOwnerId(42)
-        //         .build();
-        // //Типа пример задания элементов
-        // tableView.setItems(FXCollections.observableArrayList(
-        //     dragon
-        // ));
     }
 
 
@@ -154,11 +148,43 @@ public class MainSceneController implements Initializable{
         }
     }
 
+    public void updateTable () {
+        // TODO
+        System.out.println("Update");
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("show", null, AuthController.getCheckUser());
+
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            List<Dragon> answerList = (List<Dragon>) answer.answer();
+            Platform.runLater(() -> tableView.setItems(FXCollections.observableList(answerList)));
+
+        } catch (IOException | ClassNotFoundException | TimeOutException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
 
     @FXML
     private void logoutClicked() {
+        timer.cancel();
         AuthController.setCheckUser(null);
         switchToLoginScene();
     }
     
+}
+
+
+class Updater extends TimerTask {
+    private MainSceneController controller;
+
+    public Updater(MainSceneController controller) {
+        this.controller = controller;
+    }
+
+    @Override
+    public void run() {
+        controller.updateTable();
+    }
 }
