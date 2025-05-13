@@ -9,18 +9,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="719.0" prefWidth="1023.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainSceneController">
+<VBox fx:id="rootVBox" prefHeight="719.0" prefWidth="1023.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainSceneController">
   <children>
     <MenuBar prefHeight="29.0" prefWidth="956.0" styleClass="background" stylesheets="@styles.css" VBox.vgrow="NEVER">
       <menus>
         <Menu fx:id="currentUserName" mnemonicParsing="false" styleClass="background" text="Username">
           <items>
-            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" styleClass="background" text="Log out" />
+            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#logoutClicked" styleClass="background" text="Log out" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.5" prefHeight="692.0" prefWidth="702.0">
+    <SplitPane dividerPositions="0.5886385896180215" prefHeight="692.0" prefWidth="702.0">
       <items>
         <TableView fx:id="tableView" prefHeight="690.0" prefWidth="651.0" styleClass="background">
           <columns>

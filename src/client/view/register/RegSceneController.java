@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import client.ClientMain;
 import client.view.auth.AuthController;
 import client.view.login.LoginSceneController;
+import client.view.main.MainSceneController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -40,6 +41,26 @@ public class RegSceneController extends AuthController implements Initializable 
     public void initialize(URL location, ResourceBundle resources) {
     }
 
+    public void switchToMainScene() {
+        try {
+            Scene currentScene = username.getScene();
+
+            StackPane parent = (StackPane) currentScene.getRoot();
+            Parent mainScene = FXMLLoader.load(MainSceneController.class.getResource("resources/MainWindow.fxml"));
+
+            mainScene.translateXProperty().set(0);
+
+            parent.getChildren().add(mainScene);
+            parent.getChildren().remove(rootPane);
+
+            currentScene.getWindow().sizeToScene();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void onSignUpClicked(){
         if (validateFields()){
             final User user = new User(username.getText(), password.getText());
@@ -52,8 +73,8 @@ public class RegSceneController extends AuthController implements Initializable 
                         printError("The user with this username already exists");
                         break;
                     case SUCCESSFUL:
-                        printError("Successful registration"); //TODO move to the next Scene
                         AuthController.setCheckUser(user);
+                        switchToMainScene();
                         break;
                     case UNSUCCESSFUL:
                         printError("Registration error");
