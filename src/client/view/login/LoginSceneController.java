@@ -61,7 +61,7 @@ public class LoginSceneController extends AuthController implements Initializabl
         parent.getChildren().addAll(regScene);
         Timeline timeline = new Timeline();
         KeyValue kv = new KeyValue(regScene.translateXProperty(), 0, Interpolator.EASE_BOTH);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.1), kv);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.3), kv);
         timeline.getKeyFrames().add(kf);
         timeline.setOnFinished(event -> {
             parent.getChildren().remove(rootPane);

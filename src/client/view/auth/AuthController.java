@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     protected boolean validateFields(){
-        return validateLogin() || validatePassword();
+        return validateLogin() && validatePassword();
     }
 
     private boolean validateLogin(){
