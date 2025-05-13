@@ -114,7 +114,8 @@ public class MainSceneController implements Initializable{
         setupColumns();
         Platform.runLater(() -> {
             updateParent();
-            addGradientCircle();
+            addGradientCircle(); //Maybe not needed LOOKS UGLY :}
+            //TODO add some object to the background to make table looks better
         });
         
 
