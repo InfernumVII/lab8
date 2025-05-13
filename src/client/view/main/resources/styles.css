@@ -1,12 +1,57 @@
-.background {
-    -fx-background-color: #28272F;
+* {
+    -fx-top-color: #33333A;
+    -fx-bottom-color: #37373E;
+    -fx-font-color: #FFFFFF;
+    -fx-font-size: 16px;
 }
-.text {
-    -fx-fill:  #FFFFFF;  
-}
+
+/* MAIN PANES */
 .root {
-    -fx-background-color: #28272F;
+    -fx-background-color: -fx-bottom-color;
 }
-.background2 {
-    -fx-background-color:  #37373E;
+.split-pane {
+    -fx-background-color: -fx-bottom-color;
 }
+
+/* MENU BAR */
+.menu-bar {
+    -fx-background-color: -fx-top-color;
+}
+.menu-bar .label {
+    -fx-text-fill: -fx-font-color;
+}
+
+/* CONTEXT MENUS*/
+.context-menu { /*https://stackoverflow.com/questions/12299162/how-to-style-menu-button-and-menu-items*/
+    -fx-background-color: -fx-top-color;
+}
+.context-menu .label {
+    -fx-text-fill: -fx-font-color;
+}
+
+/* TABLE VIEWS */
+.table-view {
+    -fx-background-color: -fx-bottom-color;
+}
+.table-view .placeholder .label { /*No content in the table text*/
+    -fx-text-fill: -fx-font-color;
+}
+
+.table-column {
+    -fx-background-color: -fx-bottom-color;
+    -fx-text-fill: -fx-font-color;
+}
+.table-column .label {
+    -fx-text-fill: -fx-font-color;
+}
+
+/* This styles the grid lines between cells */
+.table-row-cell {
+    /* -fx-border-color: #555555; */
+    -fx-table-cell-border-color: -fx-bottom-color; 
+}
+
+/* This styles the grid lines between columns */
+/* .table-view *.column-resize-line {
+    -fx-background-color: #555555; 
+} */
