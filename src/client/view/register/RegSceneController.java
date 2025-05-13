@@ -6,11 +6,23 @@ import java.util.ResourceBundle;
 
 import client.ClientMain;
 import client.view.auth.AuthController;
+import client.view.login.LoginSceneController;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import server.psql.auth.RegistrationEnums;
 import server.psql.auth.User;
 import shared.network.exceptions.TimeOutException;
@@ -18,10 +30,14 @@ import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
 
 public class RegSceneController extends AuthController implements Initializable {
+    @FXML
+    private Text backButton;
+    @FXML
+    private AnchorPane rootPane;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(username);
     }
 
     public void onSignUpClicked(){
@@ -49,7 +65,38 @@ public class RegSceneController extends AuthController implements Initializable 
         }
     }
 
-    
+    public void backOnMouseEntered(){
+        backButton.setStrokeWidth(0.2);
+    }
+
+    public void backOnMouseExited(){
+        backButton.setStrokeWidth(0);
+    }
+
+    public void backOnMouseClicked(){
+        Parent loginScene = null;
+        try {
+            loginScene = FXMLLoader.load(LoginSceneController.class.getResource("resources/LoginScene.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        
+        Scene currentScene = backButton.getScene();
+        StackPane parent = (StackPane) currentScene.getRoot();
+        
+        loginScene.translateXProperty().set(-currentScene.getWidth());
+        parent.getChildren().add(loginScene);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(loginScene.translateXProperty(), 0, Interpolator.EASE_BOTH);
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.3), kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(event -> {
+            parent.getChildren().remove(rootPane);
+        });
+        timeline.play();
+    }
 
 
 }
