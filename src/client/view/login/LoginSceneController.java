@@ -66,7 +66,7 @@ public class LoginSceneController extends AuthController implements Initializabl
         timeline.setOnFinished(event -> {
             parent.getChildren().remove(rootPane);
         });
-        timeline.play();;
+        timeline.play();
     }
 
     public void onLoginClicked(){

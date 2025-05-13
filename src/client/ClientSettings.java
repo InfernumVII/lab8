@@ -4,6 +4,6 @@ import shared.network.Settings;
 
 public class ClientSettings extends Settings {
     public ClientSettings(){
-        super("helios.cs.ifmo.ru");
+        super("192.168.10.80");
     }
 }
