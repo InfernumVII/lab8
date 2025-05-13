@@ -1,14 +1,20 @@
 package client.view.main;
 
 import shared.collection.Color;
+import shared.collection.Coordinates;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
+import shared.collection.DragonHead;
 import shared.collection.DragonType;
+import shared.network.exceptions.TimeOutException;
+import shared.network.models.Answer;
+import shared.network.models.NetCommandAuth;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.io.IOException;
 
+import client.ClientMain;
 import client.view.auth.AuthController;
 import client.view.login.LoginSceneController;
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,6 +30,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import server.psql.auth.User;
 
 public class MainSceneController implements Initializable{
 
@@ -158,7 +165,29 @@ public class MainSceneController implements Initializable{
     @FXML
     private void logoutClicked() {
         AuthController.setCheckUser(null);
-        switchToLoginScene();
+        //switchToLoginScene();
+        addDragon();
+    }
+
+    private void addDragon(){
+        User user = AuthController.getCheckUser();
+
+        Dragon.Builder builder = new Dragon.Builder()
+                    .withName("Абоба")
+                    .withCoordinates(new Coordinates(1, 1))
+                    .withAge(1L)
+                    .withColor(Color.values()[0])
+                    .withType(DragonType.values()[1])
+                    .withCharacter(DragonCharacter.values()[0])
+                    .withHead(new DragonHead(1f));
+        NetCommandAuth netCommandAuth = new NetCommandAuth("add", builder, user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        
     }
     
 }
