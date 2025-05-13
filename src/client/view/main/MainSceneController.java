@@ -4,16 +4,21 @@ import shared.collection.Color;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
 import shared.collection.DragonType;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import client.view.auth.AuthController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-public class MainSceneController {
+public class MainSceneController implements Initializable{
 
     @FXML private TableView<Dragon> tableView;
     @FXML private TableColumn<Dragon, Integer> idColumn;
@@ -32,8 +37,8 @@ public class MainSceneController {
 
     private final ContextMenu contextMenu = new ContextMenu();
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         // Привязка колонок к данным
         idColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getId()));
         nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName()));
@@ -117,5 +122,8 @@ public class MainSceneController {
             contextMenu.hide();
         }
     }
+
+
+
     
 }

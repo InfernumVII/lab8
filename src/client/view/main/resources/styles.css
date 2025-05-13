@@ -4,3 +4,9 @@
 .text {
     -fx-fill:  #FFFFFF;  
 }
+.root {
+    -fx-background-color: #28272F;
+}
+.background2 {
+    -fx-background-color:  #37373E;
+}
