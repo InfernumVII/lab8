@@ -8,13 +8,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="719.0" prefWidth="1023.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainSceneController">
+<VBox fx:id="rootVBox" prefHeight="719.0" prefWidth="1023.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.main.MainSceneController">
   <children>
     <MenuBar prefHeight="29.0" prefWidth="956.0" styleClass="background" stylesheets="@styles.css" VBox.vgrow="NEVER">
       <menus>
         <Menu fx:id="currentUserName" mnemonicParsing="false" text="Username">
           <items>
-            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Log out" />
+            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#logoutClicked" text="Log out" />
           </items>
         </Menu>
       </menus>

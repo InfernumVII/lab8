@@ -7,19 +7,27 @@ import shared.collection.DragonType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.io.IOException;
 
 import client.view.auth.AuthController;
+import client.view.login.LoginSceneController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class MainSceneController implements Initializable{
 
+    @FXML private VBox rootVBox;
     @FXML private TableView<Dragon> tableView;
     @FXML private TableColumn<Dragon, Integer> idColumn;
     @FXML private TableColumn<Dragon, String> nameColumn;
@@ -34,6 +42,7 @@ public class MainSceneController implements Initializable{
     @FXML private Canvas canvas;
     @FXML private MenuItem logoutMenuItem;
     @FXML private Menu currentUserName;
+
 
     private final ContextMenu contextMenu = new ContextMenu();
 
@@ -106,6 +115,7 @@ public class MainSceneController implements Initializable{
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             if (selectedDragon != null) {
                 // TODO: Реализовать подтверждение и удаление
+                
                 tableView.getItems().remove(selectedDragon);
                 System.out.println("Удалить: " + selectedDragon);
             }
@@ -125,5 +135,30 @@ public class MainSceneController implements Initializable{
 
 
 
+    public void switchToLoginScene() {
+        try {
+            Scene currentScene = tableView.getScene();
+
+            StackPane parent = (StackPane) currentScene.getRoot();
+            Parent mainScene = FXMLLoader.load(LoginSceneController.class.getResource("resources/LoginScene.fxml"));
+
+            mainScene.translateXProperty().set(0);
+
+            parent.getChildren().add(mainScene);
+            parent.getChildren().remove(rootVBox);
+
+            currentScene.getWindow().sizeToScene();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    private void logoutClicked() {
+        AuthController.setCheckUser(null);
+        switchToLoginScene();
+    }
     
 }
