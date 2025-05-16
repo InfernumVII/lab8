@@ -48,6 +48,8 @@ public class AddButton {
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
             
+            //dragonNamePrompt.getContent() -- пример получения данных
+            //TODO добавить отправку команды на сервер
         }
     }   
 
