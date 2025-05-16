@@ -1,8 +1,15 @@
 package client.view.auth;
 
+
+
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import server.psql.auth.User;
 
@@ -13,8 +20,23 @@ public class AuthController {
     protected PasswordField password;
     @FXML
     protected Text error;
+    @FXML
+    protected Button authButton;
+
+    private EventHandler<KeyEvent> enterEvent = event -> {
+        if (event.getCode() == KeyCode.ENTER){
+            authButton.fire();
+        } 
+    };
 
     private static User checkUser;
+
+    public AuthController(){
+        Platform.runLater(() -> {
+            username.setOnKeyPressed(enterEvent);
+            password.setOnKeyPressed(enterEvent);
+        });   
+    }
 
     public static User getCheckUser(){
         return checkUser;

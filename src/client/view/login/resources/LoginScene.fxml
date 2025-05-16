@@ -74,7 +74,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Text>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" stylesheets="@styles.css" text="Log In" VBox.vgrow="ALWAYS">
+            <Button fx:id="authButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="50.0" prefWidth="350.0" styleClass="login-button" stylesheets="@styles.css" text="Log In" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
