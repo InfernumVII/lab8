@@ -10,9 +10,9 @@ import shared.network.Settings;
 import shared.network.UdpNetwork;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.Pair;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.auth.Pair;
 import server.psql.auth.User;
 
 public class ServerUdpNetwork extends UdpNetwork {

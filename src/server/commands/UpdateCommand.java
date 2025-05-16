@@ -10,11 +10,11 @@ import shared.collection.Dragon.Builder;
 import shared.collection.DragonCharacter;
 import shared.collection.DragonHead;
 import shared.collection.DragonType;
+import shared.network.models.Pair;
 import shared.network.models.UpdateCommandArgs;
 import server.managers.ServerCommandManager;
 import server.managers.DragonManager;
 import server.managers.exceptions.DragonFindException;
-import server.psql.auth.Pair;
 import server.psql.auth.User;
 
 

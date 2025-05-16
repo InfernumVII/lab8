@@ -14,9 +14,9 @@ import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
 import shared.collection.DragonHead;
 import shared.collection.DragonType;
+import shared.network.models.Pair;
 import server.managers.ServerCommandManager;
 import server.psql.PSQL;
-import server.psql.auth.Pair;
 import server.psql.auth.User;
 import server.psql.exceptions.UserNotFound;
 

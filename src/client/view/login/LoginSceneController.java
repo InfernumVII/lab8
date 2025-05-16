@@ -28,6 +28,7 @@ import server.psql.auth.User;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.Pair;
 
 public class LoginSceneController extends AuthController implements Initializable {
     @FXML
@@ -97,9 +98,10 @@ public class LoginSceneController extends AuthController implements Initializabl
             NetCommandAuth netCommandAuth = new NetCommandAuth("auth", user, user);
             try {
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
-                boolean answerB = (boolean) answer.answer();
-                if (answerB == true){
+                Pair<Boolean, Integer> answerP = (Pair<Boolean, Integer>) answer.answer();
+                if (answerP.getValue1() == true){
                     AuthController.setCheckUser(user);
+                    AuthController.setUserId(answerP.getValue2());
                     switchToMainScene();
                     
                 } else {

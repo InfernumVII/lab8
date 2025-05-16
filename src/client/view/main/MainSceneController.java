@@ -223,8 +223,6 @@ public class MainSceneController extends AddButton implements Initializable{
         }
     }
 
-
-
     public void switchToLoginScene() {
         try {
             Scene currentScene = tableView.getScene();

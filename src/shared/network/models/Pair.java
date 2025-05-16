@@ -1,4 +1,4 @@
-package server.psql.auth;
+package shared.network.models;
 
 public class Pair<V1, V2>{
     V1 value1;

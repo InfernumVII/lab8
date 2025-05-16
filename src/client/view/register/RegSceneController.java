@@ -29,6 +29,7 @@ import server.psql.auth.User;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.Pair;
 
 public class RegSceneController extends AuthController implements Initializable {
     @FXML
@@ -67,13 +68,15 @@ public class RegSceneController extends AuthController implements Initializable 
             NetCommandAuth netCommandAuth = new NetCommandAuth("reg", user, user);
             try {
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
-                RegistrationEnums answerE = (RegistrationEnums) answer.answer();
+                Pair<RegistrationEnums, Integer> answerP = (Pair<RegistrationEnums, Integer>) answer.answer();
+                RegistrationEnums answerE = answerP.getValue1();
                 switch (answerE) {
                     case LOGIN_IS_EXIST:
                         printError("The user with this username already exists");
                         break;
                     case SUCCESSFUL:
                         AuthController.setCheckUser(user);
+                        AuthController.setUserId(answerP.getValue2());
                         switchToMainScene();
                         break;
                     case UNSUCCESSFUL:

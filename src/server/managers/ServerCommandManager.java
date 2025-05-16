@@ -2,10 +2,10 @@ package server.managers;
 
 
 import shared.managers.CommandManager;
+import shared.network.models.Pair;
 import server.ServerMain;
 import server.commands.*;
 import server.psql.auth.Auth;
-import server.psql.auth.Pair;
 import server.psql.auth.User;
 
 

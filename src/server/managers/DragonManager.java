@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 
 
 import shared.collection.Dragon;
+import shared.network.models.Pair;
 import server.ServerMain;
 import server.managers.exceptions.DragonFindException;
 import server.managers.utility.CSV;
 import server.managers.utility.DragonCSVParser;
-import server.psql.auth.Pair;
 import server.psql.auth.User;
 import server.psql.dragon.DragonDB;
 

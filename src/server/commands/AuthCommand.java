@@ -2,12 +2,18 @@ package server.commands;
 
 import server.managers.ServerCommandManager;
 import server.psql.auth.User;
+import shared.network.models.Pair;
 
 public class AuthCommand implements Command {
 	@Override
 	public Object execute(Object argument, User user) {
 		User userToAuth = (User) argument;
-		return ServerCommandManager.getAuthInstance().checkUserCreds(userToAuth);
+		boolean checkUserCreds = ServerCommandManager.getAuthInstance().checkUserCreds(userToAuth);
+		int userId = -1;
+		if (checkUserCreds){
+			userId = ServerCommandManager.getAuthInstance().findUserId(userToAuth);
+		}
+		return new Pair<Boolean,Integer>(checkUserCreds, userId);
 		// String username = (String) argument;
 		// Auth auth = ServerCommandManager.getAuthInstance();
 		// if (auth.userIsExists(username)) {

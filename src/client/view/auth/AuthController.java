@@ -30,6 +30,7 @@ public class AuthController {
     };
 
     private static User checkUser;
+    private static int userId;
 
     public AuthController(){
         Platform.runLater(() -> {
@@ -44,6 +45,14 @@ public class AuthController {
 
     public static void setCheckUser(User user){
         checkUser = user;
+    }
+
+    public static void setUserId(int id){
+        userId = id;
+    }
+
+    public static int getUserId(){
+        return userId;
     }
 
     protected void printError(String errorText){
