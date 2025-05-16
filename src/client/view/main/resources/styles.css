@@ -50,7 +50,19 @@
     /* -fx-border-color: #555555; */
     -fx-table-cell-border-color: -fx-bottom-color; 
 }
-
+.table-row-cell:selected .table-cell { /*https://stackoverflow.com/questions/29857596/javafx-tableview-change-selected-cell-colour*/
+    -fx-background-color: #555566;
+    -fx-table-cell-border-color: #555566; 
+    -fx-text-fill: -fx-font-color;
+}
+/* .table-row-cell:filled:hover {
+    -fx-background-color: #444455;
+    -fx-text-fill: -fx-font-color;
+}
+.table-row-cell:filled:focused {
+    -fx-background-color: #555566;
+    -fx-text-fill: -fx-font-color;
+} */
 /* This styles the grid lines between columns */
 /* .table-view *.column-resize-line {
     -fx-background-color: #555555; 

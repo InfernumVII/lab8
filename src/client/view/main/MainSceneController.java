@@ -127,7 +127,7 @@ public class MainSceneController implements Initializable{
             //TODO add some object to the background to make table looks better
         });
         
-
+        
         currentUserName.setText(AuthController.getCheckUser().getLogin());
     
         setupContextMenu();
@@ -142,6 +142,7 @@ public class MainSceneController implements Initializable{
             row.setOnMouseClicked(event -> handleRowRightClick(event, row));
             return row;
         });
+        
 
         // Это просто пример добавления в таблицу, забей, можно вырезать
 
@@ -237,7 +238,6 @@ public class MainSceneController implements Initializable{
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             List<Dragon> answerList = (List<Dragon>) answer.answer();
             Platform.runLater(() -> tableView.setItems(FXCollections.observableList(answerList)));
-
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
             System.exit(1);
