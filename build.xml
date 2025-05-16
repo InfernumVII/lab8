@@ -8,7 +8,7 @@
     
     <property name="server-main" value="server.ServerMain"/>
     <property name="client-main" value="client.ClientMain"/>
-    
+    <property name="test-main" value="test.TestMain"/>
 
     <path id="classpath">
         <fileset dir="${lib}">
@@ -51,6 +51,12 @@
 
     <target name="run-client" depends="compile">
         <java classname="${client-main}" fork="true">
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+    <target name="run-test" depends="compile">
+        <java classname="${test-main}" fork="true">
             <classpath refid="classpath"/>
         </java>
     </target>
