@@ -117,7 +117,7 @@ public class Dragon implements Comparable<Dragon>, Serializable {
 
         Dragon dragon = (Dragon) o;
 
-        return id == dragon.id;
+        return id.equals(dragon.id);
     }
 
     @Override

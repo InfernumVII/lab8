@@ -191,9 +191,19 @@ public class MainSceneController implements Initializable{
             System.out.println("event");
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             if (selectedDragon != null) {
-                // TODO: Реализовать подтверждение и удаление
-                
-                tableView.getItems().remove(selectedDragon);
+                NetCommandAuth netCommandAuth = new NetCommandAuth("remove_by_id", selectedDragon.getId().toString(), AuthController.getCheckUser());
+                try{
+                    Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+                    String strAnswer = (String)answer.answer();
+                    System.out.println(strAnswer);
+                    if (strAnswer.equals("Дракон удалён.")) {
+                        tableView.getItems().remove(selectedDragon);
+                    }
+                } catch (IOException | ClassNotFoundException | TimeOutException e){
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+
                 System.out.println("Удалить: " + selectedDragon);
             }
         });
@@ -240,10 +250,19 @@ public class MainSceneController implements Initializable{
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             List<Dragon> answerList = (List<Dragon>) answer.answer();
 
-            tableView.getItems().clear();
-            tableView.getItems().addAll(answerList);
+            Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
+
+            tableView.getItems().setAll(answerList);
             tableView.sort();
 
+            if (selectedDragon != null) {
+                List<Dragon> a = tableView.getItems();
+                int newIndex = a.indexOf(selectedDragon);
+
+                if (newIndex != -1) {
+                    tableView.getSelectionModel().select(newIndex);
+                }
+            }
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
             System.exit(1);
