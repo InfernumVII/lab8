@@ -36,6 +36,7 @@ public class AddButton {
     @FXML
     protected void onAddMouseClicked(){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
+        modernInputHandlerDialog.setLabelText("Creating new Dragon");
         StringPrompt dragonNamePrompt = new StringPrompt("Enter the dragon's name", false);
         LongPrompt xPrompt = new LongPrompt("Enter the x coordinate", false, -420, Long.MAX_VALUE);
         LongPrompt yPrompt = new LongPrompt("Enter the y coordinate", false, Long.MIN_VALUE, 699);

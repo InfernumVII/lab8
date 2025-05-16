@@ -126,13 +126,16 @@ public class MainSceneController extends AddButton implements Initializable{
             updateParent();
             addGradientCircle(); //Maybe not needed LOOKS UGLY :}
             //TODO add some object to the background to make table looks better
+            tableView.getScene().getWindow().setOnCloseRequest(e -> {
+                close();
+            });
+
         });
         
         
         currentUserName.setText(AuthController.getCheckUser().getLogin());
     
         setupContextMenu();
-
 
         Updater updater = new Updater(this);
         timer.scheduleAtFixedRate(updater, 0, 1000);
