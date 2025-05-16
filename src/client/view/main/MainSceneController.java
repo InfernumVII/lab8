@@ -32,6 +32,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
@@ -187,11 +188,22 @@ public class MainSceneController extends AddButton implements Initializable{
         });
 
         deleteItem.setOnAction(event -> {
+            System.out.println("event");
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             if (selectedDragon != null) {
-                // TODO: Реализовать подтверждение и удаление
-                
-                tableView.getItems().remove(selectedDragon);
+                NetCommandAuth netCommandAuth = new NetCommandAuth("remove_by_id", selectedDragon.getId().toString(), AuthController.getCheckUser());
+                try{
+                    Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+                    String strAnswer = (String)answer.answer();
+                    System.out.println(strAnswer);
+                    if (strAnswer.equals("Дракон удалён.")) {
+                        tableView.getItems().remove(selectedDragon);
+                    }
+                } catch (IOException | ClassNotFoundException | TimeOutException e){
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+
                 System.out.println("Удалить: " + selectedDragon);
             }
         });
@@ -237,7 +249,20 @@ public class MainSceneController extends AddButton implements Initializable{
         try {
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             List<Dragon> answerList = (List<Dragon>) answer.answer();
-            Platform.runLater(() -> tableView.setItems(FXCollections.observableList(answerList)));
+
+            Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
+
+            tableView.getItems().setAll(answerList);
+            tableView.sort();
+
+            if (selectedDragon != null) {
+                List<Dragon> a = tableView.getItems();
+                int newIndex = a.indexOf(selectedDragon);
+
+                if (newIndex != -1) {
+                    tableView.getSelectionModel().select(newIndex);
+                }
+            }
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
             System.exit(1);
@@ -291,6 +316,8 @@ class Updater extends TimerTask {
 
     @Override
     public void run() {
-        controller.updateTable();
+        Platform.runLater(() -> {
+            controller.updateTable();
+        });
     }
 }
