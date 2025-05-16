@@ -51,7 +51,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import server.psql.auth.User;
 
-public class MainSceneController implements Initializable{
+public class MainSceneController extends AddButton implements Initializable{
 
     @FXML private VBox rootVBox;
     @FXML private TableView<Dragon> tableView;

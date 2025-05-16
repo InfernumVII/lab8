@@ -1,0 +1,10 @@
+* {
+    -fx-font-size: 14px;
+}
+.root {
+   -fx-background-color: #28272F;
+}
+.text-field {
+    -fx-background-color:  #37373E;
+    -fx-text-fill:  #FFFFFF;
+}

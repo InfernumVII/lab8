@@ -7,6 +7,9 @@ public class FloatPrompt extends Handler<Float> {
 
     public FloatPrompt(String prompt, boolean allowNull, float min, float max){
         super(prompt);
+        this.allowNull = allowNull;
+        this.min = min;
+        this.max = max;
     }
 
     @Override
@@ -22,7 +25,6 @@ public class FloatPrompt extends Handler<Float> {
         }
         try {
             float inputParsed = Float.parseFloat(finalInput);
-
             if (inputParsed <= min || inputParsed > max) {
                 printError(String.format("The number must be between %s и %s.", min, max));
                 return false;

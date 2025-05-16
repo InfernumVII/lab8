@@ -19,6 +19,7 @@ public class ModernInputHandlerDialog {
     private StackPane root;
     private Button submitButton = new Button("Submit");
     private Stage stage = new Stage();
+    private boolean submitted = false;
 
     public ModernInputHandlerDialog(){
         submitButton.setDisable(true);
@@ -27,16 +28,28 @@ public class ModernInputHandlerDialog {
         StackPane.setAlignment(vBox, Pos.TOP_LEFT);
         StackPane.setMargin(vBox, new Insets(20, 20, 20, 20));
         root = new StackPane(vBox);
-        root.setMinWidth(500);
-        root.setStyle("-fx-background-color: #28272F;");
+        root.setMinWidth(700);
+        String stylesheet = ModernInputHandlerDialog.class.getResource("resources/styles.css").toExternalForm();
+        root.getStylesheets().add(stylesheet);
+        //root.setStyle("-fx-background-color: #28272F;");
     }
 
-    public void addHandler(Handler<?> handler){
+    public void add(Handler<?> handler){
         handler.validateStateProperty().addListener((observable, oldValue, newValue) -> {
             checkAllHandlersReady();
         });
         vBox.getChildren().addAll(handler.getNodes());
         handlers.add(handler);
+    }
+    
+    public void addAll(Handler<?>... handlers){
+        for (Handler<?> handler : handlers) {
+            handler.validateStateProperty().addListener((observable, oldValue, newValue) -> {
+                checkAllHandlersReady();
+            });
+            vBox.getChildren().addAll(handler.getNodes());
+            this.handlers.add(handler);
+        }
     }
 
     private void checkAllHandlersReady(){
@@ -56,7 +69,12 @@ public class ModernInputHandlerDialog {
     }
 
     private void onButtonSubmit(ActionEvent event){
+        submitted = true;
         stage.close();
+    }
+
+    public boolean wasSubmitted(){
+        return submitted;
     }
 
     public void showAndWait(){
