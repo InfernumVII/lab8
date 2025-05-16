@@ -1,8 +1,8 @@
 package server.commands;
 
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 import shared.network.models.Pair;
+import shared.network.models.User;
 
 public class AuthCommand implements Command {
 	@Override

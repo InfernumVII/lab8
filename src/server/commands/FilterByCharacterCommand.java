@@ -5,9 +5,9 @@ import shared.utility.ArgHandler;
 import shared.utility.exceptions.ArgumentEnumException;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
+import shared.network.models.User;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 
 /**
  * Команда для вывода элементов коллекции, значение поля character которых равно заданному.

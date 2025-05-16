@@ -14,9 +14,9 @@ import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommand;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.RegistrationEnums;
+import shared.network.models.User;
 import server.managers.exceptions.ParseCommandException;
-import server.psql.auth.RegistrationEnums;
-import server.psql.auth.User;
 
 public class ClientTerminalWithAuth extends ClientTerminal {
     private RegistrationCommand registrationCommand = new RegistrationCommand();

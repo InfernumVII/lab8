@@ -3,8 +3,8 @@ package client.commands;
 import java.io.Console;
 import java.math.BigInteger;
 
+import shared.network.models.User;
 import shared.network.utility.SHA1;
-import server.psql.auth.User;
 
 public class RegistrationCommand implements Command {
 	private User user;

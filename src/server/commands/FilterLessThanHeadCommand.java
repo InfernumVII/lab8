@@ -3,9 +3,9 @@ import java.util.StringJoiner;
 
 import shared.utility.ArgHandler;
 import shared.collection.Dragon;
+import shared.network.models.User;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 
 /**
  * Команда для вывода элементов коллекции, значение поля head которых меньше заданного.

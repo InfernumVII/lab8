@@ -9,6 +9,8 @@ import shared.collection.DragonType;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.RegistrationEnums;
+import shared.network.models.User;
 
 import java.net.URL;
 import java.util.List;
@@ -40,7 +42,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import server.psql.auth.RegistrationEnums;
 
 import java.util.TimerTask;
 import java.util.Timer;
@@ -50,7 +51,6 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
-import server.psql.auth.User;
 
 public class MainSceneController extends AddButton implements Initializable{
 

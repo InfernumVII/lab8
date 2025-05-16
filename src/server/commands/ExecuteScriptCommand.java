@@ -1,7 +1,7 @@
 package server.commands;
 
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
+import shared.network.models.User;
 
 public class ExecuteScriptCommand implements Command {
     

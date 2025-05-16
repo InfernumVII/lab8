@@ -3,10 +3,10 @@ package server.managers;
 
 import shared.managers.CommandManager;
 import shared.network.models.Pair;
+import shared.network.models.User;
 import server.ServerMain;
 import server.commands.*;
 import server.psql.auth.Auth;
-import server.psql.auth.User;
 
 
 public class ServerCommandManager extends CommandManager<Command> {

@@ -12,10 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import server.psql.auth.User;
 import shared.network.Settings;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.User;
 
 public class ClientMain extends Application {
     private static ClientUdpNetwork client;

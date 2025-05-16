@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
+import shared.network.models.User;
 /**
  * Команда для вывода справки по доступным командам.
  * Реализует интерфейс {@link Command}.

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
+import shared.network.models.RegistrationEnums;
+import shared.network.models.User;
 import shared.network.utility.SHA1;
 import server.psql.PSQL;
 //import server.psql.exceptions.UserNotFound;
@@ -27,7 +29,7 @@ public class Auth extends PSQL {
         return resultSet.next();
     }
 
-    public RegistrationEnums registerUser(server.psql.auth.User user){
+    public RegistrationEnums registerUser(shared.network.models.User user){
         try {
             if (checkLoginIsExist(user.getLogin())){
                 return RegistrationEnums.LOGIN_IS_EXIST;
@@ -91,7 +93,7 @@ public class Auth extends PSQL {
         return null;
     }
 
-    public boolean insertUser(server.psql.auth.User user){
+    public boolean insertUser(shared.network.models.User user){
         try {
             PreparedStatement pStatement = createPreparedStatement("INSERT INTO auth (login, password, salt) values (?, ?, ?)");
             byte[] salt = makeSalt();

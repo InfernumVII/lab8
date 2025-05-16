@@ -1,4 +1,4 @@
-package server.psql.auth;
+package shared.network.models;
 
 import java.io.Serializable;
 

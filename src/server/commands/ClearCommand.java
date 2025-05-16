@@ -1,8 +1,8 @@
 package server.commands;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 import server.psql.exceptions.UserNotFound;
+import shared.network.models.User;
 
 
 public class ClearCommand implements Command{

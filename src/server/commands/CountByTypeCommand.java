@@ -3,10 +3,10 @@ import java.util.StringJoiner;
 
 
 import shared.collection.DragonType;
+import shared.network.models.User;
 import shared.utility.ArgHandler;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 
 /**
  * Команда для подсчета количества драконов определенного типа в коллекции.

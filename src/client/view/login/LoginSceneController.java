@@ -24,11 +24,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import server.psql.auth.User;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
 import shared.network.models.Pair;
+import shared.network.models.User;
 
 public class LoginSceneController extends AuthController implements Initializable {
     @FXML

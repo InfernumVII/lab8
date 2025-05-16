@@ -1,6 +1,8 @@
 package shared.network.models;
 
-public class Pair<V1, V2>{
+import java.io.Serializable;
+
+public class Pair<V1, V2> implements Serializable{
     V1 value1;
     V2 value2;
     public Pair(V1 value1, V2 value2){

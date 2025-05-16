@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import shared.collection.Dragon;
 import shared.network.models.RemoveGreaterCommandArgs;
+import shared.network.models.User;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 import server.managers.DragonManager;
 
 

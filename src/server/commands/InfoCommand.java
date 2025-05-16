@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
+import shared.network.models.User;
 
 /**
  * Команда для вывода информации о коллекции.

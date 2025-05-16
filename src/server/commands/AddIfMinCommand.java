@@ -1,8 +1,8 @@
 package server.commands;
 import shared.collection.Dragon.Builder;
 import shared.network.models.Pair;
+import shared.network.models.User;
 import server.managers.ServerCommandManager;
-import server.psql.auth.User;
 import server.managers.DragonManager;
 
 import java.time.LocalDate;

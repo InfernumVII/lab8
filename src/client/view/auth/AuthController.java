@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
-import server.psql.auth.User;
+import shared.network.models.User;
 
 public class AuthController {
     @FXML

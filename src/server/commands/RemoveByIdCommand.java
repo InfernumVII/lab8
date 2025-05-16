@@ -4,10 +4,10 @@ import java.util.StringJoiner;
 import shared.utility.ArgHandler;
 import shared.utility.exceptions.ArgumentNumberException;
 import shared.collection.Dragon;
+import shared.network.models.User;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
 import server.managers.exceptions.DragonFindException;
-import server.psql.auth.User;
 
 /**
  * Команда для удаления элемента коллекции по его ID.
