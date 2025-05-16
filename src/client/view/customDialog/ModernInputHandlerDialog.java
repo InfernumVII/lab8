@@ -37,10 +37,23 @@ public class ModernInputHandlerDialog {
         submitButton.setOnAction(this::onButtonSubmit);
     }
 
+    private void onButtonSubmit(ActionEvent event){
+        submitted = true;
+        stage.close();
+    }
+
+    public boolean wasSubmitted(){
+        return submitted;
+    }
+
     private void labelSetup(){
         label = new Text();
         label.getStyleClass().add("label-text");
         label.setEffect(new Glow(0.8));
+    }
+    
+    public void setLabelText(String text){
+        label.setText(text);
     }
 
     private void vBoxSetup(){
@@ -67,10 +80,6 @@ public class ModernInputHandlerDialog {
         handlers.add(handler);
     }
 
-    public void setLabelText(String text){
-        label.setText(text);
-    }
-    
     public void addAll(Handler<?>... handlers){
         for (Handler<?> handler : handlers) {
             handler.validateStateProperty().addListener((observable, oldValue, newValue) -> {
@@ -97,25 +106,11 @@ public class ModernInputHandlerDialog {
         return root;
     }
 
-    private void onButtonSubmit(ActionEvent event){
-        submitted = true;
-        stage.close();
-    }
-
-    public boolean wasSubmitted(){
-        return submitted;
-    }
-
     public void showAndWait(){
         stage.setScene(new Scene(getCompletedRoot()));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     } 
-
-    // private void addChilden(Handler children){
-    //     childrens.add(children);
-    //     vBox.getChildren().addAll(children.getNodes());
-    // }
     
     
     
