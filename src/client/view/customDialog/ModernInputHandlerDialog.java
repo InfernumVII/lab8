@@ -28,23 +28,35 @@ public class ModernInputHandlerDialog {
     private Text label;
 
     public ModernInputHandlerDialog(){
+        submitButtonSetup();
+        rootSetup();
+    }
+
+    private void submitButtonSetup(){
         submitButton.setDisable(true);
         submitButton.setOnAction(this::onButtonSubmit);
-        vBox = new VBox();
+    }
+
+    private void labelSetup(){
         label = new Text();
         label.getStyleClass().add("label-text");
         label.setEffect(new Glow(0.8));
+    }
+
+    private void vBoxSetup(){
+        labelSetup();
+        vBox = new VBox();
         StackPane.setAlignment(vBox, Pos.TOP_LEFT);
         StackPane.setMargin(vBox, new Insets(20, 20, 20, 20));
-        //StackPane.setAlignment(label, Pos.TOP_LEFT);
-        //StackPane.setMargin(label, new Insets(10, 20, 100, 20));
-        //VBox.setMargin(label, new Insets(0, 0, 5, 0));
         vBox.getChildren().add(label);
+    }
+
+    private void rootSetup(){
+        vBoxSetup();
         root = new StackPane(vBox);
         root.setMinWidth(700);
         String stylesheet = ModernInputHandlerDialog.class.getResource("resources/styles.css").toExternalForm();
         root.getStylesheets().add(stylesheet);
-        //root.setStyle("-fx-background-color: #28272F;");
     }
 
     public void add(Handler<?> handler){
