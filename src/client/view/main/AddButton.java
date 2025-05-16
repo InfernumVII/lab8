@@ -46,6 +46,9 @@ public class AddButton {
         FloatPrompt eyesCountPrompt = new FloatPrompt("Enter the number of eyes of the dragon", true, -Float.MAX_VALUE, Float.MAX_VALUE);
         modernInputHandlerDialog.addAll(dragonNamePrompt, xPrompt, yPrompt, agePrompt, colorPrompt, typePrompt, characterPrompt, eyesCountPrompt);
         modernInputHandlerDialog.showAndWait();
+        if (modernInputHandlerDialog.wasSubmitted()){
+            
+        }
     }   
 
     @FXML
