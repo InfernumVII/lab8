@@ -17,7 +17,7 @@ public class ClientUdpNetwork extends UdpNetwork {
 
     public Answer sendAndGetAnswer(Object command) throws IOException, TimeOutException, ClassNotFoundException {
         sendObject(command);
-        return handleAnswer(1000);
+        return handleAnswer(10000);
     }
 
     
