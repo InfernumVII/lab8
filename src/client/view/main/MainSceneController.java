@@ -32,6 +32,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
@@ -186,6 +187,7 @@ public class MainSceneController implements Initializable{
         });
 
         deleteItem.setOnAction(event -> {
+            System.out.println("event");
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             if (selectedDragon != null) {
                 // TODO: Реализовать подтверждение и удаление
@@ -236,7 +238,10 @@ public class MainSceneController implements Initializable{
         try {
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             List<Dragon> answerList = (List<Dragon>) answer.answer();
-            Platform.runLater(() -> tableView.setItems(FXCollections.observableList(answerList)));
+
+            tableView.getItems().clear();
+            tableView.getItems().addAll(answerList);
+            tableView.sort();
 
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
@@ -291,6 +296,8 @@ class Updater extends TimerTask {
 
     @Override
     public void run() {
-        controller.updateTable();
+        Platform.runLater(() -> {
+            controller.updateTable();
+        });
     }
 }
