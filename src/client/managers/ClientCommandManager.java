@@ -1,14 +1,6 @@
 package client.managers;
 
-import java.time.temporal.Temporal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.function.Predicate;
-
 import client.ClientTerminal;
-import client.ClientUdpNetwork;
 import client.commands.AddCommand;
 import client.commands.Command;
 import client.commands.ExecuteScriptCommand;

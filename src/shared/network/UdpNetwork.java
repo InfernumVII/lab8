@@ -3,19 +3,15 @@ package shared.network;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.util.Iterator;
-import java.util.Scanner;
 
 
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
-import shared.network.models.NetCommand;
 import shared.network.models.NetCommandAuth;
 import shared.network.utility.BytesConversions;
 
