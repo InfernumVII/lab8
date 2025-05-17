@@ -254,8 +254,7 @@ public class MainSceneController extends AddButton implements Initializable{
     }
 
     private void close(){
-        timer.cancel(); // Все?
-        //TODO close Thread of Timer
+        timer.cancel(); // Все? Yes, that's enough
     }
 
     private void addDragon(){
