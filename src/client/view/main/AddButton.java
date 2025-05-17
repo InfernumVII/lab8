@@ -1,6 +1,10 @@
 package client.view.main;
 
 
+import java.io.IOException;
+
+import client.ClientMain;
+import client.view.auth.AuthController;
 import client.view.customDialog.EnumPrompt;
 import client.view.customDialog.FloatPrompt;
 import client.view.customDialog.LongPrompt;
@@ -9,8 +13,15 @@ import client.view.customDialog.StringPrompt;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import shared.collection.Color;
+import shared.collection.Coordinates;
+import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
+import shared.collection.DragonHead;
 import shared.collection.DragonType;
+import shared.network.exceptions.TimeOutException;
+import shared.network.models.Answer;
+import shared.network.models.NetCommandAuth;
+import shared.network.models.User;
 
 public class AddButton {
     @FXML protected Text addButton;
@@ -46,10 +57,38 @@ public class AddButton {
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
             
-            //dragonNamePrompt.getContent() -- пример получения данных
-            //TODO добавить отправку команды на сервер
+            Dragon createdDragon = new Dragon.Builder()
+                .withName(dragonNamePrompt.getContent())
+                .withCoordinates(new Coordinates(xPrompt.getContent(), yPrompt.getContent()))
+                .withAge(agePrompt.getContent())
+                .withColor(colorPrompt.getContent())
+                .withType(typePrompt.getContent())
+                .withCharacter(characterPrompt.getContent())
+                .withHead(new DragonHead(eyesCountPrompt.getContent()))
+                .build();
+
+            addDragon(createdDragon);
         }
-    }   
+    }
+
+    private boolean addDragon(Dragon dragon){
+        User user = AuthController.getCheckUser();
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("add", dragon, user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            System.out.println((String)answer.answer());
+            if (!"Добавление нового дракона.\nНовый дракон успешно добавлен.".equals((String)answer.answer())) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
 
     @FXML
     protected void onAddMouseExited(){

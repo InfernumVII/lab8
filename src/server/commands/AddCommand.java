@@ -40,12 +40,11 @@ public class AddCommand implements Command {
         if (!ServerCommandManager.getAuthInstance().checkUserCreds(user))
             return "Ошибка авторизации";
         StringJoiner stringJoiner = new StringJoiner("\n");
-        Builder dragonBuilder = (Builder) arg;
+        Dragon dragon = (Dragon) arg;
+        dragon.setCreationDate(LocalDate.now());
+        dragon.setId(1); // Q: Зачем это надо?
+
         stringJoiner.add("Добавление нового дракона.");
-        Dragon dragon = dragonBuilder
-                    .withId(1)
-                    .withDate(LocalDate.now())
-                    .build();
         Pair<Integer,Integer> pair = dragonManager.preAddDragon(dragon, user);
         if (pair.getValue1() == -1 | pair.getValue2() == -1){
             return "Ошибка при добавлении дракона";

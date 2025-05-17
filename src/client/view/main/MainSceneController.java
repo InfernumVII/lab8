@@ -1,15 +1,12 @@
 package client.view.main;
 
 import shared.collection.Color;
-import shared.collection.Coordinates;
 import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
-import shared.collection.DragonHead;
 import shared.collection.DragonType;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
-import shared.network.models.User;
 
 import java.net.URL;
 import java.util.List;
@@ -250,32 +247,11 @@ public class MainSceneController extends AddButton implements Initializable{
         AuthController.setCheckUser(null);
         close();
         switchToLoginScene();
-        //addDragon();
     }
 
     private void close(){
         timer.cancel(); // Все? Yes, that's enough
     }
 
-    private void addDragon(){
-        User user = AuthController.getCheckUser();
-
-        Dragon.Builder builder = new Dragon.Builder()
-                    .withName("Абоба")
-                    .withCoordinates(new Coordinates(1, 1))
-                    .withAge(1L)
-                    .withColor(Color.values()[0])
-                    .withType(DragonType.values()[1])
-                    .withCharacter(DragonCharacter.values()[0])
-                    .withHead(new DragonHead(1f));
-        NetCommandAuth netCommandAuth = new NetCommandAuth("add", builder, user);
-        try {
-            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
-        } catch (ClassNotFoundException | IOException | TimeOutException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        
-    }
 
 }
