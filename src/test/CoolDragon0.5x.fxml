@@ -1,68 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Polygon?>
 
-
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Group scaleX="0.5" scaleY="0.5">
+      <Group scaleX="0.5" scaleY="0.5" stylesheets="@styles.css">
          <children>
             <Group layoutX="226.0" layoutY="8.0" rotate="-10.3" scaleX="-1.0">
                <children>
-                  <Polygon fill="#ef4136" layoutX="148.0" layoutY="246.0" points="63.5, 37.25, 80.5, 28.5, 67.75, 3.0, 56.75, 3.0, 45.75, -30.75, 33.25, -40.5, 35.0, -9.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="78.0" layoutY="190.0" points="143.75, 44.5, 150.5, 84.5, 137.5, 59.0, 126.5, 59.0, 115.0, 25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="85.0" layoutY="226.0" points="80.75, -4.75, 98.0, 10.75, 96.25, -20.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="109.0" layoutY="209.0" points="56.75, 12.25, 72.25, -3.5, 61.0, -61.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="88.0" layoutY="128.0" points="93.25, 78.25, 87.25, 22.5, 82.0, 20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="98.0" layoutY="122.0" points="72.0, 26.0, 77.5, 29.75, 75.75, 24.25, 67.75, 15.75, 56.25, 15.75, 66.25, 18.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="112.0" layoutY="127.0" points="58.0, 21.0, 63.5, 24.75, 62.0, 7.75, 53.75, 0.25, 59.5, 10.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="93.0" layoutY="129.0" points="77.0, 19.0, 82.25, 21.75, 90.25, 12.75, 90.25, 1.75, 86.5, 12.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="123.0" layoutY="191.0" points="-101.75, -14.25, 47.0, -36.75, 47.0, -43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="133.0" layoutY="201.0" points="-62.5, 59.0, 37.0, -36.5, 37.0, -44.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="133.0" layoutY="201.0" points="-4.5, 86.75, 35.25, -18.25, 37.0, -42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="143.0" layoutY="211.0" points="36.75, 89.25, 39.5, 25.25, 35.0, 20.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="391.0" layoutY="190.0" points="-211.25, 109.5, -213.0, 41.75, -225.25, 31.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="263.0" layoutY="222.0" points="-134.5, 66.0, -91.75, 28.0, -97.25, -0.875, -95.0, -40.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="120.0" layoutY="242.0" points="8.5, 45.75, 32.75, -29.0, 13.25, -19.75, 13.25, -19.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="379.0" layoutY="184.0" points="-226.25, 29.0, -211.25, -17.25, -308.5, 76.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="129.0" layoutY="253.0" points="-58.5, 7.0, 40.0, -94.75, 41.0, -98.75, -26.0, -64.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="100.0" layoutY="129.0" points="-78.75, 47.75, 70.0, 25.25, -34.75, 54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="389.0" layoutY="194.0" points="-285.75, -5.5, -219.0, -39.75, -324.25, -11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="148.0" layoutY="246.0" points="63.5, 37.25, 80.5, 28.5, 67.75, 3.0, 56.75, 3.0, 45.75, -30.75, 33.25, -40.5, 35.0, -9.25" styleClass="color9" />
+                  <Polygon layoutX="78.0" layoutY="190.0" points="143.75, 44.5, 150.5, 84.5, 137.5, 59.0, 126.5, 59.0, 115.0, 25.0" styleClass="color7" />
+                  <Polygon layoutX="85.0" layoutY="226.0" points="80.75, -4.75, 98.0, 10.75, 96.25, -20.5" styleClass="color7" />
+                  <Polygon layoutX="109.0" layoutY="209.0" points="56.75, 12.25, 72.25, -3.5, 61.0, -61.0" styleClass="color8" />
+                  <Polygon layoutX="88.0" layoutY="128.0" points="93.25, 78.25, 87.25, 22.5, 82.0, 20.0" styleClass="color7" />
+                  <Polygon layoutX="98.0" layoutY="122.0" points="72.0, 26.0, 77.5, 29.75, 75.75, 24.25, 67.75, 15.75, 56.25, 15.75, 66.25, 18.75" styleClass="color8" />
+                  <Polygon layoutX="112.0" layoutY="127.0" points="58.0, 21.0, 63.5, 24.75, 62.0, 7.75, 53.75, 0.25, 59.5, 10.25" styleClass="color7" />
+                  <Polygon layoutX="93.0" layoutY="129.0" points="77.0, 19.0, 82.25, 21.75, 90.25, 12.75, 90.25, 1.75, 86.5, 12.75" styleClass="color9" />
+                  <Polygon layoutX="123.0" layoutY="191.0" points="-101.75, -14.25, 47.0, -36.75, 47.0, -43.0" styleClass="color7" />
+                  <Polygon layoutX="133.0" layoutY="201.0" points="-62.5, 59.0, 37.0, -36.5, 37.0, -44.5" styleClass="color8" />
+                  <Polygon layoutX="133.0" layoutY="201.0" points="-4.5, 86.75, 35.25, -18.25, 37.0, -42.0" styleClass="color9" />
+                  <Polygon layoutX="143.0" layoutY="211.0" points="36.75, 89.25, 39.5, 25.25, 35.0, 20.75" styleClass="color1" />
+                  <Polygon layoutX="391.0" layoutY="190.0" points="-211.25, 109.5, -213.0, 41.75, -225.25, 31.25" styleClass="color10" />
+                  <Polygon layoutX="263.0" layoutY="222.0" points="-134.5, 66.0, -91.75, 28.0, -97.25, -0.875, -95.0, -40.25" styleClass="color1" />
+                  <Polygon layoutX="120.0" layoutY="242.0" points="8.5, 45.75, 32.75, -29.0, 13.25, -19.75, 13.25, -19.75" styleClass="color2" />
+                  <Polygon layoutX="379.0" layoutY="184.0" points="-226.25, 29.0, -211.25, -17.25, -308.5, 76.0" styleClass="color10" />
+                  <Polygon layoutX="129.0" layoutY="253.0" points="-58.5, 7.0, 40.0, -94.75, 41.0, -98.75, -26.0, -64.75" styleClass="color2" />
+                  <Polygon layoutX="100.0" layoutY="129.0" points="-78.75, 47.75, 70.0, 25.25, -34.75, 54.0" styleClass="color2" />
+                  <Polygon layoutX="389.0" layoutY="194.0" points="-285.75, -5.5, -219.0, -39.75, -324.25, -11.0" styleClass="color10" />
                </children>
                <rotationAxis>
                   <Point3D z="-21.0" />
@@ -70,100 +37,100 @@
             </Group>
             <Group>
                <children>
-                  <Polygon fill="#bf1e2e" layoutX="137.0" layoutY="334.0" points="18.75, -8.75, 39.75, -2.5, 51.75, 2.0, 69.25, -27.5, 43.5, -32.25, 8.5, -32.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="105.0" layoutY="334.0" points="22.0, -3.5, 55.25, -7.5, 50.5, -9.5, 42.75, -28.25, -0.25, -21.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="58.0" layoutY="312.0" points="8.5, 18.5, 38.75, 22.75, 69.0, 18.5, 52.0, 4.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="71.0" layoutY="380.0" points="16.0, -8.0, 25.75, -45.25, 4.5, -48.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="119.0" layoutY="395.0" points="-31.25, -27.5, -6.0, -17.25, -1.75, -27.5, -27.0, -43.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="121.0" layoutY="423.0" points="-16.0, -24.5, 2.25, -44.5, -2.25, -59.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="137.0" layoutY="334.0" points="18.75, -8.75, 39.75, -2.5, 51.75, 2.0, 69.25, -27.5, 43.5, -32.25, 8.5, -32.25" styleClass="color7" />
+                  <Polygon layoutX="105.0" layoutY="334.0" points="22.0, -3.5, 55.25, -7.5, 50.5, -9.5, 42.75, -28.25, -0.25, -21.75" styleClass="color8" />
+                  <Polygon layoutX="58.0" layoutY="312.0" points="8.5, 18.5, 38.75, 22.75, 69.0, 18.5, 52.0, 4.25" styleClass="color9" />
+                  <Polygon layoutX="71.0" layoutY="380.0" points="16.0, -8.0, 25.75, -45.25, 4.5, -48.25" styleClass="color7" />
+                  <Polygon layoutX="119.0" layoutY="395.0" points="-31.25, -27.5, -6.0, -17.25, -1.75, -27.5, -27.0, -43.75" styleClass="color8" />
+                  <Polygon layoutX="121.0" layoutY="423.0" points="-16.0, -24.5, 2.25, -44.5, -2.25, -59.5" styleClass="color9" />
                </children>
             </Group>
             <Group layoutX="273.0" layoutY="327.0">
                <children>
-                  <Polygon fill="#9b1e2e" layoutX="34.0" layoutY="-49.0" points="-47.0, 29.0, -6.5, 34.0, -35.75, 11.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="-52.0" layoutY="-16.0" points="20.0, 5.5, 31.5, 9.5, 50.25, -21.5, 12.5, -15.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="5.0" layoutY="18.0" points="-25.625, -24.5, 5.25, -10.0, 22.5, -33.0, -17.75, -38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="-52.0" layoutY="39.0" points="-4.5, -21.75, 18.25, -21.75, 62.5, -31.0, 31.375, -45.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="-44.0" layoutY="40.0" points="10.0, -10.75, 10.0, -23.0, -13.0, -23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="-38.0" layoutY="52.0" points="4.0, -22.75, 16.0, -27.0, 4.0, -35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="-2.0" layoutY="71.0" points="10.0, -41.75, -9.25, -50.5, -32.0, -41.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="-7.0" layoutY="78.0" points="8.25, -51.75, 21.5, -51.75, 4.25, -58.5, -1.0, -56.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="34.0" layoutY="-49.0" points="-47.0, 29.0, -6.5, 34.0, -35.75, 11.5" styleClass="color8" />
+                  <Polygon layoutX="-52.0" layoutY="-16.0" points="20.0, 5.5, 31.5, 9.5, 50.25, -21.5, 12.5, -15.25" styleClass="color9" />
+                  <Polygon layoutX="5.0" layoutY="18.0" points="-25.625, -24.5, 5.25, -10.0, 22.5, -33.0, -17.75, -38.0" styleClass="color7" />
+                  <Polygon layoutX="-52.0" layoutY="39.0" points="-4.5, -21.75, 18.25, -21.75, 62.5, -31.0, 31.375, -45.5" styleClass="color8" />
+                  <Polygon layoutX="-44.0" layoutY="40.0" points="10.0, -10.75, 10.0, -23.0, -13.0, -23.0" styleClass="color7" />
+                  <Polygon layoutX="-38.0" layoutY="52.0" points="4.0, -22.75, 16.0, -27.0, 4.0, -35.0" styleClass="color8" />
+                  <Polygon layoutX="-2.0" layoutY="71.0" points="10.0, -41.75, -9.25, -50.5, -32.0, -41.75" styleClass="color9" />
+                  <Polygon layoutX="-7.0" layoutY="78.0" points="8.25, -51.75, 21.5, -51.75, 4.25, -58.5, -1.0, -56.0" styleClass="color8" />
                </children>
             </Group>
             <Group>
                <children>
-                  <Polygon fill="#bf1e2e" layoutX="274.0" layoutY="232.0" points="-93.75, 69.75, -91.5, 87.0, -69.25, 91.75, -51.5, 74.5, -78.25, 54.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="275.0" layoutY="235.0" points="-71.5, 86.75, -34.75, 90.25, -34.75, 90.25, -19.25, 63.25, -47.25, 69.5, -54.5, 69.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="261.0" layoutY="268.0" points="-31.0, 45.25, 1.5, 30.75, -18.75, -7.5, -29.5, -3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="244.0" layoutY="258.0" points="-13.25, 55.0, 19.0, 40.5, 1.75, 38.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="305.0" layoutY="205.0" points="-42.5, 94.0, -50.5, 50.5, -62.75, 55.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="260.0" layoutY="186.0" points="-69.5, 97.25, -29.5, 127.25, -27.5, 78.75, -62.5, 60.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="262.0" layoutY="138.0" points="-72.0, 108.0, -29.5, 127.25, -23.25, 125.375, -24.75, 82.0, -54.0, 73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="304.0" layoutY="166.0" points="-41.5, 94.5, -52.75, 49.75, -65.25, 54.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="269.0" layoutY="223.0" points="-32.25, 45.75, -6.5, 37.5, -32.25, -5.75, -32.25, -5.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="136.0" layoutY="184.0" points="83.25, -0.25, 100.0, 38.25, 106.0, 35.25, 100.0, 2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="273.0" layoutY="177.0" points="-33.25, 43.25, -19.0, 37.5, -37.0, 9.0, -37.0, 9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="156.0" layoutY="189.0" points="45.5, 21.25, 80.0, 33.0, 63.5, -5.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="159.0" layoutY="184.0" points="39.25, 13.0, 48.75, 17.0, 55.25, 9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="240.0" layoutY="117.0" points="-24.75, 66.25, -4.0, 69.0, 0.25, 64.0, 6.25, 50.0, -11.25, 50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="142.0" layoutY="147.0" points="69.0, 26.0, 77.75, 31.0, 84.5, 23.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="308.0" layoutY="120.0" points="-54.0, 94.5, -68.0, 61.0, -72.0, 66.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="261.0" layoutY="217.0" points="-21.0, -35.75, -7.0, -2.5, -17.0, -44.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="252.0" layoutY="212.0" points="-13.25, 56.25, 10.5, 48.5, -0.5, 46.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="256.0" layoutY="166.0" points="-17.25, 54.75, -2.0, 48.5, -8.0, 46.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="274.0" layoutY="232.0" points="-93.75, 69.75, -91.5, 87.0, -69.25, 91.75, -51.5, 74.5, -78.25, 54.5" styleClass="color7" />
+                  <Polygon layoutX="275.0" layoutY="235.0" points="-71.5, 86.75, -34.75, 90.25, -34.75, 90.25, -19.25, 63.25, -47.25, 69.5, -54.5, 69.5" styleClass="color2" />
+                  <Polygon layoutX="261.0" layoutY="268.0" points="-31.0, 45.25, 1.5, 30.75, -18.75, -7.5, -29.5, -3.0" styleClass="color2" />
+                  <Polygon layoutX="244.0" layoutY="258.0" points="-13.25, 55.0, 19.0, 40.5, 1.75, 38.75" styleClass="color1" />
+                  <Polygon layoutX="305.0" layoutY="205.0" points="-42.5, 94.0, -50.5, 50.5, -62.75, 55.5" styleClass="color10" />
+                  <Polygon layoutX="260.0" layoutY="186.0" points="-69.5, 97.25, -29.5, 127.25, -27.5, 78.75, -62.5, 60.25" styleClass="color8" />
+                  <Polygon layoutX="262.0" layoutY="138.0" points="-72.0, 108.0, -29.5, 127.25, -23.25, 125.375, -24.75, 82.0, -54.0, 73.0" styleClass="color8" />
+                  <Polygon layoutX="304.0" layoutY="166.0" points="-41.5, 94.5, -52.75, 49.75, -65.25, 54.5" styleClass="color10" />
+                  <Polygon layoutX="269.0" layoutY="223.0" points="-32.25, 45.75, -6.5, 37.5, -32.25, -5.75, -32.25, -5.75" styleClass="color2" />
+                  <Polygon layoutX="136.0" layoutY="184.0" points="83.25, -0.25, 100.0, 38.25, 106.0, 35.25, 100.0, 2.0" styleClass="color9" />
+                  <Polygon layoutX="273.0" layoutY="177.0" points="-33.25, 43.25, -19.0, 37.5, -37.0, 9.0, -37.0, 9.0" styleClass="color2" />
+                  <Polygon layoutX="156.0" layoutY="189.0" points="45.5, 21.25, 80.0, 33.0, 63.5, -5.5" styleClass="color7" />
+                  <Polygon layoutX="159.0" layoutY="184.0" points="39.25, 13.0, 48.75, 17.0, 55.25, 9.0" styleClass="color8" />
+                  <Polygon layoutX="240.0" layoutY="117.0" points="-24.75, 66.25, -4.0, 69.0, 0.25, 64.0, 6.25, 50.0, -11.25, 50.0" styleClass="color8" />
+                  <Polygon layoutX="142.0" layoutY="147.0" points="69.0, 26.0, 77.75, 31.0, 84.5, 23.25" styleClass="color9" />
+                  <Polygon layoutX="308.0" layoutY="120.0" points="-54.0, 94.5, -68.0, 61.0, -72.0, 66.0" styleClass="color10" />
+                  <Polygon layoutX="261.0" layoutY="217.0" points="-21.0, -35.75, -7.0, -2.5, -17.0, -44.5" styleClass="color2" />
+                  <Polygon layoutX="252.0" layoutY="212.0" points="-13.25, 56.25, 10.5, 48.5, -0.5, 46.5" styleClass="color1" />
+                  <Polygon layoutX="256.0" layoutY="166.0" points="-17.25, 54.75, -2.0, 48.5, -8.0, 46.75" styleClass="color1" />
                </children>
             </Group>
             <Group layoutX="-10.0" layoutY="-10.0">
                <children>
-                  <Polygon fill="#9b1e2e" layoutX="308.0" layoutY="144.0" points="-51.25, 21.5, -44.25, 23.5, -44.25, 10.25, -30.25, 3.0, -32.5, -17.25, -35.0, 0.5, -51.25, 7.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="315.0" layoutY="130.0" points="-65.0, 61.0, -53.75, 52.5, -67.25, 35.25, -78.75, 43.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f45929" layoutX="299.0" layoutY="151.0" points="-49.5, 40.0, -29.75, 40.0, -38.25, 31.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="311.0" layoutY="171.0" points="-50.25, 11.5, -41.75, 20.0, -31.75, 17.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="310.0" layoutY="193.0" points="-40.25, -2.0, -23.0, -2.0, -19.75, -8.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#83633d" layoutX="348.0" layoutY="156.0" points="-87.25, 26.5, -78.25, 29.25, -69.5, 16.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f45929" layoutX="346.0" layoutY="170.0" points="-76.375, 15.25, -66.75, 18.5, -73.0, 10.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="315.0" layoutY="109.0" points="-54.25, 73.5, -36.5, 63.25, -32.0, 54.75, -71.0, 51.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="323.0" layoutY="156.0" points="-69.25, 5.75, -40.0, 8.0, -71.25, 2.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="316.0" layoutY="174.0" points="-37.5, -1.75, -12.25, 0.5, -25.5, -14.75, -34.0, -9.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ee233e" layoutX="291.0" layoutY="224.0" points="-4.0, -58.5, 0.0, -58.5, 3.5, -54.75, 0.0, -60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#65141e" layoutX="264.0" layoutY="140.0" points="-4.75, 29.0, 1.75, 31.5, 1.75, 33.5, 4.0, 29.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="262.3" layoutY="229.0" points="3.5, -58.5, 5.25, -60.0, -0.05000000074505806, -60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="171.0" layoutY="123.0" points="69.5, 51.0, 75.0, 47.0, 66.75, 35.5, 77.0, 20.75, 69.5, 3.75, 73.0, 20.75, 58.75, 34.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="308.0" layoutY="144.0" points="-51.25, 21.5, -44.25, 23.5, -44.25, 10.25, -30.25, 3.0, -32.5, -17.25, -35.0, 0.5, -51.25, 7.75" styleClass="color8" />
+                  <Polygon layoutX="315.0" layoutY="130.0" points="-65.0, 61.0, -53.75, 52.5, -67.25, 35.25, -78.75, 43.75" styleClass="color9" />
+                  <Polygon layoutX="299.0" layoutY="151.0" points="-49.5, 40.0, -29.75, 40.0, -38.25, 31.5" styleClass="color5" />
+                  <Polygon layoutX="311.0" layoutY="171.0" points="-50.25, 11.5, -41.75, 20.0, -31.75, 17.25" styleClass="color2" />
+                  <Polygon layoutX="310.0" layoutY="193.0" points="-40.25, -2.0, -23.0, -2.0, -19.75, -8.25" styleClass="color10" />
+                  <Polygon layoutX="348.0" layoutY="156.0" points="-87.25, 26.5, -78.25, 29.25, -69.5, 16.25" styleClass="color3" />
+                  <Polygon layoutX="346.0" layoutY="170.0" points="-76.375, 15.25, -66.75, 18.5, -73.0, 10.25" styleClass="color5" />
+                  <Polygon layoutX="315.0" layoutY="109.0" points="-54.25, 73.5, -36.5, 63.25, -32.0, 54.75, -71.0, 51.75" styleClass="color8" />
+                  <Polygon layoutX="323.0" layoutY="156.0" points="-69.25, 5.75, -40.0, 8.0, -71.25, 2.5" styleClass="color9" />
+                  <Polygon layoutX="316.0" layoutY="174.0" points="-37.5, -1.75, -12.25, 0.5, -25.5, -14.75, -34.0, -9.75" styleClass="color9" />
+                  <Polygon layoutX="291.0" layoutY="224.0" points="-4.0, -58.5, 0.0, -58.5, 3.5, -54.75, 0.0, -60.0" styleClass="color6" />
+                  <Polygon layoutX="264.0" layoutY="140.0" points="-4.75, 29.0, 1.75, 31.5, 1.75, 33.5, 4.0, 29.0" styleClass="color4" />
+                  <Polygon layoutX="262.3" layoutY="229.0" points="3.5, -58.5, 5.25, -60.0, -0.05000000074505806, -60.0" styleClass="color10" />
+                  <Polygon layoutX="171.0" layoutY="123.0" points="69.5, 51.0, 75.0, 47.0, 66.75, 35.5, 77.0, 20.75, 69.5, 3.75, 73.0, 20.75, 58.75, 34.25" styleClass="color8" />
                </children>
             </Group>
             <Group layoutX="-6.0" layoutY="-4.0" rotate="-3.2">
                <children>
-                  <Polygon fill="#ef4136" layoutX="148.0" layoutY="246.0" points="63.5, 37.25, 80.5, 28.5, 67.75, 3.0, 56.75, 3.0, 45.75, -30.75, 33.25, -40.5, 35.0, -9.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="78.0" layoutY="190.0" points="143.75, 44.5, 150.5, 84.5, 137.5, 59.0, 126.5, 59.0, 115.0, 25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="85.0" layoutY="226.0" points="80.75, -4.75, 98.0, 10.75, 96.25, -20.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="109.0" layoutY="209.0" points="56.75, 12.25, 72.25, -3.5, 61.0, -61.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="88.0" layoutY="128.0" points="93.25, 78.25, 87.25, 22.5, 82.0, 20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="98.0" layoutY="122.0" points="72.0, 26.0, 77.5, 29.75, 75.75, 24.25, 67.75, 15.75, 56.25, 15.75, 66.25, 18.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="112.0" layoutY="127.0" points="58.0, 21.0, 63.5, 24.75, 62.0, 7.75, 53.75, 0.25, 59.5, 10.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="93.0" layoutY="129.0" points="77.0, 19.0, 82.25, 21.75, 90.25, 12.75, 90.25, 1.75, 86.5, 12.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="123.0" layoutY="191.0" points="-101.75, -14.25, 47.0, -36.75, 47.0, -43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="133.0" layoutY="201.0" points="-62.5, 59.0, 37.0, -36.5, 37.0, -44.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="133.0" layoutY="201.0" points="-4.5, 86.75, 35.25, -18.25, 37.0, -42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="143.0" layoutY="211.0" points="36.75, 89.25, 39.5, 25.25, 35.0, 20.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="391.0" layoutY="190.0" points="-211.25, 109.5, -213.0, 41.75, -225.25, 31.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7671e" layoutX="263.0" layoutY="222.0" points="-134.5, 66.0, -91.75, 28.0, -97.25, -0.875, -95.0, -40.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="120.0" layoutY="242.0" points="8.5, 45.75, 32.75, -29.0, 13.25, -19.75, 13.25, -19.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="379.0" layoutY="184.0" points="-226.25, 29.0, -211.25, -17.25, -308.5, 76.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="129.0" layoutY="253.0" points="-58.5, 7.0, 40.0, -94.75, 41.0, -98.75, -26.0, -64.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#f7941d" layoutX="100.0" layoutY="129.0" points="-78.75, 47.75, 70.0, 25.25, -34.75, 54.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#fcb040" layoutX="389.0" layoutY="194.0" points="-285.75, -5.5, -219.0, -39.75, -324.25, -11.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="148.0" layoutY="246.0" points="63.5, 37.25, 80.5, 28.5, 67.75, 3.0, 56.75, 3.0, 45.75, -30.75, 33.25, -40.5, 35.0, -9.25" styleClass="color9" />
+                  <Polygon layoutX="78.0" layoutY="190.0" points="143.75, 44.5, 150.5, 84.5, 137.5, 59.0, 126.5, 59.0, 115.0, 25.0" styleClass="color7" />
+                  <Polygon layoutX="85.0" layoutY="226.0" points="80.75, -4.75, 98.0, 10.75, 96.25, -20.5" styleClass="color7" />
+                  <Polygon layoutX="109.0" layoutY="209.0" points="56.75, 12.25, 72.25, -3.5, 61.0, -61.0" styleClass="color8" />
+                  <Polygon layoutX="88.0" layoutY="128.0" points="93.25, 78.25, 87.25, 22.5, 82.0, 20.0" styleClass="color7" />
+                  <Polygon layoutX="98.0" layoutY="122.0" points="72.0, 26.0, 77.5, 29.75, 75.75, 24.25, 67.75, 15.75, 56.25, 15.75, 66.25, 18.75" styleClass="color8" />
+                  <Polygon layoutX="112.0" layoutY="127.0" points="58.0, 21.0, 63.5, 24.75, 62.0, 7.75, 53.75, 0.25, 59.5, 10.25" styleClass="color7" />
+                  <Polygon layoutX="93.0" layoutY="129.0" points="77.0, 19.0, 82.25, 21.75, 90.25, 12.75, 90.25, 1.75, 86.5, 12.75" styleClass="color9" />
+                  <Polygon layoutX="123.0" layoutY="191.0" points="-101.75, -14.25, 47.0, -36.75, 47.0, -43.0" styleClass="color7" />
+                  <Polygon layoutX="133.0" layoutY="201.0" points="-62.5, 59.0, 37.0, -36.5, 37.0, -44.5" styleClass="color8" />
+                  <Polygon layoutX="133.0" layoutY="201.0" points="-4.5, 86.75, 35.25, -18.25, 37.0, -42.0" styleClass="color9" />
+                  <Polygon layoutX="143.0" layoutY="211.0" points="36.75, 89.25, 39.5, 25.25, 35.0, 20.75" styleClass="color1" />
+                  <Polygon layoutX="391.0" layoutY="190.0" points="-211.25, 109.5, -213.0, 41.75, -225.25, 31.25" styleClass="color10" />
+                  <Polygon layoutX="263.0" layoutY="222.0" points="-134.5, 66.0, -91.75, 28.0, -97.25, -0.875, -95.0, -40.25" styleClass="color1" />
+                  <Polygon layoutX="120.0" layoutY="242.0" points="8.5, 45.75, 32.75, -29.0, 13.25, -19.75, 13.25, -19.75" styleClass="color2" />
+                  <Polygon layoutX="379.0" layoutY="184.0" points="-226.25, 29.0, -211.25, -17.25, -308.5, 76.0" styleClass="color10" />
+                  <Polygon layoutX="129.0" layoutY="253.0" points="-58.5, 7.0, 40.0, -94.75, 41.0, -98.75, -26.0, -64.75" styleClass="color2" />
+                  <Polygon layoutX="100.0" layoutY="129.0" points="-78.75, 47.75, 70.0, 25.25, -34.75, 54.0" styleClass="color2" />
+                  <Polygon layoutX="389.0" layoutY="194.0" points="-285.75, -5.5, -219.0, -39.75, -324.25, -11.0" styleClass="color10" />
                </children>
             </Group>
             <Group layoutX="209.0" layoutY="342.0">
                <children>
-                  <Polygon fill="#9b1e2e" layoutX="34.0" layoutY="-49.0" points="-47.0, 29.0, -6.5, 34.0, -35.75, 11.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="-52.0" layoutY="-16.0" points="20.0, 5.5, 31.5, 9.5, 50.25, -21.5, 12.5, -15.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="5.0" layoutY="18.0" points="-25.625, -24.5, 5.25, -10.0, 22.5, -33.0, -17.75, -38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="-52.0" layoutY="39.0" points="-4.5, -21.75, 18.25, -21.75, 62.5, -31.0, 31.375, -45.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#bf1e2e" layoutX="-44.0" layoutY="40.0" points="10.0, -10.75, 10.0, -23.0, -13.0, -23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="-38.0" layoutY="52.0" points="4.0, -22.75, 16.0, -27.0, 4.0, -35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#ef4136" layoutX="-2.0" layoutY="71.0" points="10.0, -41.75, -9.25, -50.5, -32.0, -41.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Polygon fill="#9b1e2e" layoutX="-7.0" layoutY="78.0" points="8.25, -51.75, 21.5, -51.75, 4.25, -58.5, -1.0, -56.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Polygon layoutX="34.0" layoutY="-49.0" points="-47.0, 29.0, -6.5, 34.0, -35.75, 11.5" styleClass="color8" />
+                  <Polygon layoutX="-52.0" layoutY="-16.0" points="20.0, 5.5, 31.5, 9.5, 50.25, -21.5, 12.5, -15.25" styleClass="color9" />
+                  <Polygon layoutX="5.0" layoutY="18.0" points="-25.625, -24.5, 5.25, -10.0, 22.5, -33.0, -17.75, -38.0" styleClass="color7" />
+                  <Polygon layoutX="-52.0" layoutY="39.0" points="-4.5, -21.75, 18.25, -21.75, 62.5, -31.0, 31.375, -45.5" styleClass="color8" />
+                  <Polygon layoutX="-44.0" layoutY="40.0" points="10.0, -10.75, 10.0, -23.0, -13.0, -23.0" styleClass="color7" />
+                  <Polygon layoutX="-38.0" layoutY="52.0" points="4.0, -22.75, 16.0, -27.0, 4.0, -35.0" styleClass="color8" />
+                  <Polygon layoutX="-2.0" layoutY="71.0" points="10.0, -41.75, -9.25, -50.5, -32.0, -41.75" styleClass="color9" />
+                  <Polygon layoutX="-7.0" layoutY="78.0" points="8.25, -51.75, 21.5, -51.75, 4.25, -58.5, -1.0, -56.0" styleClass="color8" />
                </children>
             </Group>
          </children>
