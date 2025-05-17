@@ -13,7 +13,6 @@ import shared.network.models.User;
 
 import java.net.URL;
 import java.util.List;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.io.IOException;
 
@@ -23,7 +22,6 @@ import client.view.login.LoginSceneController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -127,8 +125,6 @@ public class MainSceneController extends AddButton implements Initializable{
         
         
         currentUserName.setText(AuthController.getCheckUser().getLogin());
-    
-        setupContextMenu();
 
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -146,37 +142,11 @@ public class MainSceneController extends AddButton implements Initializable{
         });
         
 
-        // Это просто пример добавления в таблицу, забей, можно вырезать
-
-        Coordinates coordinates = new Coordinates(100, 200);
-
-        DragonHead head = new DragonHead(0.1f);
-
-        // Создание дракона с помощью Builder
-        Dragon[] dragons = new Dragon[10];
-        for (int index = 0; index < dragons.length; index++) {
-            dragons[index] = new Dragon.Builder()
-                .withId(index)
-                .withName(String.format("GoodBoy %s", index))
-                .withCoordinates(coordinates)
-                .withDate(LocalDate.now())
-                .withAge(150L)
-                .withColor(Color.BROWN)
-                .withType(DragonType.FIRE)
-                .withCharacter(DragonCharacter.CHAOTIC_EVIL)
-                .withHead(head)
-                .withOwnerId(42)
-                .build();
-        }
-        
-        //Типа пример задания элементов
-        tableView.setItems(FXCollections.observableArrayList(
-            dragons
-        ));
+        updateTable();
     }
 
 
-    private void setupContextMenu() {
+    private void setupPermittedContextMenu() {
         MenuItem editItem = new MenuItem("Изменить");
         MenuItem deleteItem = new MenuItem("Удалить");
     
@@ -209,12 +179,26 @@ public class MainSceneController extends AddButton implements Initializable{
             }
         });
     
-        contextMenu.getItems().addAll(editItem, deleteItem);
+        contextMenu.getItems().setAll(editItem, deleteItem);
+    }
+
+    private void setupForbiddenContextMenu () {
+        MenuItem forbiddenItem = new MenuItem("Изменение запрещено.");
+        contextMenu.getItems().setAll(forbiddenItem);
     }
     
     private void handleRowRightClick(MouseEvent event, TableRow<Dragon> row) {
         if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY) {
-            tableView.getSelectionModel().select(row.getItem());
+            Dragon tableItem = row.getItem();
+
+            tableView.getSelectionModel().select(tableItem);
+
+            if (AuthController.getUserId() == tableItem.getOwnerId()) {
+                setupPermittedContextMenu(); 
+            } else {
+                setupForbiddenContextMenu();
+            }
+            
             contextMenu.show(row, event.getScreenX(), event.getScreenY());
         } else {
             contextMenu.hide();
@@ -252,12 +236,7 @@ public class MainSceneController extends AddButton implements Initializable{
             tableView.sort();
 
             if (selectedDragon != null) {
-                List<Dragon> a = tableView.getItems();
-                int newIndex = a.indexOf(selectedDragon);
-
-                if (newIndex != -1) {
-                    tableView.getSelectionModel().select(newIndex);
-                }
+                tableView.getSelectionModel().select(selectedDragon);
             }
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
