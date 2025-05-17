@@ -65,7 +65,6 @@ public class ModernInputHandlerDialog {
     private void rootSetup(){
         vBoxSetup();
         root = new StackPane(vBox);
-        root.setMinWidth(700);
         String stylesheet = ModernInputHandlerDialog.class.getResource("resources/styles.css").toExternalForm();
         root.getStylesheets().add(stylesheet);
     }
@@ -105,7 +104,17 @@ public class ModernInputHandlerDialog {
     }
 
     public void showAndWait(){
-        stage.setScene(new Scene(getCompletedRoot()));
+        StackPane root = getCompletedRoot();
+        
+        Scene scene = new Scene(root);
+        
+        stage.setMinWidth(450);
+        stage.setMinHeight(560);
+        
+        stage.setWidth(450);
+        stage.setHeight(560);
+        
+        stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     } 
