@@ -3,10 +3,8 @@ package client;
 import java.io.IOException;
 import java.util.Collection;
 
-import client.commands.Command;
 import client.managers.ClientCommandManager;
 import shared.managers.TerminalWithCommandManager;
-import shared.managers.CommandManager;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommand;

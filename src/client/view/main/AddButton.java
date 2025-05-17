@@ -1,7 +1,5 @@
 package client.view.main;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import client.view.customDialog.EnumPrompt;
 import client.view.customDialog.FloatPrompt;
@@ -9,7 +7,6 @@ import client.view.customDialog.LongPrompt;
 import client.view.customDialog.ModernInputHandlerDialog;
 import client.view.customDialog.StringPrompt;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import shared.collection.Color;
 import shared.collection.DragonCharacter;

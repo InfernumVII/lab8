@@ -1,15 +1,12 @@
 package client.commands;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.temporal.Temporal;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 import client.ClientTerminal;
-import client.ClientUdpNetwork;
 
 public class ExecuteScriptCommand implements Command {
     private ClientTerminal terminal;

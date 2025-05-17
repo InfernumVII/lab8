@@ -1,15 +1,11 @@
 package shared.managers;
 
-import java.io.EOFException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Consumer;
-import java.util.function.Function;
-
-import shared.managers.CommandManager;
 import server.managers.exceptions.ParseCommandException;
 
 public class TerminalWithCommandManager<T extends CommandManager<?>> {

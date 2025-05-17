@@ -1,10 +1,8 @@
 package client.commands;
 
 import java.io.Console;
-import java.math.BigInteger;
 
 import shared.network.models.User;
-import shared.network.utility.SHA1;
 
 public class RegistrationCommand implements Command {
 	private User user;

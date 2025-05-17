@@ -3,7 +3,6 @@ package server;
 import java.io.IOException;
 
 import shared.network.Settings;
-import shared.network.exceptions.TimeOutException;
 import server.local.ServerTerminal;
 import server.psql.Manager;
 import server.psql.exceptions.BlankCreds;

@@ -2,12 +2,8 @@ package client;
 
 import java.io.IOException;
 
-import client.managers.ClientCommandManager;
 import javafx.stage.Stage;
 import shared.network.Settings;
-import shared.network.UdpNetwork;
-import shared.network.exceptions.TimeOutException;
-import server.managers.exceptions.ParseCommandException;
 
 public class ClientMainOld {
     public static void main(String[] args) {
