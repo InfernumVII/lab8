@@ -1,6 +1,5 @@
 package server;
 
-import server.commands.ShowCommand;
 import server.local.ServerCommandManager;
 
 public class ServerShutDownThread extends Thread {

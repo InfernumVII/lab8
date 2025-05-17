@@ -6,7 +6,6 @@ import shared.network.Settings;
 import shared.network.UdpNetwork;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
-import shared.network.models.NetCommand;
 
 public class ClientUdpNetwork extends UdpNetwork {
 

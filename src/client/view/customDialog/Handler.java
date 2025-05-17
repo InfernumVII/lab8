@@ -4,7 +4,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public abstract class Handler<T> {

@@ -1,7 +1,5 @@
 package server.psql;
 
-import java.net.ServerSocket;
-
 import server.psql.auth.Auth;
 import server.psql.exceptions.BlankCreds;
 

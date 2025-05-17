@@ -1,7 +1,6 @@
 package server.commands;
 import java.util.Deque;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 import server.managers.ServerCommandManager;
 import shared.network.models.User;

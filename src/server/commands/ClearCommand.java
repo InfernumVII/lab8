@@ -1,7 +1,6 @@
 package server.commands;
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
-import server.psql.exceptions.UserNotFound;
 import shared.network.models.User;
 
 

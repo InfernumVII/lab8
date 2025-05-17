@@ -18,7 +18,6 @@ import shared.network.models.Pair;
 import shared.network.models.User;
 import server.managers.ServerCommandManager;
 import server.psql.PSQL;
-import server.psql.exceptions.UserNotFound;
 
 public class DragonDB extends PSQL {
     public DragonDB(Connection connection) {

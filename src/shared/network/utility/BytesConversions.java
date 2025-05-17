@@ -9,8 +9,6 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import shared.collection.Dragon;
-
 public class BytesConversions {
     public static byte[] intToBytes(int x) throws IOException { //https://stackoverflow.com/questions/2183240/java-integer-to-byte-array
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

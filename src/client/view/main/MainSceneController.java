@@ -9,12 +9,10 @@ import shared.collection.DragonType;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
-import shared.network.models.RegistrationEnums;
 import shared.network.models.User;
 
 import java.net.URL;
 import java.util.List;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.io.IOException;
 
@@ -24,8 +22,6 @@ import client.view.login.LoginSceneController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +30,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
@@ -46,10 +41,6 @@ import javafx.scene.layout.VBox;
 import java.util.TimerTask;
 import java.util.Timer;
 
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Paint;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
 public class MainSceneController extends AddButton implements Initializable{
@@ -134,11 +125,14 @@ public class MainSceneController extends AddButton implements Initializable{
         
         
         currentUserName.setText(AuthController.getCheckUser().getLogin());
-    
-        setupContextMenu();
 
-        Updater updater = new Updater(this);
-        timer.scheduleAtFixedRate(updater, 0, 1000);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                Platform.runLater(() -> {
+                    updateTable();
+                });
+            }
+        }, 0, 1000);
 
 
         tableView.setRowFactory(tv -> {
@@ -148,37 +142,11 @@ public class MainSceneController extends AddButton implements Initializable{
         });
         
 
-        // Это просто пример добавления в таблицу, забей, можно вырезать
-
-        Coordinates coordinates = new Coordinates(100, 200);
-
-        DragonHead head = new DragonHead(0.1f);
-
-        // Создание дракона с помощью Builder
-        Dragon[] dragons = new Dragon[10];
-        for (int index = 0; index < dragons.length; index++) {
-            dragons[index] = new Dragon.Builder()
-                .withId(index)
-                .withName(String.format("GoodBoy %s", index))
-                .withCoordinates(coordinates)
-                .withDate(LocalDate.now())
-                .withAge(150L)
-                .withColor(Color.BROWN)
-                .withType(DragonType.FIRE)
-                .withCharacter(DragonCharacter.CHAOTIC_EVIL)
-                .withHead(head)
-                .withOwnerId(42)
-                .build();
-        }
-        
-        //Типа пример задания элементов
-        tableView.setItems(FXCollections.observableArrayList(
-            dragons
-        ));
+        updateTable();
     }
 
 
-    private void setupContextMenu() {
+    private void setupPermittedContextMenu() {
         MenuItem editItem = new MenuItem("Изменить");
         MenuItem deleteItem = new MenuItem("Удалить");
     
@@ -211,12 +179,26 @@ public class MainSceneController extends AddButton implements Initializable{
             }
         });
     
-        contextMenu.getItems().addAll(editItem, deleteItem);
+        contextMenu.getItems().setAll(editItem, deleteItem);
+    }
+
+    private void setupForbiddenContextMenu () {
+        MenuItem forbiddenItem = new MenuItem("Изменение запрещено.");
+        contextMenu.getItems().setAll(forbiddenItem);
     }
     
     private void handleRowRightClick(MouseEvent event, TableRow<Dragon> row) {
         if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY) {
-            tableView.getSelectionModel().select(row.getItem());
+            Dragon tableItem = row.getItem();
+
+            tableView.getSelectionModel().select(tableItem);
+
+            if (AuthController.getUserId() == tableItem.getOwnerId()) {
+                setupPermittedContextMenu(); 
+            } else {
+                setupForbiddenContextMenu();
+            }
+            
             contextMenu.show(row, event.getScreenX(), event.getScreenY());
         } else {
             contextMenu.hide();
@@ -242,9 +224,6 @@ public class MainSceneController extends AddButton implements Initializable{
     }
 
     public void updateTable () {
-        // TODO
-        System.out.println("Update");
-
         NetCommandAuth netCommandAuth = new NetCommandAuth("show", null, AuthController.getCheckUser());
 
         try {
@@ -257,12 +236,7 @@ public class MainSceneController extends AddButton implements Initializable{
             tableView.sort();
 
             if (selectedDragon != null) {
-                List<Dragon> a = tableView.getItems();
-                int newIndex = a.indexOf(selectedDragon);
-
-                if (newIndex != -1) {
-                    tableView.getSelectionModel().select(newIndex);
-                }
+                tableView.getSelectionModel().select(selectedDragon);
             }
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
@@ -280,8 +254,7 @@ public class MainSceneController extends AddButton implements Initializable{
     }
 
     private void close(){
-        timer.cancel(); // Все?
-        //TODO close Thread of Timer
+        timer.cancel(); // Все? Yes, that's enough
     }
 
     private void addDragon(){
@@ -304,21 +277,5 @@ public class MainSceneController extends AddButton implements Initializable{
         }
         
     }
-    
-}
 
-
-class Updater extends TimerTask {
-    private MainSceneController controller;
-
-    public Updater(MainSceneController controller) {
-        this.controller = controller;
-    }
-
-    @Override
-    public void run() {
-        Platform.runLater(() -> {
-            controller.updateTable();
-        });
-    }
 }

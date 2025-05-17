@@ -1,15 +1,8 @@
 package client;
 
-import java.io.ByteArrayInputStream;
 import java.io.Console;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.SequenceInputStream;
-import java.util.Scanner;
-import java.util.concurrent.TimeoutException;
-
 import client.commands.RegistrationCommand;
-import shared.network.Settings;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommand;

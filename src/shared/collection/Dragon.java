@@ -1,6 +1,5 @@
 package shared.collection;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * Класс, представляющий сущность дракона.

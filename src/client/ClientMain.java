@@ -1,9 +1,6 @@
 package client;
 
 import java.io.IOException;
-import java.net.BindException;
-import java.net.URL;
-import java.util.Enumeration;
 
 import client.view.login.LoginSceneController;
 import javafx.application.Application;

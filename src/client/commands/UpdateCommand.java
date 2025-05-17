@@ -1,18 +1,9 @@
 package client.commands;
 
-import java.util.Scanner;
-
 import client.commands.utility.ArgHandler;
 import client.commands.utility.ConsoleInputHandler;
 import client.commands.utility.DefaultDragon;
-import shared.collection.Color;
-import shared.collection.Coordinates;
 import shared.collection.Dragon;
-import shared.collection.Dragon.Builder;
-import shared.collection.DragonCharacter;
-import shared.collection.DragonHead;
-import shared.collection.DragonType;
-import shared.network.models.UpdateCommandArgs;
 
 
 public class UpdateCommand implements Command {
