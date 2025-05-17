@@ -1,6 +1,6 @@
 package client;
 
-import network.Settings;
+import shared.network.Settings;
 
 public class ClientSettings extends Settings {
     public ClientSettings(){
