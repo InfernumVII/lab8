@@ -1,0 +1,53 @@
+.color1 {
+    -fx-fill: #f7671e;
+}
+.color2 {
+    -fx-fill: #f7941d;
+}
+.color3 {
+    -fx-fill: #83633d;
+}
+.color4 {
+    -fx-fill: #65141e;
+}
+.color5 {
+    -fx-fill: #f45929;
+}
+.color6 {
+    -fx-fill: #ee233e;
+}
+.color7 {
+    -fx-fill: #bf1e2e;
+}
+.color8 {
+    -fx-fill: #9b1e2e;
+}
+.color9 {
+    -fx-fill: #ef4136;
+}
+.color10 {
+    -fx-fill: #fcb040;
+}
+
+/*
+fill="#f7671e"
+styleClass="color1"
+fill="#f7941d"
+styleClass="color2"
+fill="#83633d"
+styleClass="color3"
+fill="#65141e"
+styleClass="color4"
+fill="#f45929"
+styleClass="color5"
+fill="#ee233e"
+styleClass="color6"
+fill="#bf1e2e"
+styleClass="color7"
+fill="#9b1e2e"
+styleClass="color8"
+fill="#ef4136"
+styleClass="color9"
+fill="#fcb040"
+styleClass="color10"
+*/
