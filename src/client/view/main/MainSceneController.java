@@ -9,7 +9,6 @@ import shared.collection.DragonType;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
-import shared.network.models.RegistrationEnums;
 import shared.network.models.User;
 
 import java.net.URL;
@@ -25,7 +24,6 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +32,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.SortType;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
@@ -46,10 +43,6 @@ import javafx.scene.layout.VBox;
 import java.util.TimerTask;
 import java.util.Timer;
 
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Paint;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
 public class MainSceneController extends AddButton implements Initializable{
@@ -137,8 +130,13 @@ public class MainSceneController extends AddButton implements Initializable{
     
         setupContextMenu();
 
-        Updater updater = new Updater(this);
-        timer.scheduleAtFixedRate(updater, 0, 1000);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                Platform.runLater(() -> {
+                    updateTable();
+                });
+            }
+        }, 0, 1000);
 
 
         tableView.setRowFactory(tv -> {
@@ -242,9 +240,6 @@ public class MainSceneController extends AddButton implements Initializable{
     }
 
     public void updateTable () {
-        // TODO
-        System.out.println("Update");
-
         NetCommandAuth netCommandAuth = new NetCommandAuth("show", null, AuthController.getCheckUser());
 
         try {
@@ -304,21 +299,5 @@ public class MainSceneController extends AddButton implements Initializable{
         }
         
     }
-    
-}
 
-
-class Updater extends TimerTask {
-    private MainSceneController controller;
-
-    public Updater(MainSceneController controller) {
-        this.controller = controller;
-    }
-
-    @Override
-    public void run() {
-        Platform.runLater(() -> {
-            controller.updateTable();
-        });
-    }
 }
