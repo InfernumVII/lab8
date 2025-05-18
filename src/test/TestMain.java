@@ -1,14 +1,17 @@
 package test;
 
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class TestMain extends Application {
     
@@ -33,6 +36,11 @@ public class TestMain extends Application {
             StackPane[] stackPanes = new StackPane[cols];
             for (int j = 0; j < cols; j++) {
                 stackPanes[j] = FXMLLoader.load(TestMain.class.getResource("CoolDragon0.5x.fxml"));
+                Group group = (Group) stackPanes[j].getChildren().get(0);
+                ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(5), group);
+                scaleTransition.toXProperty().set(0.25);
+                scaleTransition.toYProperty().set(0.25);
+                scaleTransition.play();
                 String css = CssFormatter.generateCss((i*8 + j)*4 - 200);
                 stackPanes[j].getStylesheets().add("data:text/css," + css);
             }
