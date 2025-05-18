@@ -29,6 +29,7 @@ public abstract class Handler<T> {
 
     public void setDefaultValue(T value){
         textField.setText(value.toString());
+        validateState.set(true);
     }
 
     public BooleanProperty validateStateProperty() { return validateState; }

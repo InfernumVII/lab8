@@ -37,12 +37,11 @@ public class AddIfMinCommand implements Command {
         StringJoiner stringJoiner = new StringJoiner("\n");
         stringJoiner.add("Добавление нового дракона.");
 
-        Builder dragonBuilder = (Builder) arg;
-        Dragon dragon = dragonBuilder
-                    .withId(1)
-                    .withDate(LocalDate.now())
-                    .build();
-            
+        Dragon dragon = (Dragon) arg;
+        dragon.setCreationDate(LocalDate.now());
+        dragon.setId(1);
+        
+
         if (dragonManager.getDragonSet().isEmpty()){
             Pair<Integer,Integer> pair = dragonManager.preAddDragon(dragon, user);
             if (pair.getValue1() == -1 | pair.getValue2() == -1){

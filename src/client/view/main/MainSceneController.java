@@ -149,8 +149,11 @@ public class MainSceneController extends TopBarButtons implements Initializable{
     
         editItem.setOnAction(event -> {
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
+            System.out.println(selectedDragon);
             if (selectedDragon != null) {
                 // TODO: Реализовать окно редактирования
+
+                addDragon("Edit dragon", this::sendUpdateDragonToServer, selectedDragon);
                 System.out.println("Изменить: " + selectedDragon);
             }
         });
@@ -178,6 +181,9 @@ public class MainSceneController extends TopBarButtons implements Initializable{
     
         contextMenu.getItems().setAll(editItem, deleteItem);
     }
+
+    
+
 
     private void setupForbiddenContextMenu () {
         MenuItem forbiddenItem = new MenuItem("Изменение запрещено.");

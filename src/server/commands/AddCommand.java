@@ -42,7 +42,7 @@ public class AddCommand implements Command {
         StringJoiner stringJoiner = new StringJoiner("\n");
         Dragon dragon = (Dragon) arg;
         dragon.setCreationDate(LocalDate.now());
-        dragon.setId(1); // Q: Зачем это надо?
+        dragon.setId(1);
 
         stringJoiner.add("Добавление нового дракона.");
         Pair<Integer,Integer> pair = dragonManager.preAddDragon(dragon, user);

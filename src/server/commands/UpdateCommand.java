@@ -71,7 +71,7 @@ public class UpdateCommand implements Command {
         }
         
 
-        return String.format("Дракон с ID-%d успешно обновлён!", id);
+        return "Дракон с ID успешно обновлён!";
     }
 
     @Override
