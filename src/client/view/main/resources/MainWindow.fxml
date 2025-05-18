@@ -25,6 +25,15 @@
                   <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#logoutClicked" text="Log out" />
                 </items>
               </Menu>
+                  <Menu mnemonicParsing="false" text="Commands">
+                    <items>
+                      <MenuItem fx:id="clearCommand" mnemonicParsing="false" text="Clear" />
+                        <MenuItem fx:id="countByTypeCommand" mnemonicParsing="false" text="CountByType" />
+                        <MenuItem fx:id="filterByCharacterCommand" mnemonicParsing="false" text="FilterByCharacter" />
+                        <MenuItem fx:id="filterLessThanHeadCommand" mnemonicParsing="false" text="FilterLessThanHead" />
+                        <MenuItem fx:id="removeGreaterCommand" mnemonicParsing="false" text="RemoveGreater" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Info">
                      <items>
                         <CustomMenuItem hideOnClick="false" mnemonicParsing="false" styleClass="info" text="Unspecified Action">
