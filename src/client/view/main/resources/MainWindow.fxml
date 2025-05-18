@@ -51,6 +51,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
+            <Text fx:id="addIfMinButton" fill="WHITE" layoutX="1099.0" layoutY="24.0" onMouseClicked="#onAddIfMinMouseClicked" onMouseEntered="#onAddMouseEntered" onMouseExited="#onAddMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="AddIfMin" textAlignment="CENTER" wrappingWidth="95.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <effect>
+                  <Glow level="1.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Text>
          </children>
       </AnchorPane>
     <SplitPane prefHeight="692.0" prefWidth="702.0">

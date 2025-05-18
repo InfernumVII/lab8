@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 import client.ClientMain;
 import client.view.auth.AuthController;
@@ -32,15 +33,12 @@ import shared.network.models.User;
 
 public class TopBarButtons{
     @FXML protected Text addButton;
-    @FXML Text info;
+    @FXML protected Text addIfMinButton;
+    @FXML protected Text info;
 
     public TopBarButtons() {
         initInfo();
     }
-    // @Override
-    // public void initialize(URL location, ResourceBundle resources) {
-    //     initInfo();
-    // }
 
     private void initInfo(){
         Platform.runLater(() -> {
@@ -72,20 +70,10 @@ public class TopBarButtons{
     protected void onAddMouseEntered(){
         addButton.setStrokeWidth(0.2);
     }   
-
-    /*    return new Dragon.Builder()
-                    .withName(consoleInputHandler.promptForString("Введите имя дракона:", false))
-                    .withCoordinates(new Coordinates(consoleInputHandler.promptForLong("Введите координату x:", false, -420, Long.MAX_VALUE),
-                                                        consoleInputHandler.promptForLong("Введите координату y:", false, Long.MIN_VALUE, 699)))
-                    .withAge(consoleInputHandler.promptForLong("Введите возраст дракона:", false, 0, Long.MAX_VALUE))
-                    .withColor(consoleInputHandler.promptForEnum("Введите цвет дракона: %s", Color.values(), false))
-                    .withType(consoleInputHandler.promptForEnum("Введите тип дракона: %s", DragonType.values(), false))
-                    .withCharacter(consoleInputHandler.promptForEnum("Введите характер дракона: %s", DragonCharacter.values(), false))
-                    .withHead(new DragonHead(consoleInputHandler.promptForFloat("Введите кол-во глаз у дракона:", true, -Float.MAX_VALUE, Float.MAX_VALUE))); */
-    @FXML
-    protected void onAddMouseClicked(){
+    
+    private void addDragon(String label, Consumer<Dragon> func){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
-        modernInputHandlerDialog.setLabelText("Creating new Dragon");
+        modernInputHandlerDialog.setLabelText(label);
         StringPrompt dragonNamePrompt = new StringPrompt("Enter the dragon's name", false);
         LongPrompt xPrompt = new LongPrompt("Enter the x coordinate", false, -420, Long.MAX_VALUE);
         LongPrompt yPrompt = new LongPrompt("Enter the y coordinate", false, Long.MIN_VALUE, 699);
@@ -108,11 +96,27 @@ public class TopBarButtons{
                 .withHead(new DragonHead(eyesCountPrompt.getContent()))
                 .build();
 
-            addDragon(createdDragon);
+            func.accept(createdDragon);
+            //sendAddDragonToServer(createdDragon);
         }
     }
 
-    private boolean addDragon(Dragon dragon){
+    @FXML
+    protected void onAddIfMinMouseClicked(){
+        addDragon("AddIfMin commands", this::sendAddIfMinDragonToServer);
+    }
+
+    @FXML
+    protected void onAddMouseClicked(){
+        addDragon("Creating new Dragon", this::sendAddDragonToServer);
+    }
+
+    private boolean sendAddIfMinDragonToServer(Dragon dragon){
+        //TODO complete this func
+        return false;
+    }
+
+    private boolean sendAddDragonToServer(Dragon dragon){
         User user = AuthController.getCheckUser();
 
         NetCommandAuth netCommandAuth = new NetCommandAuth("add", dragon, user);

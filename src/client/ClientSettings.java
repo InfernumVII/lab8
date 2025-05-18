@@ -4,6 +4,6 @@ import shared.network.Settings;
 
 public class ClientSettings extends Settings {
     public ClientSettings(){
-        super();
+        super("172.28.211.92");
     }
 }
