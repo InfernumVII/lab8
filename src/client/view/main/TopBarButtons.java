@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
+import javax.naming.Context;
+
 import client.ClientMain;
 import client.view.auth.AuthController;
 import client.view.customDialog.EnumPrompt;
@@ -15,11 +17,19 @@ import client.view.customDialog.LongPrompt;
 import client.view.customDialog.ModernInputHandlerDialog;
 import client.view.customDialog.StringPrompt;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Side;
+import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.PopupWindow;
 import shared.collection.Color;
 import shared.collection.Coordinates;
 import shared.collection.Dragon;
@@ -37,12 +47,6 @@ public class TopBarButtons{
     @FXML protected Text addIfMinButton;
     @FXML protected Text info;
 
-    //COMMANDS MENU
-    @FXML protected MenuItem clearCommand;
-    @FXML protected MenuItem countByTypeCommand;
-    @FXML protected MenuItem filterByCharacterCommand;
-    @FXML protected MenuItem filterLessThanHeadCommand;
-    @FXML protected MenuItem removeGreaterCommand;
 
     public TopBarButtons() {
         initInfo();
