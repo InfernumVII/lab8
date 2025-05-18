@@ -5,6 +5,7 @@ import java.util.StringJoiner;
 
 import server.managers.DragonManager;
 import server.managers.ServerCommandManager;
+import shared.network.models.Info;
 import shared.network.models.User;
 
 /**
@@ -41,11 +42,11 @@ public class InfoCommand implements Command {
     public Object execute(Object arg, User user){
         if (!ServerCommandManager.getAuthInstance().checkUserCreds(user))
             return "Ошибка авторизации";
-        StringJoiner stringJoiner = new StringJoiner("\n");
-        stringJoiner.add("Тип коллекции: " + dragonManager.getTypeName());
-        stringJoiner.add("Дата инициализации: " + dragonManager.getInitializationDate());
-        stringJoiner.add("Количество элементов: " + dragonManager.getDragonSet().size());
-        return stringJoiner.toString();
+        // StringJoiner stringJoiner = new StringJoiner("\n");
+        // stringJoiner.add("Тип коллекции: " + dragonManager.getTypeName());
+        // stringJoiner.add("Дата инициализации: " + dragonManager.getInitializationDate());
+        // stringJoiner.add("Количество элементов: " + dragonManager.getDragonSet().size());
+        return new Info(dragonManager.getTypeName(), dragonManager.getInitializationDate(), dragonManager.getDragonSet().size());
     }
 
     /**

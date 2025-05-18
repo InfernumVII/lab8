@@ -2,6 +2,9 @@ package client.view.main;
 
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
 import client.ClientMain;
 import client.view.auth.AuthController;
@@ -10,7 +13,10 @@ import client.view.customDialog.FloatPrompt;
 import client.view.customDialog.LongPrompt;
 import client.view.customDialog.ModernInputHandlerDialog;
 import client.view.customDialog.StringPrompt;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import shared.collection.Color;
 import shared.collection.Coordinates;
@@ -20,12 +26,47 @@ import shared.collection.DragonHead;
 import shared.collection.DragonType;
 import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
+import shared.network.models.Info;
 import shared.network.models.NetCommandAuth;
 import shared.network.models.User;
 
-public class AddButton {
+public class TopBarButtons{
     @FXML protected Text addButton;
+    @FXML Text info;
 
+    public TopBarButtons() {
+        initInfo();
+    }
+    // @Override
+    // public void initialize(URL location, ResourceBundle resources) {
+    //     initInfo();
+    // }
+
+    private void initInfo(){
+        Platform.runLater(() -> {
+            User user = AuthController.getCheckUser();
+            String infoText = "Error";
+            NetCommandAuth netCommandAuth = new NetCommandAuth("info", null, user);
+            try {
+                Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+                if (answer.answer().getClass() != String.class){
+                    Info answerInfo = (Info) answer.answer();
+                    StringJoiner stringJoiner = new StringJoiner("\n");
+                    stringJoiner.add("Type of collection: " + answerInfo.collectionType());
+                    stringJoiner.add("Init time: " + answerInfo.initTime());
+                    stringJoiner.add("Num of elements:  " + answerInfo.size());
+                    infoText = stringJoiner.toString();
+                }
+                
+            } catch (ClassNotFoundException | IOException | TimeOutException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+            info.setText(infoText);
+        });
+        
+        
+    }  
     
     @FXML
     protected void onAddMouseEntered(){

@@ -40,7 +40,7 @@ import java.util.Timer;
 
 import javafx.scene.shape.Circle;
 
-public class MainSceneController extends AddButton implements Initializable{
+public class MainSceneController extends TopBarButtons implements Initializable{
 
     @FXML private VBox rootVBox;
     @FXML private TableView<Dragon> tableView;

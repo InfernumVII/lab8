@@ -20,6 +20,12 @@
 .menu-bar .label {
     -fx-text-fill: -fx-font-color;
 }
+/* .info:hover {
+    -fx-background-color: -fx-top-color;
+} */
+.info {
+    -fx-background-color: -fx-top-color;
+}
 
 /* CONTEXT MENUS*/
 .context-menu { /*https://stackoverflow.com/questions/12299162/how-to-style-menu-button-and-menu-items*/

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CustomMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -24,6 +25,19 @@
                   <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#logoutClicked" text="Log out" />
                 </items>
               </Menu>
+                  <Menu mnemonicParsing="false" text="Info">
+                     <items>
+                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" styleClass="info" text="Unspecified Action">
+                           <content>
+                              <Text fx:id="info" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                           </content>
+                        </CustomMenuItem>
+                     </items>
+                  </Menu>
             </menus>
           </MenuBar>
             <Text fx:id="addButton" fill="WHITE" layoutX="1185.0" layoutY="24.0" onMouseClicked="#onAddMouseClicked" onMouseEntered="#onAddMouseEntered" onMouseExited="#onAddMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Add" textAlignment="CENTER" wrappingWidth="45.0">
