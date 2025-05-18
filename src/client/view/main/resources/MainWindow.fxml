@@ -31,7 +31,7 @@
                            <content>
                               <Text fx:id="info" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </Text>
                            </content>
