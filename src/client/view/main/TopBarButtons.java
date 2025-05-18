@@ -103,7 +103,17 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddIfMinMouseClicked(){
-        addDragon("AddIfMin commands", this::sendAddIfMinDragonToServer);
+        addDragon("AddIfMin command", this::sendAddIfMinDragonToServer);
+    }
+
+    @FXML
+    protected void onAddIfMinMouseEntered(){
+        addIfMinButton.setStrokeWidth(0.2);
+    }
+
+    @FXML
+    protected void onAddIfMinMouseExited(){
+        addIfMinButton.setStrokeWidth(0);
     }
 
     @FXML
