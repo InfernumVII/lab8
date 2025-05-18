@@ -27,7 +27,7 @@
               </Menu>
                   <Menu mnemonicParsing="false" text="Commands">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Clear" />
+                      <MenuItem mnemonicParsing="false" onAction="#clear" text="Clear" />
                         <Menu mnemonicParsing="false" text="CountByType">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#countByType" text="WATER" />
@@ -38,14 +38,14 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="FilterByCharacter">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="WISE" />
-                              <MenuItem mnemonicParsing="false" text="EVIL" />
-                              <MenuItem mnemonicParsing="false" text="CHAOTIC_EVIL" />
-                              <MenuItem mnemonicParsing="false" text="FICKLE" />
+                            <MenuItem mnemonicParsing="false" onAction="#filterByCharacter" text="WISE" />
+                              <MenuItem mnemonicParsing="false" onAction="#filterByCharacter" text="EVIL" />
+                              <MenuItem mnemonicParsing="false" onAction="#filterByCharacter" text="CHAOTIC_EVIL" />
+                              <MenuItem mnemonicParsing="false" onAction="#filterByCharacter" text="FICKLE" />
                           </items>
                         </Menu>
-                        <MenuItem mnemonicParsing="false" text="FilterLessThanHead" />
-                        <MenuItem mnemonicParsing="false" text="RemoveGreater" />
+                        <MenuItem mnemonicParsing="false" onAction="#filterLessThanHead" text="FilterLessThanHead" />
+                        <MenuItem mnemonicParsing="false" onAction="#removeGreater" text="RemoveGreater" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Info">

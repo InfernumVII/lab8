@@ -16,6 +16,7 @@ import client.view.customDialog.FloatPrompt;
 import client.view.customDialog.LongPrompt;
 import client.view.customDialog.ModernInputHandlerDialog;
 import client.view.customDialog.StringPrompt;
+import client.view.message.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -82,8 +83,55 @@ public class TopBarButtons{
     protected void countByType(ActionEvent event){
         MenuItem menuItem = (MenuItem) event.getSource();
         DragonType dragonType = DragonType.valueOf(menuItem.getText());
-        //TODO make server request
+        new Message(dragonType.toString()).show();
+        //TODO make server request and show message
     }
+
+    @FXML
+    protected void filterByCharacter(ActionEvent event){
+        MenuItem menuItem = (MenuItem) event.getSource();
+        DragonCharacter dragonCharacter = DragonCharacter.valueOf(menuItem.getText());
+        System.out.println(dragonCharacter);
+        //TODO make server request and make filter(maybe dont need to show message)
+    }
+
+    @FXML
+    protected void clear(ActionEvent event){
+        new Message("Clearing").show();
+        //TODO make clear and show message
+    }
+
+    @FXML
+    protected void removeGreater(ActionEvent event){
+        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
+        modernInputHandlerDialog.setLabelText("RemoveGreater command"); //TODO fix size of window
+        LongPrompt xPrompt = new LongPrompt("Enter coordinate x", false, -420, Long.MAX_VALUE);
+        LongPrompt yPrompt = new LongPrompt("Enter coordinate y", false, Long.MIN_VALUE, 699);
+        modernInputHandlerDialog.addAll(xPrompt, yPrompt);
+        modernInputHandlerDialog.showAndWait();
+        if (modernInputHandlerDialog.wasSubmitted()){
+            long x = xPrompt.getContent();
+            long y = xPrompt.getContent();
+            new Message(String.format("x: %d y: %d", x, y)).show();
+            //TODO make server request and show message
+        }
+    }
+
+    @FXML
+    protected void filterLessThanHead(ActionEvent event){
+        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(); //TODO fix size of window
+        modernInputHandlerDialog.setLabelText("FilterLessThanHead command");
+        FloatPrompt eyesPrompt = new FloatPrompt("Enter eyes count", false, 1, Float.MAX_VALUE);
+        modernInputHandlerDialog.add(eyesPrompt);
+        modernInputHandlerDialog.showAndWait();
+        if (modernInputHandlerDialog.wasSubmitted()){
+            float eyesCount = eyesPrompt.getContent();
+            new Message(String.format("Eyes count: %s", eyesCount)).show();
+            //TODO make server request and show message(maybe dont need to show message)
+        }
+    }
+
+
     
     @FXML
     protected void onAddMouseEntered(){

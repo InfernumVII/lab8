@@ -35,7 +35,7 @@ public class Message {
         HBox.setMargin(text, new Insets(20, 20, 10, 20));
         hBox.setAlignment(Pos.CENTER);
         HBox hBox2 = new HBox(button);
-        HBox.setMargin(button, new Insets(0, 10, 10, 10));
+        HBox.setMargin(button, new Insets(0, 5, 5, 5));
         hBox2.setAlignment(Pos.BOTTOM_RIGHT);
         VBox vbox = new VBox(hBox, hBox2);
         StackPane stackPane = new StackPane(vbox, createFourPolyStars());
