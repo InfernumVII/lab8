@@ -71,7 +71,7 @@ public class TopBarButtons{
         addButton.setStrokeWidth(0.2);
     }   
     
-    private void addDragon(String label, Consumer<Dragon> func){
+    protected void addDragon(String label, Consumer<Dragon> func, Dragon defaultDragon){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
         modernInputHandlerDialog.setLabelText(label);
         StringPrompt dragonNamePrompt = new StringPrompt("Enter the dragon's name", false);
@@ -82,7 +82,20 @@ public class TopBarButtons{
         EnumPrompt<DragonType> typePrompt = new EnumPrompt<>("Enter the type of the dragon", DragonType.class, false);
         EnumPrompt<DragonCharacter> characterPrompt = new EnumPrompt<>("Enter the character of the dragon", DragonCharacter.class, false);
         FloatPrompt eyesCountPrompt = new FloatPrompt("Enter the number of eyes of the dragon", true, -Float.MAX_VALUE, Float.MAX_VALUE);
+        
         modernInputHandlerDialog.addAll(dragonNamePrompt, xPrompt, yPrompt, agePrompt, colorPrompt, typePrompt, characterPrompt, eyesCountPrompt);
+        
+        if (defaultDragon != null) {
+            dragonNamePrompt.setDefaultValue(defaultDragon.getName());
+            xPrompt.setDefaultValue(defaultDragon.getCoordinates().getX());
+            yPrompt.setDefaultValue(defaultDragon.getCoordinates().getY());
+            agePrompt.setDefaultValue(defaultDragon.getAge());
+            colorPrompt.setDefaultValue(defaultDragon.getColor());
+            typePrompt.setDefaultValue(defaultDragon.getType());
+            characterPrompt.setDefaultValue(defaultDragon.getCharacter());
+            eyesCountPrompt.setDefaultValue(defaultDragon.getHead().getEyesCount());
+        }
+        
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
             
@@ -96,6 +109,12 @@ public class TopBarButtons{
                 .withHead(new DragonHead(eyesCountPrompt.getContent()))
                 .build();
 
+            if(defaultDragon != null) {
+                createdDragon.setId(defaultDragon.getId());
+                createdDragon.setCreationDate(defaultDragon.getCreationDate());
+                createdDragon.setOwnerId(defaultDragon.getOwnerId());
+            }
+
             func.accept(createdDragon);
             //sendAddDragonToServer(createdDragon);
         }
@@ -103,16 +122,50 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddIfMinMouseClicked(){
-        addDragon("AddIfMin commands", this::sendAddIfMinDragonToServer);
+        addDragon("AddIfMin commands", this::sendAddIfMinDragonToServer, null);
     }
 
     @FXML
     protected void onAddMouseClicked(){
-        addDragon("Creating new Dragon", this::sendAddDragonToServer);
+        addDragon("Creating new Dragon", this::sendAddDragonToServer, null);
     }
 
+
+    protected boolean sendUpdateDragonToServer(Dragon dragon){
+        User user = AuthController.getCheckUser();
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("update", dragon, user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            if (!"Дракон с ID успешно обновлён!".equals((String)answer.answer())) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
+
+
     private boolean sendAddIfMinDragonToServer(Dragon dragon){
-        //TODO complete this func
+        User user = AuthController.getCheckUser();
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("add_if_min", dragon, user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            System.out.println((String)answer.answer());
+            if (!"Новый дракон успешно добавлен.".equals((String)answer.answer())) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
         return false;
     }
 
