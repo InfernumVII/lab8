@@ -30,10 +30,10 @@
                       <MenuItem mnemonicParsing="false" text="Clear" />
                         <Menu mnemonicParsing="false" text="CountByType">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="WATER" />
-                              <MenuItem mnemonicParsing="false" text="UNDERGROUND" />
-                              <MenuItem mnemonicParsing="false" text="AIR" />
-                              <MenuItem mnemonicParsing="false" text="FIRE" />
+                            <MenuItem mnemonicParsing="false" onAction="#countByType" text="WATER" />
+                              <MenuItem mnemonicParsing="false" onAction="#countByType" text="UNDERGROUND" />
+                              <MenuItem mnemonicParsing="false" onAction="#countByType" text="AIR" />
+                              <MenuItem mnemonicParsing="false" onAction="#countByType" text="FIRE" />
                           </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="FilterByCharacter">

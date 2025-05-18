@@ -77,6 +77,13 @@ public class TopBarButtons{
         
         
     }  
+
+    @FXML
+    protected void countByType(ActionEvent event){
+        MenuItem menuItem = (MenuItem) event.getSource();
+        DragonType dragonType = DragonType.valueOf(menuItem.getText());
+        //TODO make server request
+    }
     
     @FXML
     protected void onAddMouseEntered(){
