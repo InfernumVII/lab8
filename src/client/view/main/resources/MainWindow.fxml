@@ -25,6 +25,15 @@
                   <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#logoutClicked" text="Log out" />
                 </items>
               </Menu>
+                  <Menu mnemonicParsing="false" text="Commands">
+                    <items>
+                      <MenuItem fx:id="clearCommand" mnemonicParsing="false" text="Clear" />
+                        <MenuItem fx:id="countByTypeCommand" mnemonicParsing="false" text="CountByType" />
+                        <MenuItem fx:id="filterByCharacterCommand" mnemonicParsing="false" text="FilterByCharacter" />
+                        <MenuItem fx:id="filterLessThanHeadCommand" mnemonicParsing="false" text="FilterLessThanHead" />
+                        <MenuItem fx:id="removeGreaterCommand" mnemonicParsing="false" text="RemoveGreater" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Info">
                      <items>
                         <CustomMenuItem hideOnClick="false" mnemonicParsing="false" styleClass="info" text="Unspecified Action">
@@ -51,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Text>
-            <Text fx:id="addIfMinButton" fill="WHITE" layoutX="1099.0" layoutY="24.0" onMouseClicked="#onAddIfMinMouseClicked" onMouseEntered="#onAddMouseEntered" onMouseExited="#onAddMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="AddIfMin" textAlignment="CENTER" wrappingWidth="95.0">
+            <Text fx:id="addIfMinButton" fill="WHITE" layoutX="1099.0" layoutY="24.0" onMouseClicked="#onAddIfMinMouseClicked" onMouseEntered="#onAddIfMinMouseEntered" onMouseExited="#onAddIfMinMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="AddIfMin" textAlignment="CENTER" wrappingWidth="95.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

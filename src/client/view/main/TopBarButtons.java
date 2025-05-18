@@ -17,6 +17,7 @@ import client.view.customDialog.StringPrompt;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import shared.collection.Color;
@@ -35,6 +36,13 @@ public class TopBarButtons{
     @FXML protected Text addButton;
     @FXML protected Text addIfMinButton;
     @FXML protected Text info;
+
+    //COMMANDS MENU
+    @FXML protected MenuItem clearCommand;
+    @FXML protected MenuItem countByTypeCommand;
+    @FXML protected MenuItem filterByCharacterCommand;
+    @FXML protected MenuItem filterLessThanHeadCommand;
+    @FXML protected MenuItem removeGreaterCommand;
 
     public TopBarButtons() {
         initInfo();
@@ -122,7 +130,17 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddIfMinMouseClicked(){
-        addDragon("AddIfMin commands", this::sendAddIfMinDragonToServer, null);
+        addDragon("AddIfMin command", this::sendAddIfMinDragonToServer, null);
+    }
+
+    @FXML
+    protected void onAddIfMinMouseEntered(){
+        addIfMinButton.setStrokeWidth(0.2);
+    }
+
+    @FXML
+    protected void onAddIfMinMouseExited(){
+        addIfMinButton.setStrokeWidth(0);
     }
 
     @FXML
