@@ -3,6 +3,7 @@ package client.view.main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
@@ -121,10 +122,22 @@ public class TopBarButtons{
     protected void filterByCharacter(ActionEvent event){
         MenuItem menuItem = (MenuItem) event.getSource();
         DragonCharacter dragonCharacter = DragonCharacter.valueOf(menuItem.getText());
-        System.out.println(dragonCharacter);
 
-        new TableWindow(tableView.getItems()).show();
-        //TODO make server request and make filter(maybe dont need to show message)
+        User user = AuthController.getCheckUser();
+        NetCommandAuth netCommandAuth = new NetCommandAuth("filter_by_character", dragonCharacter.toString(), user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            if(answer.answer() == null) {
+                new Message("Error during command execute", MessageColor.ERROR).show();
+                return;
+            }
+            List<Dragon> result = (List<Dragon>)answer.answer();
+            new TableWindow(result).show();
+
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     @FXML
@@ -186,9 +199,22 @@ public class TopBarButtons{
         modernInputHandlerDialog.add(eyesPrompt);
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
-            float eyesCount = eyesPrompt.getContent();
-            new Message(String.format("Eyes count: %s", eyesCount)).show();
-            //TODO make server request and show message(maybe dont need to show message)
+            Float eyesCount = eyesPrompt.getContent();
+
+            User user = AuthController.getCheckUser();
+            NetCommandAuth netCommandAuth = new NetCommandAuth("filter_less_than_head", eyesCount.toString(), user);
+            try {
+                Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+                if(answer.answer() == null) {
+                    new Message("Error during command execute", MessageColor.ERROR).show();
+                    return;
+                }
+                List<Dragon> result = (List<Dragon>)answer.answer();
+                new TableWindow(result).show();    
+            } catch (ClassNotFoundException | IOException | TimeOutException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
     }
 

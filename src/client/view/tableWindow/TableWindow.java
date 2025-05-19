@@ -73,8 +73,10 @@ public class TableWindow {
             
             stage.setScene(scene);
             stage.setTitle("Result table");
-        
+            stage.setResizable(false);
+
             stage.initModality(Modality.APPLICATION_MODAL);
+
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -85,8 +87,7 @@ public class TableWindow {
     
     public void show(){
         stage.show();
-        stage.setHeight(479);
-        stage.setWidth(1112);
+        stage.sizeToScene();
     }
 
     @FXML

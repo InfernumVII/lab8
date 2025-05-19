@@ -1,5 +1,7 @@
 package server.commands;
+import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import shared.utility.ArgHandler;
 import shared.utility.exceptions.ArgumentEnumException;
@@ -43,20 +45,17 @@ public class FilterByCharacterCommand implements Command {
     @Override
     public Object execute(Object argument, User user){
         if (!ServerCommandManager.getAuthInstance().checkUserCreds(user))
-            return "Ошибка авторизации";
+            return null;
         String arg = (String) argument;
         try {
-            StringJoiner stringJoiner = new StringJoiner("\n");
             if (ArgHandler.checkArgForEnumString(arg, DragonCharacter.values())){
-                stringJoiner.add("Драконы с таким же характером: ");
                 DragonCharacter dragonCharacter = DragonCharacter.valueOf(arg);
 
-                dragonManager.getSortedDragons().stream()
+                return dragonManager.getSortedDragons().stream()
                                 .filter(dragon -> dragon.getCharacter() == dragonCharacter)
-                                .map(Dragon::toString)
-                                .forEachOrdered(dragon -> stringJoiner.add(dragon));
+                                .collect(Collectors.toList());
             }
-            return stringJoiner.toString();
+            return null;
         } catch (ArgumentEnumException e) {
             return e.getMessage();
         }

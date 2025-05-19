@@ -8,22 +8,23 @@
 
 <VBox fx:id="rootVBox" prefHeight="479.0" prefWidth="1112.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-  <TableView fx:id="tableView" prefHeight="728.0" prefWidth="1083.0">
+  <TableView fx:id="tableView" prefHeight="493.0" prefWidth="1112.0">
     <columns>
       <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id" />
-      <TableColumn fx:id="nameColumn" prefWidth="268.0" text="Name" />
-      <TableColumn fx:id="coordXColumn" minWidth="1.0" prefWidth="123.0" text="Coord X" />
-      <TableColumn fx:id="coordYColumn" prefWidth="87.0" text="Coord Y" />
-      <TableColumn fx:id="creationDateColumn" prefWidth="114.0" text="Creation date" />
+      <TableColumn fx:id="nameColumn" prefWidth="257.0" text="Name" />
+      <TableColumn fx:id="coordXColumn" minWidth="1.0" prefWidth="112.0" text="Coord X" />
+      <TableColumn fx:id="coordYColumn" prefWidth="98.0" text="Coord Y" />
+      <TableColumn fx:id="creationDateColumn" prefWidth="125.0" text="Creation date" />
       <TableColumn fx:id="ageColumn" prefWidth="71.0" text="Age" />
       <TableColumn fx:id="colorColumn" prefWidth="82.0" text="Color" />
-      <TableColumn fx:id="typeColumn" prefWidth="56.0" text="Type" />
-      <TableColumn fx:id="characterColumn" prefWidth="103.0" text="Character" />
-      <TableColumn fx:id="numOfEyesColumn" prefWidth="109.0" text="Num of eyes" />
+      <TableColumn fx:id="typeColumn" prefWidth="72.0" text="Type" />
+      <TableColumn fx:id="characterColumn" prefWidth="117.0" text="Character" />
+      <TableColumn fx:id="numOfEyesColumn" prefWidth="127.0" text="Num of eyes" />
     </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+
   </TableView>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="bottom-bar">
          <children>

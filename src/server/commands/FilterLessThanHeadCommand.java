@@ -1,5 +1,7 @@
 package server.commands;
+import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import shared.utility.ArgHandler;
 import shared.collection.Dragon;
@@ -41,24 +43,21 @@ public class FilterLessThanHeadCommand implements Command {
     @Override
     public Object execute(Object argument, User user){
         if (!ServerCommandManager.getAuthInstance().checkUserCreds(user))
-            return "Ошибка авторизации";
+            return null;
         String arg = (String) argument;
-        StringJoiner stringJoiner = new StringJoiner("\n");
         try {
             if (ArgHandler.checkArgForFloat(arg)){
                 Float eyesCount = Float.parseFloat(arg);
-                stringJoiner.add(String.format("Драконы у которых кол-во глаз на говоле меньше чем: %s", eyesCount));
 
-                dragonManager.getSortedDragons().stream()
+                return dragonManager.getSortedDragons().stream()
                                 .filter(dragon -> dragon.getHead().getEyesCount() < eyesCount)
-                                .map(Dragon::toString)
-                                .forEachOrdered(dragon -> stringJoiner.add(dragon));
+                                .collect(Collectors.toList());
             }
             
         } catch (Exception e) {
             return e.getMessage();
         }
-        return stringJoiner.toString();
+        return null;
     }
 
     /**
