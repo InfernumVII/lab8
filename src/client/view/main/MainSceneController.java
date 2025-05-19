@@ -115,7 +115,6 @@ public class MainSceneController extends TopBarButtons implements Initializable{
         Platform.runLater(() -> {
             updateParent();
             addGradientCircle();
-            //TODO сделать так, чтобы объект на фоне не меншал нажимать на элементы интерфейса
             tableView.getScene().getWindow().setOnCloseRequest(e -> {
                 close();
             });

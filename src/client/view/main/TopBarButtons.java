@@ -161,7 +161,7 @@ public class TopBarButtons{
 
     @FXML
     protected void filterLessThanHead(ActionEvent event){
-        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(); //TODO fix size of window
+        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 150); //Q: оно кстати не делается меньше некого размера, хзхзхзх
         modernInputHandlerDialog.setLabelText("FilterLessThanHead command");
         FloatPrompt eyesPrompt = new FloatPrompt("Enter eyes count", false, 1, Float.MAX_VALUE);
         modernInputHandlerDialog.add(eyesPrompt);

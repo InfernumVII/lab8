@@ -122,6 +122,10 @@ public class ModernInputHandlerDialog {
         stage.setMinWidth(minWidth);
         stage.setMinHeight(minHeight);
         
+        stage.setWidth(minWidth);
+        stage.setHeight(minHeight);
+        
+
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
