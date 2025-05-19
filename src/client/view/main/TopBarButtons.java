@@ -18,6 +18,7 @@ import client.view.customDialog.LongPrompt;
 import client.view.customDialog.ModernInputHandlerDialog;
 import client.view.customDialog.StringPrompt;
 import client.view.message.Message;
+import client.view.tableWindow.TableWindow;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -121,6 +122,8 @@ public class TopBarButtons{
         MenuItem menuItem = (MenuItem) event.getSource();
         DragonCharacter dragonCharacter = DragonCharacter.valueOf(menuItem.getText());
         System.out.println(dragonCharacter);
+
+        new TableWindow(tableView.getItems()).show();
         //TODO make server request and make filter(maybe dont need to show message)
     }
 
