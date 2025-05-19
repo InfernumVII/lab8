@@ -19,6 +19,7 @@ import client.view.customDialog.StringPrompt;
 import client.view.message.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
@@ -27,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -47,6 +49,10 @@ public class TopBarButtons{
     @FXML protected Text addButton;
     @FXML protected Text addIfMinButton;
     @FXML protected Text info;
+    @FXML protected TableView<Dragon> tableView;
+
+
+    private String preFormattedInfo;
 
 
     public TopBarButtons() {
@@ -58,14 +64,15 @@ public class TopBarButtons{
             User user = AuthController.getCheckUser();
             String infoText = "Error";
             NetCommandAuth netCommandAuth = new NetCommandAuth("info", null, user);
+            Info answerInfo = null;
             try {
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
                 if (answer.answer().getClass() != String.class){
-                    Info answerInfo = (Info) answer.answer();
+                    answerInfo = (Info) answer.answer();
                     StringJoiner stringJoiner = new StringJoiner("\n");
                     stringJoiner.add("Type of collection: " + answerInfo.collectionType());
                     stringJoiner.add("Init time: " + answerInfo.initTime());
-                    stringJoiner.add("Num of elements:  " + answerInfo.size());
+                    stringJoiner.add("Num of elements:  %d");
                     infoText = stringJoiner.toString();
                 }
                 
@@ -73,14 +80,20 @@ public class TopBarButtons{
                 e.printStackTrace();
                 System.exit(1);
             }
-            info.setText(infoText);
+            preFormattedInfo = infoText;
+            info.setText(String.format(preFormattedInfo, answerInfo.size()));
         });
         
         
-    }  
+    }
 
     @FXML
-    protected void countByType(ActionEvent event){
+    private void onInfoClicked(Event event) {
+        info.setText(String.format(preFormattedInfo, tableView.getItems().size()));
+    }
+
+    @FXML
+    protected void countByType(Event event){
         MenuItem menuItem = (MenuItem) event.getSource();
         //DragonType dragonType = DragonType.valueOf(menuItem.getText());
 

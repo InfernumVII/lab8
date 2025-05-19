@@ -48,7 +48,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#removeGreater" text="RemoveGreater" />
                     </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Info">
+                  <Menu mnemonicParsing="false" onMenuValidation="#onInfoClicked" text="Info">
                      <items>
                         <CustomMenuItem hideOnClick="false" mnemonicParsing="false" styleClass="info" text="Unspecified Action">
                            <content>

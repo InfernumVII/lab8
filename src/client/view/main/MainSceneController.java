@@ -43,7 +43,6 @@ import javafx.scene.shape.Circle;
 public class MainSceneController extends TopBarButtons implements Initializable{
 
     @FXML private VBox rootVBox;
-    @FXML private TableView<Dragon> tableView;
     @FXML private TableColumn<Dragon, Integer> idColumn;
     @FXML private TableColumn<Dragon, String> nameColumn;
     @FXML private TableColumn<Dragon, Long> coordXColumn;
