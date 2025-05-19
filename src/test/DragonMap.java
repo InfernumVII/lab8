@@ -1,6 +1,8 @@
 package test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import shared.collection.Dragon;
 
 public class DragonMap {
     private final double scaleFactor;
@@ -18,6 +21,7 @@ public class DragonMap {
     private final double dragonYShift = 282;
     private final Pane rootPane = new Pane();
     private final Stage stage = new Stage();
+    private final Map<Dragon, StackPane> dragons = new HashMap<>();
 
     public DragonMap(double scaleFactor){
         this.scaleFactor = scaleFactor;
@@ -46,13 +50,17 @@ public class DragonMap {
         stage.setScene(scene);
     }
 
-    public void createDragonAt(double x, double y, int colorShift){
+    public void createDragonAt(double x, double y, int colorShift, Dragon dragonI){
         StackPane dragon = createDragon(colorShift);
         dragon.setLayoutX(x - dragonXShift / 2);
         dragon.setLayoutY(y - dragonYShift / 2);
+        dragons.put(dragonI, dragon);
         rootPane.getChildren().add(dragon);
-        
     }
+
+    public Map<Dragon, StackPane> getDragons(){
+        return dragons;
+    } 
 
     public void show(){
         stage.show();

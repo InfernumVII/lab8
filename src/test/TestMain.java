@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import shared.collection.Dragon;
 
 public class TestMain extends Application {
     
@@ -57,13 +58,17 @@ public class TestMain extends Application {
         DragonMap dragonMap = new DragonMap(0.0625);
         for (int i = 20; i < 850; i+= 50) {
             for (int j = 20; j < 850; j+=50) {
-                dragonMap.createDragonAt(i, j, i * j);
-                
+                Dragon dragon = new Dragon.Builder().withId(i * j).build();
+                dragonMap.createDragonAt(i, j, i * j, dragon);
             }
         }
 
-        dragonMap.createDragonAt(256, 256, 0);
+        //dragonMap.createDragonAt(256, 256, 0);
         dragonMap.show();
+        //System.out.println(dragonMap);
+        Dragon dragon = new Dragon.Builder().withId(57400).build(); //test that eq id work
+        System.out.println(dragonMap.getDragons().get(dragon));
+
         
         
 
