@@ -56,7 +56,6 @@ public class TestMain extends Application {
 
         //String stylesheet = ModernInputHandlerDialog.class.getResource("resources/styles.css").toExternalForm(); -- example of stylesheet set
         //but can be set in fxml
-        //TODO add styles to make possible to change dragon colors
     }
     
 }

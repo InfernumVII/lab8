@@ -151,10 +151,8 @@ public class MainSceneController extends TopBarButtons implements Initializable{
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             System.out.println(selectedDragon);
             if (selectedDragon != null) {
-                // TODO: Реализовать окно редактирования
-
-                addDragon("Edit dragon", this::sendUpdateDragonToServer, selectedDragon);
                 System.out.println("Изменить: " + selectedDragon);
+                addDragon("Edit dragon", this::sendUpdateDragonToServer, selectedDragon);   
             }
         });
 

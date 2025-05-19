@@ -49,7 +49,6 @@ public class UpdateCommand implements Command {
         Dragon dragon;
         try {
             dragon = dragonManager.returnDragonById(id);
-            System.out.println(dragon);
         } catch (DragonFindException e) {
             return e.getMessage();
         }
