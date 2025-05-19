@@ -18,6 +18,7 @@ import client.view.customDialog.LongPrompt;
 import client.view.customDialog.ModernInputHandlerDialog;
 import client.view.customDialog.StringPrompt;
 import client.view.message.Message;
+import client.view.message.MessageColor;
 import client.view.tableWindow.TableWindow;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -101,13 +102,12 @@ public class TopBarButtons{
         //DragonType dragonType = DragonType.valueOf(menuItem.getText());
 
         User user = AuthController.getCheckUser();
-
         NetCommandAuth netCommandAuth = new NetCommandAuth("count_by_type", menuItem.getText(), user);
         try {
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             Long count = (Long)answer.answer();
             if (count == -1) {
-                new Message("Error during command execute").show();
+                new Message("Error during command execute", MessageColor.ERROR).show();
             } else {
                 new Message("Count " + menuItem.getText() + ": " + count).show();
             }
@@ -138,9 +138,9 @@ public class TopBarButtons{
             if (result.equals("Драконы были очищены!")) {
                 new Message("Success").show();
             } else if (result.equals("Нет драконов для очистки")) {
-                new Message("No your dragons to clear").show();
+                new Message("There is not a single dragon of yours to clean.", MessageColor.ERROR).show();
             } else {
-                new Message("Error during command").show();
+                new Message("Error during command execution", MessageColor.ERROR).show();
             }
         } catch (ClassNotFoundException | IOException | TimeOutException e) {
             e.printStackTrace();
@@ -165,9 +165,9 @@ public class TopBarButtons{
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
                 String result = (String)answer.answer();
                 if (result.equals("Нет драконов для удаления")) {
-                    new Message("No dragons to delete").show();
+                    new Message("No dragons to delete", MessageColor.ERROR).show();
                 } else if (result.equals("Ошибка удаления") || result.equals("Ошибка авторизации")) {
-                    new Message("Error during command execute").show();
+                    new Message("Error during command execution", MessageColor.ERROR).show();
                 } else {
                     new Message(String.format("Success! You're deleted %d dragons", result.split("\n").length)).show();
                 }

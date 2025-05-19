@@ -26,11 +26,11 @@ import javafx.util.Duration;
 public class Message {
     private Stage stage = new Stage();
 
-    public Message(String message){
+    public Message(String message, MessageColor color){
         Button button = new Button("OK");
         button.setOnAction(this::onAction);
         Text text = new Text(message);
-        text.setStyle("-fx-fill: #ffffff; -fx-font-weight: bold; -fx-font-size: 20px;");
+        text.setStyle(String.format("-fx-fill: %s; -fx-font-weight: bold; -fx-font-size: 20px;", color.getHexCode()));
         HBox hBox = new HBox(text);
         HBox.setMargin(text, new Insets(20, 20, 10, 20));
         hBox.setAlignment(Pos.CENTER);
@@ -45,7 +45,10 @@ public class Message {
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         // stage.setOnShown(this::onShow);
-        
+    }
+
+    public Message(String message){
+        this(message, MessageColor.DEFAULT);
     }
 
     private StackPane createFourPolyStars(){
