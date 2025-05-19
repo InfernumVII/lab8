@@ -35,7 +35,6 @@ public class AddIfMinCommand implements Command {
         if (!ServerCommandManager.getAuthInstance().checkUserCreds(user))
             return "Ошибка авторизации";
         StringJoiner stringJoiner = new StringJoiner("\n");
-        stringJoiner.add("Добавление нового дракона.");
 
         Dragon dragon = (Dragon) arg;
         dragon.setCreationDate(LocalDate.now());

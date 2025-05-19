@@ -112,8 +112,8 @@ public class MainSceneController extends TopBarButtons implements Initializable{
         setupColumns();
         Platform.runLater(() -> {
             updateParent();
-            addGradientCircle(); //Maybe not needed LOOKS UGLY :}
-            //TODO add some object to the background to make table looks better
+            addGradientCircle();
+            //TODO сделать так, чтобы объект на фоне не меншал нажимать на элементы интерфейса
             tableView.getScene().getWindow().setOnCloseRequest(e -> {
                 close();
             });
@@ -144,14 +144,12 @@ public class MainSceneController extends TopBarButtons implements Initializable{
 
 
     private void setupPermittedContextMenu() {
-        MenuItem editItem = new MenuItem("Изменить");
-        MenuItem deleteItem = new MenuItem("Удалить");
+        MenuItem editItem = new MenuItem("Edit");
+        MenuItem deleteItem = new MenuItem("Delete");
     
         editItem.setOnAction(event -> {
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
-            System.out.println(selectedDragon);
             if (selectedDragon != null) {
-                System.out.println("Изменить: " + selectedDragon);
                 addDragon("Edit dragon", this::sendUpdateDragonToServer, selectedDragon);   
             }
         });
@@ -164,7 +162,6 @@ public class MainSceneController extends TopBarButtons implements Initializable{
                 try{
                     Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
                     String strAnswer = (String)answer.answer();
-                    System.out.println(strAnswer);
                     if (strAnswer.equals("Дракон удалён.")) {
                         tableView.getItems().remove(selectedDragon);
                     }
@@ -172,8 +169,6 @@ public class MainSceneController extends TopBarButtons implements Initializable{
                     e.printStackTrace();
                     System.exit(1);
                 }
-
-                System.out.println("Удалить: " + selectedDragon);
             }
         });
     
@@ -184,7 +179,7 @@ public class MainSceneController extends TopBarButtons implements Initializable{
 
 
     private void setupForbiddenContextMenu () {
-        MenuItem forbiddenItem = new MenuItem("Изменение запрещено.");
+        MenuItem forbiddenItem = new MenuItem("You can't edit this dragon.");
         contextMenu.getItems().setAll(forbiddenItem);
     }
     

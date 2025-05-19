@@ -97,7 +97,6 @@ public class DragonDB extends PSQL {
         try {
             int user_id = ServerCommandManager.getAuthInstance().findUserId(user);
             preparedStatement.setInt(1, user_id);
-            System.out.println(preparedStatement);
             int editedRows = preparedStatement.executeUpdate();
             return true;
             //return editedRows > 0;  // Q: если оставить вот так, то повторный апдейт для дракона будет невозможен, будет возвращать ошибку

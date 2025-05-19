@@ -72,11 +72,7 @@ public class DragonManager {
         Dragon minDragon = Collections.min(getDragonSet(), new Comparator<Dragon>() {
                 @Override
                 public int compare(Dragon d1, Dragon d2) {
-                    int xCompare = Long.compare(d1.getCoordinates().getX(), d2.getCoordinates().getX());
-                    if (xCompare != 0) {
-                        return xCompare; 
-                    }
-                    return Long.compare(d1.getCoordinates().getY(), d2.getCoordinates().getY());
+                    return Long.compare(d1.getCoordinates().getY()+d1.getCoordinates().getX(), d2.getCoordinates().getY()+d2.getCoordinates().getX());
                 }
             });
         return minDragon;
@@ -88,9 +84,7 @@ public class DragonManager {
 
     public synchronized void clearDragonSet(User user){
         int userId = ServerCommandManager.getAuthInstance().findUserId(user);
-        dragonSet.stream()
-            .filter(dragon -> dragon.getOwnerId() == userId)
-            .forEach(this::removeDragon);
+        dragonSet.removeIf(dragon -> dragon.getOwnerId() == userId);
     }
 
     public synchronized boolean preRemoveDragon(Dragon e, User user){

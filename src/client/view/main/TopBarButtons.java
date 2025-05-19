@@ -82,9 +82,23 @@ public class TopBarButtons{
     @FXML
     protected void countByType(ActionEvent event){
         MenuItem menuItem = (MenuItem) event.getSource();
-        DragonType dragonType = DragonType.valueOf(menuItem.getText());
-        new Message(dragonType.toString()).show();
-        //TODO make server request and show message
+        //DragonType dragonType = DragonType.valueOf(menuItem.getText());
+
+        User user = AuthController.getCheckUser();
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("count_by_type", menuItem.getText(), user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            Long count = (Long)answer.answer();
+            if (count == -1) {
+                new Message("Error during command execute").show();
+            } else {
+                new Message("Count " + menuItem.getText() + ": " + count).show();
+            }
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     @FXML
@@ -97,8 +111,23 @@ public class TopBarButtons{
 
     @FXML
     protected void clear(ActionEvent event){
-        new Message("Clearing").show();
-        //TODO make clear and show message
+        User user = AuthController.getCheckUser();
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("clear", null, user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            String result = (String)answer.answer();
+            if (result.equals("Драконы были очищены!")) {
+                new Message("Success").show();
+            } else if (result.equals("Нет драконов для очистки")) {
+                new Message("No your dragons to clear").show();
+            } else {
+                new Message("Error during command").show();
+            }
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     @FXML
@@ -233,11 +262,13 @@ public class TopBarButtons{
         NetCommandAuth netCommandAuth = new NetCommandAuth("add_if_min", dragon, user);
         try {
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
-            System.out.println((String)answer.answer());
-            if (!"Новый дракон успешно добавлен.".equals((String)answer.answer())) {
+            if ("Новый дракон успешно добавлен.".equals((String)answer.answer())) {
+                return true;
+            } else if ("Ваш дракон имеет большее значение, чем у минимального элемента коллекции.".equals((String)answer.answer())){
+                new Message("It is not min!").show();
                 return false;
             } else {
-                return true;
+                return false;
             }
         } catch (ClassNotFoundException | IOException | TimeOutException e) {
             e.printStackTrace();
@@ -252,7 +283,6 @@ public class TopBarButtons{
         NetCommandAuth netCommandAuth = new NetCommandAuth("add", dragon, user);
         try {
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
-            System.out.println((String)answer.answer());
             if (!"Добавление нового дракона.\nНовый дракон успешно добавлен.".equals((String)answer.answer())) {
                 return false;
             } else {

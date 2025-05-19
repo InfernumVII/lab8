@@ -43,20 +43,18 @@ public class CountByTypeCommand implements Command {
     @Override
     public Object execute(Object argument, User user){
         if (!ServerCommandManager.getAuthInstance().checkUserCreds(user))
-            return "Ошибка авторизации";
+            return -1;
         try {
+            long count = -1;
             String arg = (String) argument;
-            StringJoiner stringJoiner = new StringJoiner("\n");
             if (ArgHandler.checkArgForEnumString(arg, DragonType.values())){
                 DragonType dragonType = DragonType.valueOf(arg);
 
-                long count = dragonManager.getDragonSet().stream()
+                count = dragonManager.getDragonSet().stream()
                                 .filter(dragon -> dragon.getType() == dragonType)
                                 .count();
-                
-                stringJoiner.add(String.format("Количество драконов с данным типом: %d", count));
             }
-            return stringJoiner.toString();
+            return count;
         } catch (Exception e) {
             return e.getMessage();
         }
