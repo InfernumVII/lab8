@@ -145,8 +145,8 @@ public class TopBarButtons{
 
     @FXML
     protected void removeGreater(ActionEvent event){
-        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
-        modernInputHandlerDialog.setLabelText("RemoveGreater command"); //TODO fix size of window
+        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 270);
+        modernInputHandlerDialog.setLabelText("RemoveGreater command");
         LongPrompt xPrompt = new LongPrompt("Enter coordinate x", false, -420, Long.MAX_VALUE);
         LongPrompt yPrompt = new LongPrompt("Enter coordinate y", false, Long.MIN_VALUE, 699);
         modernInputHandlerDialog.addAll(xPrompt, yPrompt);

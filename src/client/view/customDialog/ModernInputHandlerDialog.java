@@ -25,7 +25,18 @@ public class ModernInputHandlerDialog {
     private boolean submitted = false;
     private Text label;
 
-    public ModernInputHandlerDialog(){
+    private final Integer minWidth;
+    private final Integer minHeight;
+
+
+    public ModernInputHandlerDialog() {
+        this(450, 560);
+    }
+
+    public ModernInputHandlerDialog(Integer minWidth, Integer  minHeight){
+        this.minWidth = minWidth;
+        this.minHeight = minHeight;
+
         submitButtonSetup();
         rootSetup();
     }
@@ -108,11 +119,8 @@ public class ModernInputHandlerDialog {
         
         Scene scene = new Scene(root);
         
-        stage.setMinWidth(450);
-        stage.setMinHeight(560);
-        
-        stage.setWidth(450);
-        stage.setHeight(560);
+        stage.setMinWidth(minWidth);
+        stage.setMinHeight(minHeight);
         
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
