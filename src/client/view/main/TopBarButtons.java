@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 import javax.naming.Context;
 
 import client.ClientMain;
+import client.commands.RemoveGreaterCommand;
 import client.view.auth.AuthController;
 import client.view.customDialog.EnumPrompt;
 import client.view.customDialog.FloatPrompt;
@@ -43,6 +44,7 @@ import shared.network.exceptions.TimeOutException;
 import shared.network.models.Answer;
 import shared.network.models.Info;
 import shared.network.models.NetCommandAuth;
+import shared.network.models.RemoveGreaterCommandArgs;
 import shared.network.models.User;
 
 public class TopBarButtons{
@@ -154,8 +156,22 @@ public class TopBarButtons{
         if (modernInputHandlerDialog.wasSubmitted()){
             long x = xPrompt.getContent();
             long y = xPrompt.getContent();
-            new Message(String.format("x: %d y: %d", x, y)).show();
-            //TODO make server request and show message
+            User user = AuthController.getCheckUser();
+            NetCommandAuth netCommandAuth = new NetCommandAuth("remove_greater", new RemoveGreaterCommandArgs(x,y), user);
+            try {
+                Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+                String result = (String)answer.answer();
+                if (result.equals("Нет драконов для удаления")) {
+                    new Message("No dragons to delete").show();
+                } else if (result.equals("Ошибка удаления") || result.equals("Ошибка авторизации")) {
+                    new Message("Error during command execute").show();
+                } else {
+                    new Message(String.format("Success! You're deleted %d dragons", result.split("\n").length)).show();
+                }
+            } catch (ClassNotFoundException | IOException | TimeOutException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
     }
 

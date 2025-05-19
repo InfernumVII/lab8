@@ -35,7 +35,7 @@ public class RemoveGreaterCommand implements Command {
         long y = args.y();
         
         List<String> results = dragonManager.getSortedDragons().stream()
-            .filter(dragon -> x + y > dragon.getCoordinates().getX() + dragon.getCoordinates().getY())
+            .filter(dragon -> x + y < dragon.getCoordinates().getX() + dragon.getCoordinates().getY())
             .map(dragon -> {
                 if (!dragonManager.preRemoveDragon(dragon, user)){
                     return "Ошибка удаления"; 
