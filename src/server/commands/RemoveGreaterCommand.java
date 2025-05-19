@@ -1,6 +1,7 @@
 package server.commands;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import shared.network.models.RemoveGreaterCommandArgs;
@@ -38,11 +39,12 @@ public class RemoveGreaterCommand implements Command {
             .filter(dragon -> x + y < dragon.getCoordinates().getX() + dragon.getCoordinates().getY())
             .map(dragon -> {
                 if (!dragonManager.preRemoveDragon(dragon, user)){
-                    return "Ошибка удаления"; 
+                    return null; 
                 }
                 dragonManager.removeDragon(dragon);
                 return String.format("Дракон с именем %s и айди %d был удалён", dragon.getName(), dragon.getId());
             })
+            .filter(Objects::nonNull)
             .collect(Collectors.toList());
 
         return results.isEmpty() ? "Нет драконов для удаления" : String.join("\n", results);
