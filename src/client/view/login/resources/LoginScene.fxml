@@ -19,6 +19,56 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.login.LoginSceneController">
    <children>
+      <Circle blendMode="SCREEN" layoutX="-9.0" layoutY="14.0" radius="100.0" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.0941176488995552" green="0.2705882489681244" blue="0.6784313917160034" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.13725490868091583" green="0.6352941393852234" blue="0.9647058844566345" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow height="100.0" radius="49.5" spread="0.5" width="100.0">
+               <color>
+                  <Color red="0.0941176488995552" green="0.2705882489681244" blue="0.6784313917160034" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Circle>
+      <Circle blendMode="SCREEN" layoutX="386.0" layoutY="492.0" radius="100.0" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.3176470696926117" blue="0.18431372940540314" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9411764740943909" green="0.5960784554481506" blue="0.09803921729326248" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow height="100.0" radius="49.5" spread="0.5" width="100.0">
+               <color>
+                  <Color red="1.0" green="0.3176470696926117" blue="0.18431372940540314" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Circle>
       <Text fill="WHITE" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
             <Font name="System Bold" size="40.0" />
@@ -87,55 +137,5 @@
             </Button>
          </children>
       </VBox>
-      <Circle blendMode="SCREEN" layoutX="-9.0" layoutY="14.0" radius="100.0" strokeType="INSIDE">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.0941176488995552" green="0.2705882489681244" blue="0.6784313917160034" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.13725490868091583" green="0.6352941393852234" blue="0.9647058844566345" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-         <effect>
-            <DropShadow height="100.0" radius="49.5" spread="0.5" width="100.0">
-               <color>
-                  <Color red="0.0941176488995552" green="0.2705882489681244" blue="0.6784313917160034" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Circle>
-      <Circle blendMode="SCREEN" layoutX="386.0" layoutY="492.0" radius="100.0" strokeType="INSIDE">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="0.3176470696926117" blue="0.18431372940540314" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9411764740943909" green="0.5960784554481506" blue="0.09803921729326248" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill>
-         <effect>
-            <DropShadow height="100.0" radius="49.5" spread="0.5" width="100.0">
-               <color>
-                  <Color red="1.0" green="0.3176470696926117" blue="0.18431372940540314" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Circle>
    </children>
 </AnchorPane>
