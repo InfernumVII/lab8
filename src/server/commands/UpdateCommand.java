@@ -69,7 +69,7 @@ public class UpdateCommand implements Command {
             return "Ошибка при обновлении дракона";
         }
         
-
+        dragon.setId(pair.getValue1());
         return "Дракон с ID успешно обновлён!";
     }
 
