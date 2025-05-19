@@ -2,14 +2,19 @@ package client.view.tableWindow;
 
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,10 +23,6 @@ import shared.collection.Dragon;
 import shared.collection.DragonCharacter;
 import shared.collection.DragonType;
 
-
-// TODO: добавить кнопку OK снизу таблицы
-// TODO: пофиксить размер
-// TODO: возомжно поменять стили, чтобы выглядело по-другому по сравнеиню с глаыным окном как-то
 public class TableWindow {
 
     @FXML private TableView<Dragon> tableView;
@@ -72,9 +73,6 @@ public class TableWindow {
             
             stage.setScene(scene);
             stage.setTitle("Result table");
-
-            // stage.setHeight(scene.getHeight()); // Не работает так :(
-            // stage.setWidth(scene.getWidth());
         
             stage.initModality(Modality.APPLICATION_MODAL);
         } catch (Exception e) {
@@ -87,8 +85,11 @@ public class TableWindow {
     
     public void show(){
         stage.show();
+        stage.setHeight(479);
+        stage.setWidth(1112);
     }
 
+    @FXML
     private void onAction(ActionEvent actionEvent){
         stage.close();
     }

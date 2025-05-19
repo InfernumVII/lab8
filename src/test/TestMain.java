@@ -61,6 +61,8 @@ public class TestMain extends Application {
                 
             }
         }
+
+        dragonMap.createDragonAt(256, 256, 0);
         dragonMap.show();
         
         
