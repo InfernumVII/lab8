@@ -228,7 +228,8 @@ public class MainSceneController extends TopBarButtons implements Initializable{
             List<Dragon> answerList = (List<Dragon>) answer.answer();
 
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
-
+            
+            //TODO update only if update is needed
             tableView.getItems().setAll(answerList);
             tableView.sort();
 
