@@ -14,8 +14,8 @@ public class DragonMap {
     private final double scaleFactor;
     private final double screenX = 1000;
     private final double screenY = 1000;
-    private final double dragonXShift = 223.04978942871094;
-    private final double dragonYShift = 140.875;
+    private final double dragonXShift = 447;
+    private final double dragonYShift = 282;
     private final Pane rootPane = new Pane();
     private final Stage stage = new Stage();
 
@@ -26,7 +26,7 @@ public class DragonMap {
 
     private StackPane createDragon(int colorShift){
         try {
-            StackPane dragon = FXMLLoader.load(TestMain.class.getResource("CoolDragon0.5x.fxml"));
+            StackPane dragon = FXMLLoader.load(TestMain.class.getResource("CoolDragon.fxml"));
             Group group = (Group) dragon.getChildren().get(0);
             group.setScaleX(scaleFactor);
             group.setScaleY(scaleFactor);
