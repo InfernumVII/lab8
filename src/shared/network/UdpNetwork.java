@@ -97,6 +97,7 @@ public abstract class UdpNetwork {
     public Object handleObject() throws IOException, ClassNotFoundException {
         byte[] lenBytes = handleLen();
         int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
+        if (length < 0) throw new IOException();
         byte[] buf = receive(length);
         return BytesConversions.bytesToObject(buf);
     }
@@ -104,6 +105,7 @@ public abstract class UdpNetwork {
     public Object handleObject(long timeout) throws IOException, TimeOutException, ClassNotFoundException {
         byte[] lenBytes = handleLen(timeout);
         int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
+        if (length < 0) throw new IOException();
         byte[] buf = receive(length, timeout);
         return BytesConversions.bytesToObject(buf);
     }

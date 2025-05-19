@@ -23,7 +23,7 @@ public class LongPrompt extends Handler<Long> {
             return false;
         }
         try {
-            if (!input.matches("\\d+")){
+            if (!input.matches("-?\\d+")){
                 printError("The field must be an integer number.");
                 return false;
             }

@@ -103,9 +103,8 @@ public class MainSceneController extends TopBarButtons implements Initializable{
         gradientCircle.setStyle("-fx-fill: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #ff512f 0.0%, #f09819 100.0%); ");
 
         gradientCircle.setBlendMode(BlendMode.SCREEN);
-
         gradientCircle.setMouseTransparent(true);
-        
+
         parent.getChildren().add(gradientCircle);
     }
 
