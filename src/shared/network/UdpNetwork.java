@@ -57,13 +57,13 @@ public abstract class UdpNetwork {
 
     public void sendObject(Object object) throws IOException{
         byte[] serialized = BytesConversions.objectToBytes(object);
-        send(BytesConversions.intToBytes(serialized.length));
+        //send(BytesConversions.intToBytes(serialized.length));
         send(serialized);
     }
 
     public void sendObject(Object object, InetSocketAddress inetSocketAddress) throws IOException{
         byte[] serialized = BytesConversions.objectToBytes(object);
-        send(BytesConversions.intToBytes(serialized.length), inetSocketAddress);
+        //send(BytesConversions.intToBytes(serialized.length), inetSocketAddress);
         send(serialized, inetSocketAddress);
         
     }
@@ -95,18 +95,18 @@ public abstract class UdpNetwork {
     }
     
     public Object handleObject() throws IOException, ClassNotFoundException {
-        byte[] lenBytes = handleLen();
-        int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
-        if (length < 0) throw new IOException();
-        byte[] buf = receive(length);
+        //byte[] lenBytes = handleLen();
+        //int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
+        //if (length < 0) throw new IOException();
+        byte[] buf = receive(65507);
         return BytesConversions.bytesToObject(buf);
     }
 
     public Object handleObject(long timeout) throws IOException, TimeOutException, ClassNotFoundException {
-        byte[] lenBytes = handleLen(timeout);
-        int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
-        if (length < 0) throw new IOException();
-        byte[] buf = receive(length, timeout);
+        //byte[] lenBytes = handleLen(timeout);
+        //int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
+        //if (length < 0) throw new IOException();
+        byte[] buf = receive(65507, timeout);
         return BytesConversions.bytesToObject(buf);
     }
 
