@@ -9,6 +9,7 @@ import shared.network.models.Answer;
 import shared.network.models.NetCommandAuth;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -64,7 +65,6 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     @FXML private Menu currentUserName;
     @FXML private Menu languageMenu;
 
-    private VisualizationScopeController visualScope;
 
     private Timer timer = new Timer();
 
@@ -275,14 +275,15 @@ public class MainSceneController extends TopBarButtons implements Initializable,
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             List<Dragon> answerList = (List<Dragon>) answer.answer();
 
-            Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
-            
-            //TODO update only if update is needed
-            tableView.getItems().setAll(answerList);
-            tableView.sort();
+            if (!new HashSet<>(answerList).equals(new HashSet<>(tableView.getItems()))) { // Сравнение по хэшстеам чтобы сравнивалось без учета порядка
+                Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
 
-            if (selectedDragon != null) {
-                tableView.getSelectionModel().select(selectedDragon);
+                tableView.getItems().setAll(answerList);
+                tableView.sort();
+
+                if (selectedDragon != null) {
+                    tableView.getSelectionModel().select(selectedDragon);
+                }
             }
         } catch (IOException | ClassNotFoundException | TimeOutException e){
             e.printStackTrace();
@@ -294,6 +295,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     @FXML
     private void logoutClicked(ActionEvent event) {
         AuthController.setCheckUser(null);
+        visualScope.close();
         close();
         switchToLoginScene();
     }

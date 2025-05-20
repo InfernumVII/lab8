@@ -21,6 +21,7 @@ import client.view.customDialog.StringPrompt;
 import client.view.message.Message;
 import client.view.message.MessageColor;
 import client.view.tableWindow.TableWindow;
+import client.view.visualizationScope.VisualizationScopeController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -52,6 +53,7 @@ import shared.network.models.User;
 
 public class TopBarButtons{
     @FXML protected Text addButton;
+    @FXML protected Text showButton;
     @FXML protected Text addIfMinButton;
     @FXML protected Text info;
     @FXML protected Menu infoMenu;
@@ -63,6 +65,8 @@ public class TopBarButtons{
     @FXML protected MenuItem removeGreaterCommand;
     @FXML protected TableView<Dragon> tableView;
 
+
+    protected VisualizationScopeController visualScope;
 
     private String preFormattedInfo;
 
@@ -296,9 +300,26 @@ public class TopBarButtons{
         addIfMinButton.setStrokeWidth(0);
     }
 
+
+    @FXML
+    protected void onShowMouseEntered(){
+        showButton.setStrokeWidth(0.2);
+    }
+
+    @FXML
+    protected void onShowMouseExited(){
+        showButton.setStrokeWidth(0);
+    }
+
+
     @FXML
     protected void onAddMouseClicked(){
         addDragon("Creating new Dragon", this::sendAddDragonToServer, null);
+    }
+
+    @FXML
+    protected void onShowMouseClicked(){
+        visualScope.show();
     }
 
 

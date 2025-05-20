@@ -154,6 +154,10 @@ public class DragonMap {
     }
 
 
+    public Dragon getCheckDragon() {
+        return checkDragon;
+    }
+
     private void runDeselectAnimation(Dragon dragon) {
         if (isAnimating.get()) return;
         isAnimating.set(true);
@@ -256,6 +260,10 @@ public class DragonMap {
         stage.show();
         stage.setHeight(screenY);
         stage.setWidth(screenX);
+    }
+
+    public void close() {
+        stage.close();
     }
 
 }

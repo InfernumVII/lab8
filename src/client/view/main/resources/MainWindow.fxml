@@ -95,6 +95,20 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Text>
+                  <Text fx:id="showButton" fill="WHITE" onMouseClicked="#onShowMouseClicked" onMouseEntered="#onShowMouseEntered" onMouseExited="#onShowMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Show" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <effect>
+                        <Glow level="1.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
                </children>
             </HBox>
          </children>
