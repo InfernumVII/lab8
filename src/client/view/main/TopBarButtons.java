@@ -54,6 +54,13 @@ public class TopBarButtons{
     @FXML protected Text addButton;
     @FXML protected Text addIfMinButton;
     @FXML protected Text info;
+    @FXML protected Menu infoMenu;
+    @FXML protected Menu commandsMenu;
+    @FXML protected MenuItem clearCommand;
+    @FXML protected Menu countByTypeCommand;
+    @FXML protected Menu filterByCharacterCommand;
+    @FXML protected MenuItem filterLessThanHeadCommand;
+    @FXML protected MenuItem removeGreaterCommand;
     @FXML protected TableView<Dragon> tableView;
 
 

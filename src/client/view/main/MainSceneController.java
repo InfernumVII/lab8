@@ -10,10 +10,14 @@ import shared.network.models.NetCommandAuth;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.io.IOException;
 
 import client.ClientMain;
+import client.internationalization.LocaleController;
+import client.internationalization.Locales;
+import client.internationalization.Localizable;
 import client.view.auth.AuthController;
 import client.view.login.LoginSceneController;
 import javafx.application.Platform;
@@ -36,11 +40,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.util.TimerTask;
+import java.util.stream.Stream;
 import java.util.Timer;
 
 import javafx.scene.shape.Circle;
 
-public class MainSceneController extends TopBarButtons implements Initializable{
+public class MainSceneController extends TopBarButtons implements Initializable, Localizable{
 
     @FXML private VBox rootVBox;
     @FXML private TableColumn<Dragon, Integer> idColumn;
@@ -56,6 +61,7 @@ public class MainSceneController extends TopBarButtons implements Initializable{
     @FXML private Canvas canvas;
     @FXML private MenuItem logoutMenuItem;
     @FXML private Menu currentUserName;
+    @FXML private Menu languageMenu;
 
     private Timer timer = new Timer();
 
@@ -63,6 +69,7 @@ public class MainSceneController extends TopBarButtons implements Initializable{
     private Circle gradientCircle;
 
     private final ContextMenu contextMenu = new ContextMenu();
+    public static ResourceBundle cResourceBundle = LocaleController.getResourceBundle("main/main");
 
     private void setupColumns(){
         //Привязка колонок к данным
@@ -108,9 +115,43 @@ public class MainSceneController extends TopBarButtons implements Initializable{
         parent.getChildren().add(gradientCircle);
     }
 
+    private void initMenuLanguage(){
+        Stream.of(Locales.values()).forEach(l -> {
+            MenuItem menuItem = new MenuItem(l.getNameInLocale());
+            menuItem.setOnAction(this::changeLocale);
+            languageMenu.getItems().add(menuItem);
+        });
+    }
+
+    private void changeLocale(ActionEvent event){
+        MenuItem menuItem = (MenuItem) event.getSource();
+        Optional<Locales> locale = Stream.of(Locales.values()).filter(l -> l.getNameInLocale().equals(menuItem.getText())).findFirst();
+        LocaleController.setCurrentLocale(locale.get());
+        updateSceneWithLocale();
+    }
+
+    @Override
+    public void updateSceneWithLocale() {
+        MainSceneController.cResourceBundle = LocaleController.getResourceBundle("main/main");
+        addButton.setText(cResourceBundle.getString("add"));
+        addIfMinButton.setText(cResourceBundle.getString("add_if_min"));
+        infoMenu.setText(cResourceBundle.getString("info"));
+        logoutMenuItem.setText(cResourceBundle.getString("log_out"));
+        commandsMenu.setText(cResourceBundle.getString("commands"));
+        clearCommand.setText(cResourceBundle.getString("clear"));
+        countByTypeCommand.setText(cResourceBundle.getString("count_by_type"));
+        filterByCharacterCommand.setText(cResourceBundle.getString("filter_by_character"));
+        filterLessThanHeadCommand.setText(cResourceBundle.getString("filter_less_than_head"));
+        removeGreaterCommand.setText(cResourceBundle.getString("remove_greater"));
+
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupColumns();
+        initMenuLanguage();
+        updateSceneWithLocale();
 
         Platform.runLater(() -> {
             updateParent();
@@ -253,6 +294,4 @@ public class MainSceneController extends TopBarButtons implements Initializable{
     private void close(){
         timer.cancel(); // Все? Yes, that's enough
     }
-
-
 }
