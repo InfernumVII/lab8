@@ -2,6 +2,8 @@ package shared.collection;
 
 import java.io.Serializable;
 
+import shared.network.models.Pair;
+
 /**
  * Класс, представляющий координаты дракона.
  */
@@ -66,5 +68,9 @@ public class Coordinates implements Serializable {
      */
     public void setY(long y) {
         this.y = y;
+    }
+
+    public Pair<Double, Double> getDoublePair() {
+        return new Pair<Double,Double>((double) x, (double) y);
     }
 }
