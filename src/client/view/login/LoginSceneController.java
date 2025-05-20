@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import client.ClientMain;
+import client.internationalization.LocaleController;
+import client.internationalization.Locales;
 import client.view.auth.AuthController;
 import client.view.main.MainSceneController;
 import client.view.register.RegSceneController;
@@ -29,12 +31,17 @@ import shared.network.models.Pair;
 import shared.network.models.User;
 
 public class LoginSceneController extends AuthController implements Initializable {
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private Text signUp;
+    @FXML private Text title;
+    @FXML private Text usernameTitle;
+    @FXML private Text passwordTitle;
+    @FXML private Text signUp;
+
+    @FXML private AnchorPane rootPane;
 
     private Parent regScene;
+
+    private LocaleController localeController = new LocaleController(Locales.RUSSIAN);
+    private ResourceBundle cResourceBundle = localeController.getResourceBundle("login");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +50,13 @@ public class LoginSceneController extends AuthController implements Initializabl
         } catch (IOException e) {
             e.printStackTrace();
         }
+        title.setText(cResourceBundle.getString("title"));
+        usernameTitle.setText(cResourceBundle.getString("username"));
+        passwordTitle.setText(cResourceBundle.getString("password"));
+        username.setPromptText(cResourceBundle.getString("enter_username"));
+        password.setPromptText(cResourceBundle.getString("enter_password"));
+        signUp.setText(cResourceBundle.getString("sign_up_button"));
+        authButton.setText(cResourceBundle.getString("log_in_button"));
     }
 
     public void signUpMouseEntered(){
@@ -103,7 +117,7 @@ public class LoginSceneController extends AuthController implements Initializabl
                     switchToMainScene();
                     
                 } else {
-                    printError("Incorrect username or password");
+                    printError(cResourceBundle.getString("log_in_error"));
                 }
             } catch (IOException | ClassNotFoundException | TimeOutException e){
                 e.printStackTrace();

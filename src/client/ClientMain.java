@@ -24,7 +24,7 @@ public class ClientMain extends Application {
             StackPane parent = new StackPane(root);
             Scene scene = new Scene(parent);
             primaryStage.centerOnScreen();
-            primaryStage.setResizable(false);
+            //primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

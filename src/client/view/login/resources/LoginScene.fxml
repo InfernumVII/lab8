@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -69,14 +70,14 @@
             </DropShadow>
          </effect>
       </Circle>
-      <Text fill="WHITE" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="400.0">
+      <Text fx:id="title" fill="WHITE" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
       </Text>
       <VBox layoutX="25.0" layoutY="136.0" prefHeight="300.0" prefWidth="350.0" AnchorPane.rightAnchor="25.0">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" VBox.vgrow="ALWAYS">
+            <Text fx:id="usernameTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -89,7 +90,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </TextField>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" VBox.vgrow="ALWAYS">
+            <Text fx:id="passwordTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
@@ -105,17 +106,24 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </PasswordField>
-            <Text fx:id="signUp" fill="WHITE" onMouseClicked="#signUpClicked" onMouseEntered="#signUpMouseEntered" onMouseExited="#signUpMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
+            <HBox alignment="BASELINE_RIGHT">
                <VBox.margin>
-                  <Insets left="270.0" top="10.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Text>
+               <children>
+                  <Text fx:id="signUp" fill="WHITE" onMouseClicked="#signUpClicked" onMouseEntered="#signUpMouseEntered" onMouseExited="#signUpMouseExited" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
             <Text fx:id="error" fill="CRIMSON" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="349.13671875">
                <font>
                   <Font name="System Bold" size="15.0" />

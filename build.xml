@@ -29,6 +29,7 @@
             <fileset dir="${src}">
                 <include name="**/*.fxml"/>
                 <include name="**/*.css"/>
+                <include name="**/*.properties"/>
             </fileset>
         </copy>
         <javac 
