@@ -94,7 +94,7 @@ public class DragonMap {
 
         for (Dragon dragon : currentDragons) {
             if (!dragons.containsKey(dragon)) {
-                addDragon(dragon, 0); // TODO: вычисление colorShift, можно взять хэш от ownerId получится нормальоне рапределение, достаточно "случайное"
+                addDragon(dragon, ColorGenerator.generateColorShift(dragon.getOwnerId()));
             } else {
                 updateDragon(dragon);
             }
