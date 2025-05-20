@@ -104,7 +104,6 @@ public class DragonMap {
             if (e.getCode() == KeyCode.ESCAPE && selected.get() == true){
                 System.out.println("1234");
                 runDeselectAnimation(checkDragon);
-                selected.set(false);
             }
         });
 
@@ -130,7 +129,6 @@ public class DragonMap {
                 if (selected.get() == false){
                     checkDragon = entry.getKey();
                     runSelectAnimation(checkDragon);
-                    selected.set(true);
                 }
                 
                 
@@ -157,6 +155,7 @@ public class DragonMap {
         timeline.setOnFinished(e -> {
             rootPane.getChildren().remove(mapDragon);
             centerPane.getChildren().add(mapDragon);
+            selected.set(true);
         });
         timeline.play();
 
@@ -184,10 +183,11 @@ public class DragonMap {
                 new KeyValue(mapDragon.scaleYProperty(), scaleFactor)
             )
         );
-        timeline.play();
         timeline.setOnFinished(e -> {
             selected.set(false);
         });
+        timeline.play();
+        
     }
 
     public void addDragon(Dragon dragonI, int colorShift){
