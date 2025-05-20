@@ -5,39 +5,62 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Glow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import shared.collection.Dragon;
 import shared.network.models.Pair;
 
 public class DragonMap {
     private final double scaleFactor;
-    private final double screenX = 1000;
-    private final double screenY = 1000;
+    private final double screenX;
+    private final double screenY;
     private final double dragonXShift = 447;
     private final double dragonYShift = 282;
     private final Pane rootPane = new Pane();
     private final Stage stage = new Stage();
     private final Map<Dragon, StackPane> dragons = new HashMap<>();
+    
+    private Dragon selectedDragon = null;
 
-    public DragonMap(double scaleFactor){
+    public DragonMap(double scaleFactor, Integer sceenSizeX, Integer screenSizeY){
+        this.screenX = sceenSizeX;
+        this.screenY = screenSizeY;
         this.scaleFactor = scaleFactor;
         setupScene();
     }
 
+    public DragonMap(double scaleFactor){
+        this(scaleFactor, 1000, 1000);
+    }
+
+
     private StackPane createDragon(int colorShift){
         try {
             StackPane dragon = FXMLLoader.load(TestMain.class.getResource("CoolDragon.fxml"));
-            Group group = (Group) dragon.getChildren().get(0);
-            group.setScaleX(scaleFactor);
-            group.setScaleY(scaleFactor);
+            // Group group = (Group) dragon.getChildren().get(0);
+            // group.setScaleX(scaleFactor);
+            // group.setScaleY(scaleFactor);
+            dragon.setScaleX(scaleFactor);
+            dragon.setScaleY(scaleFactor);
             dragon.getStylesheets().add("data:text/css," + CssFormatter.generateCss(colorShift));
             return dragon;
         } catch (IOException e) {
@@ -51,19 +74,83 @@ public class DragonMap {
     private Pair<Double, Double> convertFromDragonToScreen(Pair<Double, Double> dragonCoord) {
         Double x = dragonCoord.getValue1();
         Double y = dragonCoord.getValue2();
-        Double xScreen = x - dragonXShift / 2; // Сюда можно будет вынести всю сложную логику,
-        Double yScreen = y - dragonYShift / 2; // сдвиги, масштаб. Т.о. все драконы будут отрисовываться по единой логике
+        Double xScreen = mapRanges(x, -1000d, 1000d, 0d, Math.min(screenX, screenY));
+        Double yScreen = mapRanges(y, -1000d, 1000d, Math.min(screenX, screenY), 0d); // Y ось перевернута
+
+        xScreen -= dragonXShift / 2;
+        yScreen -= dragonYShift / 2;
 
         return new Pair<Double,Double>(xScreen, yScreen);
+    }
+
+    private Double mapRanges(Double x, Double inMin, Double inMax, Double outMin, Double outMax) {
+        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
     }
 
     private void setupScene(){
         rootPane.setStyle("-fx-background-color:  #37373E;");
         Scene scene = new Scene(rootPane, screenX, screenY);
+        
+        scene.setOnMouseClicked(event -> {
+            selectDragonByClick(event.getX(), event.getY());
+        });
+
         stage.setScene(scene);
+        stage.setResizable(false);
     }
 
-    public void addDragon(Dragon dragonI, int colorShift){ // Нужн ли этот метод для нашего сценария использования?
+    private void selectDragonByClick(Double x, Double y) {
+        for (Entry<Dragon, StackPane> entry : dragons.entrySet()) {
+            StackPane mapDragon = entry.getValue();
+            
+            Bounds bounds = mapDragon.getBoundsInParent();
+            if (bounds.contains(x, y)) {
+                System.out.println("Вы выбрали дракона:");
+                System.out.println(entry.getKey());
+
+                if (selectedDragon != null) runDeselectAnimation(selectedDragon);
+                runSelectAnimation(entry.getKey());
+                selectedDragon = entry.getKey();
+            }
+        }
+    }
+
+    private void runSelectAnimation(Dragon dragon) {
+        StackPane mapDragon = dragons.get(dragon);
+        mapDragon.toFront();
+
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.millis(500),
+                new KeyValue(mapDragon.layoutXProperty(), (screenX-dragonXShift) / 2),
+                new KeyValue(mapDragon.layoutYProperty(), (screenY-dragonYShift) / 2),
+                new KeyValue(mapDragon.scaleXProperty(), 1.0),
+                new KeyValue(mapDragon.scaleYProperty(), 1.0)
+            )
+        );
+
+        Glow effect = new Glow(0.8);
+
+        mapDragon.setEffect(effect);
+        timeline.play();
+
+    }
+
+
+    private void runDeselectAnimation(Dragon dragon) {
+        StackPane mapDragon = dragons.get(dragon);
+        Pair<Double, Double> pointGoal = convertFromDragonToScreen(dragon.getCoordinates().getDoublePair());
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.millis(500),
+                new KeyValue(mapDragon.layoutXProperty(), pointGoal.getValue1()),
+                new KeyValue(mapDragon.layoutYProperty(), pointGoal.getValue2()),
+                new KeyValue(mapDragon.scaleXProperty(), scaleFactor),
+                new KeyValue(mapDragon.scaleYProperty(), scaleFactor)
+            )
+        );
+        timeline.play();
+    }
+
+    public void addDragon(Dragon dragonI, int colorShift){
         StackPane dragon = createDragon(colorShift);
         Pair<Double,Double> screenCoord = convertFromDragonToScreen(dragonI.getCoordinates().getDoublePair());
         
@@ -119,6 +206,8 @@ public class DragonMap {
 
     public void show(){
         stage.show();
+        stage.setHeight(screenY);
+        stage.setWidth(screenX);
     }
 
 }

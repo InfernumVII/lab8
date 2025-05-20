@@ -64,7 +64,8 @@ public class TestMain extends Application {
         DragonMap dragonMap = new DragonMap(0.0625);
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                Dragon dragon = new Dragon.Builder().withId(i*16 + j).withOwnerId(i*16 + j).withCoordinates(new Coordinates(i*50 + 20, j*50 + 20)).build();
+                Dragon dragon = new Dragon.Builder().withId(i*16 + j).withOwnerId(i*16 + j).withCoordinates(new Coordinates((int)(Math.random()*2000)-1000,(int)(Math.random()*2000)-1000)).build();
+                //Dragon dragon = new Dragon.Builder().withId(i*16 + j).withOwnerId(i*16 + j).withCoordinates(new Coordinates(i*50 + 20, j*50 + 20)).build();
                 data.add(dragon);
             }
         }
