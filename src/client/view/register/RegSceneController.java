@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import client.ClientMain;
+import client.internationalization.LocaleController;
+import client.internationalization.Localizable;
 import client.view.auth.AuthController;
 import client.view.login.LoginSceneController;
 import client.view.main.MainSceneController;
@@ -28,15 +30,29 @@ import shared.network.models.Pair;
 import shared.network.models.RegistrationEnums;
 import shared.network.models.User;
 
-public class RegSceneController extends AuthController implements Initializable {
+public class RegSceneController extends AuthController implements Initializable, Localizable {
     @FXML
     private Text backButton;
     @FXML
     private AnchorPane rootPane;
 
+    private static ResourceBundle cResourceBundle = LocaleController.getResourceBundle("reg/reg");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        updateSceneWithLocale();
+    }
+
+    @Override
+    public void updateSceneWithLocale() {
+        RegSceneController.cResourceBundle = LocaleController.getResourceBundle("reg/reg");
+        title.setText(cResourceBundle.getString("title"));
+        usernameTitle.setText(cResourceBundle.getString("username"));
+        passwordTitle.setText(cResourceBundle.getString("password"));
+        username.setPromptText(cResourceBundle.getString("enter_username"));
+        password.setPromptText(cResourceBundle.getString("enter_password"));
+        authButton.setText(cResourceBundle.getString("sign_up_button"));
+        backButton.setText(cResourceBundle.getString("back_button"));
     }
 
     public void switchToMainScene() {
@@ -60,6 +76,7 @@ public class RegSceneController extends AuthController implements Initializable 
 
 
     public void onSignUpClicked(){
+        //TODO fix crash when login is EXIST
         if (validateFields()){
             final User user = new User(username.getText(), password.getText());
             NetCommandAuth netCommandAuth = new NetCommandAuth("reg", user, user);
@@ -69,7 +86,7 @@ public class RegSceneController extends AuthController implements Initializable 
                 RegistrationEnums answerE = answerP.getValue1();
                 switch (answerE) {
                     case LOGIN_IS_EXIST:
-                        printError("The user with this username already exists");
+                        printError(cResourceBundle.getString("login_is_exist_error"));
                         break;
                     case SUCCESSFUL:
                         AuthController.setCheckUser(user);
@@ -77,7 +94,7 @@ public class RegSceneController extends AuthController implements Initializable 
                         switchToMainScene();
                         break;
                     case UNSUCCESSFUL:
-                        printError("Registration error");
+                        printError(cResourceBundle.getString("reg_error"));
                 }
             } catch (IOException | ClassNotFoundException | TimeOutException e){
                 e.printStackTrace();
@@ -118,6 +135,8 @@ public class RegSceneController extends AuthController implements Initializable 
         });
         timeline.play();
     }
+
+    
 
 
 }

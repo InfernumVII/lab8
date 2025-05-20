@@ -19,14 +19,14 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="400.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.register.RegSceneController">
    <children>
-      <Text fill="WHITE" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" wrappingWidth="400.0">
+      <Text fx:id="title" fill="WHITE" layoutY="93.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
       </Text>
       <VBox layoutX="25.0" layoutY="136.0" prefHeight="300.0" prefWidth="350.0" AnchorPane.rightAnchor="25.0">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" VBox.vgrow="ALWAYS">
+            <Text fx:id="usernameTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -39,7 +39,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </TextField>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" VBox.vgrow="ALWAYS">
+            <Text fx:id="passwordTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

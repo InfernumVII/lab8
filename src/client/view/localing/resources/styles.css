@@ -1,0 +1,15 @@
+* {
+    -fx-text-fill:  #FFFFFF;
+}
+.root {
+    -fx-background-color: #28272F;
+}
+.menu-button {
+    -fx-background-color:  #37373E;
+}
+.arrow {
+    -fx-background-color:  #FFFFFF;
+}
+.context-menu {
+    -fx-background-color:  #37373E;
+}
