@@ -59,11 +59,10 @@ public class TestMain extends Application {
         for (int i = 20; i < 850; i+= 50) {
             for (int j = 20; j < 850; j+=50) {
                 Dragon dragon = new Dragon.Builder().withId(i * j).build();
-                dragonMap.createDragonAt(i, j, i * j, dragon);
             }
         }
 
-        //dragonMap.createDragonAt(256, 256, 0);
+        dragonMap.createDragonAt(1, 1, 0, (Dragon)dragonMap.getDragons().keySet().toArray()[0]);
         dragonMap.show();
         //System.out.println(dragonMap);
         Dragon dragon = new Dragon.Builder().withId(57400).build(); //test that eq id work
