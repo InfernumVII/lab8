@@ -24,8 +24,8 @@ CREATE TABLE dragon_heads (
 
 CREATE TABLE coordinates (
     coord_id SERIAL PRIMARY KEY,
-    x BIGINT NOT NULL CHECK (x > -420),
-    y BIGINT NOT NULL CHECK (y <= 699)
+    x BIGINT NOT NULL CHECK (x >= -1000 AND x <= 1000),
+    y BIGINT NOT NULL CHECK (y >= -1000 AND y <= 1000)
 );
 
 CREATE TABLE dragons (

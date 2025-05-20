@@ -172,8 +172,8 @@ public class TopBarButtons{
     protected void removeGreater(ActionEvent event){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 270);
         modernInputHandlerDialog.setLabelText("RemoveGreater command");
-        LongPrompt xPrompt = new LongPrompt("Enter coordinate x", false, -420, Long.MAX_VALUE);
-        LongPrompt yPrompt = new LongPrompt("Enter coordinate y", false, Long.MIN_VALUE, 699);
+        LongPrompt xPrompt = new LongPrompt("Enter coordinate x", false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt("Enter coordinate y", false, -1000, 1000);
         modernInputHandlerDialog.addAll(xPrompt, yPrompt);
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
@@ -236,8 +236,8 @@ public class TopBarButtons{
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
         modernInputHandlerDialog.setLabelText(label);
         StringPrompt dragonNamePrompt = new StringPrompt("Enter the dragon's name", false);
-        LongPrompt xPrompt = new LongPrompt("Enter the x coordinate", false, -420, Long.MAX_VALUE);
-        LongPrompt yPrompt = new LongPrompt("Enter the y coordinate", false, Long.MIN_VALUE, 699);
+        LongPrompt xPrompt = new LongPrompt("Enter the x coordinate", false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt("Enter the y coordinate", false, -1000, 1000);
         LongPrompt agePrompt = new LongPrompt("Enter the age of the dragon", false, 0, Long.MAX_VALUE);
         EnumPrompt<Color> colorPrompt = new EnumPrompt<>("Enter the color of the dragon", Color.class, false);
         EnumPrompt<DragonType> typePrompt = new EnumPrompt<>("Enter the type of the dragon", DragonType.class, false);

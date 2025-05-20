@@ -20,6 +20,7 @@ import client.internationalization.Locales;
 import client.internationalization.Localizable;
 import client.view.auth.AuthController;
 import client.view.login.LoginSceneController;
+import client.view.visualizationScope.VisualizationScopeController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -62,6 +63,8 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     @FXML private MenuItem logoutMenuItem;
     @FXML private Menu currentUserName;
     @FXML private Menu languageMenu;
+
+    private VisualizationScopeController visualScope;
 
     private Timer timer = new Timer();
 
@@ -153,6 +156,9 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         initMenuLanguage();
         updateSceneWithLocale();
 
+        visualScope = new VisualizationScopeController(tableView);
+        visualScope.show();
+
         Platform.runLater(() -> {
             updateParent();
             addGradientCircle();
@@ -169,6 +175,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
             public void run() {
                 Platform.runLater(() -> {
                     updateTable();
+                    visualScope.updateVisualScope();
                 });
             }
         }, 0, 1000);
