@@ -36,6 +36,8 @@ public class DragonMap {
     private final double dragonXShift = 447;
     private final double dragonYShift = 282;
     private final Pane rootPane = new Pane();
+    private final StackPane centerPane = new StackPane();
+    private final StackPane mainPane = new StackPane(centerPane, rootPane);
     private final Stage stage = new Stage();
     private final Map<Dragon, StackPane> dragons = new HashMap<>();
     
@@ -89,8 +91,8 @@ public class DragonMap {
 
     private void setupScene(){
         rootPane.setStyle("-fx-background-color:  #37373E;");
-        Scene scene = new Scene(rootPane, screenX, screenY);
         
+        Scene scene = new Scene(mainPane, screenX, screenY);
         scene.setOnMouseClicked(event -> {
             selectDragonByClick(event.getX(), event.getY());
         });
