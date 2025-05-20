@@ -18,6 +18,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.effect.Bloom;
@@ -40,11 +41,12 @@ public class DragonMap {
     private final double dragonXShift = 447;
     private final double dragonYShift = 282;
     private final Pane rootPane = new Pane();
-    private final StackPane centerPane = new StackPane();
+    private final Pane centerPane = new Pane();
     private final StackPane mainPane = new StackPane(centerPane, rootPane);
     private final Stage stage = new Stage();
     private final Map<Dragon, StackPane> dragons = new HashMap<>();
-    private AtomicBoolean selected = new AtomicBoolean(false);
+    private final AtomicBoolean selected = new AtomicBoolean(false);
+    private final AtomicBoolean isAnimating = new AtomicBoolean(false);
     private Dragon checkDragon = null;
 
     public DragonMap(double scaleFactor, Integer sceenSizeX, Integer screenSizeY){
@@ -62,9 +64,6 @@ public class DragonMap {
     private StackPane createDragon(int colorShift){
         try {
             StackPane dragon = FXMLLoader.load(TestMain.class.getResource("CoolDragon.fxml"));
-            // Group group = (Group) dragon.getChildren().get(0);
-            // group.setScaleX(scaleFactor);
-            // group.setScaleY(scaleFactor);
             dragon.setScaleX(scaleFactor);
             dragon.setScaleY(scaleFactor);
             dragon.getStylesheets().add("data:text/css," + CssFormatter.generateCss(colorShift));
@@ -102,7 +101,6 @@ public class DragonMap {
         });
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE && selected.get() == true){
-                System.out.println("1234");
                 runDeselectAnimation(checkDragon);
             }
         });
@@ -114,77 +112,93 @@ public class DragonMap {
     }
 
     private void selectDragonByClick(Double x, Double y) {
-        System.out.println("123");
-
         for (Entry<Dragon, StackPane> entry : dragons.entrySet()) {
             StackPane mapDragon = entry.getValue();
             
             Bounds bounds = mapDragon.getBoundsInParent();
             if (bounds.contains(x, y)) {
-                System.out.println("Вы выбрали дракона:");
-                System.out.println(entry.getKey());
-
-                //runDeselectAnimation(selectedDragon);
-                //runSelectAnimation(entry.getKey());
                 if (selected.get() == false){
                     checkDragon = entry.getKey();
                     runSelectAnimation(checkDragon);
-                }
-                
-                
+                }        
             }
         }
     }
 
     private void runSelectAnimation(Dragon dragon) {
-        System.out.println("Select");
+        if (isAnimating.get()) return;
+        isAnimating.set(true);
+
         StackPane mapDragon = dragons.get(dragon);
         mapDragon.toFront();
+
+        double oldX = mapDragon.getLayoutX();
+        double oldY = mapDragon.getLayoutY();
+       
+
+        rootPane.getChildren().remove(mapDragon);
+        centerPane.getChildren().add(mapDragon);
+        selected.set(true);
+
+        mapDragon.setLayoutX(oldX);
+        mapDragon.setLayoutY(oldY);
+    
+
+        GaussianBlur gaussianBlur = new GaussianBlur(0);
+        rootPane.setEffect(gaussianBlur);
+
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(500),
-                new KeyValue(mapDragon.layoutXProperty(), (screenX-dragonXShift) / 2),
-                new KeyValue(mapDragon.layoutYProperty(), (screenY-dragonYShift) / 2),
+                new KeyValue(mapDragon.layoutXProperty(), (screenX - dragonXShift) / 2),
+                new KeyValue(mapDragon.layoutYProperty(), (screenY - dragonYShift) / 2),
                 new KeyValue(mapDragon.scaleXProperty(), 1.0),
-                new KeyValue(mapDragon.scaleYProperty(), 1.0)
+                new KeyValue(mapDragon.scaleYProperty(), 1.0),
+                new KeyValue(gaussianBlur.radiusProperty(), 10)
             )
         );
 
-        GaussianBlur gaussianBlur = new GaussianBlur();
-        rootPane.setEffect(gaussianBlur);
         timeline.setOnFinished(e -> {
-            rootPane.getChildren().remove(mapDragon);
-            centerPane.getChildren().add(mapDragon);
+            isAnimating.set(false);
         });
-        selected.set(true);
         timeline.play();
-
     }
 
 
     private void runDeselectAnimation(Dragon dragon) {
-        System.out.println("Deselect");
-        System.out.println(dragon);
+        if (isAnimating.get()) return;
+        isAnimating.set(true);
+
         StackPane mapDragon = dragons.get(dragon);
         Pair<Double, Double> pointGoal = convertFromDragonToScreen(dragon.getCoordinates().getDoublePair());
-        
-        centerPane.getChildren().remove(mapDragon);
-        rootPane.getChildren().add(mapDragon);
-        mapDragon.setLayoutX((screenX-dragonXShift) / 2);
-        mapDragon.setLayoutY((screenY-dragonYShift) / 2);
-        System.out.println(mapDragon.layoutXProperty());
-        System.out.println(mapDragon.layoutYProperty());
+
+        GaussianBlur gaussianBlur = new GaussianBlur(10);
+        rootPane.setEffect(gaussianBlur);
+
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(500),
                 new KeyValue(mapDragon.layoutXProperty(), pointGoal.getValue1()),
                 new KeyValue(mapDragon.layoutYProperty(), pointGoal.getValue2()),
                 new KeyValue(mapDragon.scaleXProperty(), scaleFactor),
-                new KeyValue(mapDragon.scaleYProperty(), scaleFactor)
+                new KeyValue(mapDragon.scaleYProperty(), scaleFactor),
+                new KeyValue(gaussianBlur.radiusProperty(), 0)
             )
         );
+
         timeline.setOnFinished(e -> {
+            double oldX = mapDragon.getLayoutX();
+            double oldY = mapDragon.getLayoutY();
+    
+            centerPane.getChildren().remove(mapDragon);
+            rootPane.getChildren().add(mapDragon);
             selected.set(false);
+    
+            mapDragon.setLayoutX(oldX);
+            mapDragon.setLayoutY(oldY);
+            
             rootPane.setEffect(null);
+            isAnimating.set(false);
         });
+
         timeline.play();
         
     }
