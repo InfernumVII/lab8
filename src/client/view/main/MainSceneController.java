@@ -194,13 +194,13 @@ public class MainSceneController extends TopBarButtons implements Initializable,
 
 
     private void setupPermittedContextMenu() {
-        MenuItem editItem = new MenuItem("Edit");
-        MenuItem deleteItem = new MenuItem("Delete");
+        MenuItem editItem = new MenuItem(cResourceBundle.getString("edit"));
+        MenuItem deleteItem = new MenuItem(cResourceBundle.getString("delete"));
     
         editItem.setOnAction(event -> {
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             if (selectedDragon != null) {
-                addDragon("Edit dragon", this::sendUpdateDragonToServer, selectedDragon);   
+                addDragon(cResourceBundle.getString("edit_dragon_title"), this::sendUpdateDragonToServer, selectedDragon);   
             }
         });
 

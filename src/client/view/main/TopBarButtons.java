@@ -176,7 +176,7 @@ public class TopBarButtons{
     @FXML
     protected void removeGreater(ActionEvent event){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 270);
-        modernInputHandlerDialog.setLabelText("RemoveGreater command");
+        modernInputHandlerDialog.setLabelText(cResourceBundle.getString("remove_greater_title"));
         LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -1000, 1000);
         LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, -1000, 1000);
         modernInputHandlerDialog.addAll(xPrompt, yPrompt);
@@ -206,7 +206,7 @@ public class TopBarButtons{
     @FXML
     protected void filterLessThanHead(ActionEvent event){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 150); //Q: оно кстати не делается меньше некого размера, хзхзхзх A: Из-за отступов возможно не делается
-        modernInputHandlerDialog.setLabelText("FilterLessThanHead command");
+        modernInputHandlerDialog.setLabelText(cResourceBundle.getString("filter_less_than_head_title"));
         FloatPrompt eyesPrompt = new FloatPrompt(cResourceBundle.getString("eyes_prompt"), false, 1, Float.MAX_VALUE);
         modernInputHandlerDialog.add(eyesPrompt);
         modernInputHandlerDialog.showAndWait();
@@ -288,7 +288,7 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddIfMinMouseClicked(){
-        addDragon("AddIfMin command", this::sendAddIfMinDragonToServer, null);
+        addDragon(cResourceBundle.getString("add_if_min_title"), this::sendAddIfMinDragonToServer, null);
     }
 
     @FXML
@@ -315,7 +315,7 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddMouseClicked(){
-        addDragon("Creating new Dragon", this::sendAddDragonToServer, null);
+        addDragon(cResourceBundle.getString("add_title"), this::sendAddDragonToServer, null);
     }
 
     @FXML
