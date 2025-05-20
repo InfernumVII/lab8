@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.Set;
 
 import javafx.animation.KeyFrame;
@@ -14,6 +15,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
@@ -22,6 +24,8 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -40,8 +44,8 @@ public class DragonMap {
     private final StackPane mainPane = new StackPane(centerPane, rootPane);
     private final Stage stage = new Stage();
     private final Map<Dragon, StackPane> dragons = new HashMap<>();
-    
-    private Dragon selectedDragon = null;
+    private AtomicBoolean selected = new AtomicBoolean(false);
+    private Dragon checkDragon = null;
 
     public DragonMap(double scaleFactor, Integer sceenSizeX, Integer screenSizeY){
         this.screenX = sceenSizeX;
@@ -96,12 +100,23 @@ public class DragonMap {
         scene.setOnMouseClicked(event -> {
             selectDragonByClick(event.getX(), event.getY());
         });
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ESCAPE && selected.get() == true){
+                System.out.println("1234");
+                runDeselectAnimation(checkDragon);
+                selected.set(false);
+            }
+        });
 
         stage.setScene(scene);
         stage.setResizable(false);
+        centerPane.toFront();
+        
     }
 
     private void selectDragonByClick(Double x, Double y) {
+        System.out.println("123");
+
         for (Entry<Dragon, StackPane> entry : dragons.entrySet()) {
             StackPane mapDragon = entry.getValue();
             
@@ -110,14 +125,21 @@ public class DragonMap {
                 System.out.println("Вы выбрали дракона:");
                 System.out.println(entry.getKey());
 
-                if (selectedDragon != null) runDeselectAnimation(selectedDragon);
-                runSelectAnimation(entry.getKey());
-                selectedDragon = entry.getKey();
+                //runDeselectAnimation(selectedDragon);
+                //runSelectAnimation(entry.getKey());
+                if (selected.get() == false){
+                    checkDragon = entry.getKey();
+                    runSelectAnimation(checkDragon);
+                    selected.set(true);
+                }
+                
+                
             }
         }
     }
 
     private void runSelectAnimation(Dragon dragon) {
+        System.out.println("Select");
         StackPane mapDragon = dragons.get(dragon);
         mapDragon.toFront();
 
@@ -130,17 +152,30 @@ public class DragonMap {
             )
         );
 
-        Glow effect = new Glow(0.8);
-
-        mapDragon.setEffect(effect);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        rootPane.setEffect(gaussianBlur);
+        timeline.setOnFinished(e -> {
+            rootPane.getChildren().remove(mapDragon);
+            centerPane.getChildren().add(mapDragon);
+        });
         timeline.play();
 
     }
 
 
     private void runDeselectAnimation(Dragon dragon) {
+        System.out.println("Deselect");
+        System.out.println(dragon);
         StackPane mapDragon = dragons.get(dragon);
+        rootPane.setEffect(null);
         Pair<Double, Double> pointGoal = convertFromDragonToScreen(dragon.getCoordinates().getDoublePair());
+        
+        centerPane.getChildren().remove(mapDragon);
+        rootPane.getChildren().add(mapDragon);
+        mapDragon.setLayoutX((screenX-dragonXShift) / 2);
+        mapDragon.setLayoutY((screenY-dragonYShift) / 2);
+        System.out.println(mapDragon.layoutXProperty());
+        System.out.println(mapDragon.layoutYProperty());
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(500),
                 new KeyValue(mapDragon.layoutXProperty(), pointGoal.getValue1()),
@@ -150,6 +185,9 @@ public class DragonMap {
             )
         );
         timeline.play();
+        timeline.setOnFinished(e -> {
+            selected.set(false);
+        });
     }
 
     public void addDragon(Dragon dragonI, int colorShift){
