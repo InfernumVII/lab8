@@ -1,4 +1,4 @@
-package test;
+package client.view.visualizationScope;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -53,7 +53,7 @@ public class DragonMap {
 
     private StackPane createDragon(int colorShift){
         try {
-            StackPane dragon = FXMLLoader.load(TestMain.class.getResource("CoolDragon.fxml"));
+            StackPane dragon = FXMLLoader.load(getClass().getResource("resources/CoolDragon.fxml"));
             dragon.setScaleX(scaleFactor);
             dragon.setScaleY(scaleFactor);
             dragon.getStylesheets().add("data:text/css," + CssFormatter.generateCss(colorShift));
@@ -141,8 +141,8 @@ public class DragonMap {
             new KeyFrame(Duration.millis(500),
                 new KeyValue(mapDragon.layoutXProperty(), (screenX - dragonXShift) / 2),
                 new KeyValue(mapDragon.layoutYProperty(), (screenY - dragonYShift) / 2),
-                new KeyValue(mapDragon.scaleXProperty(), 1.0),
-                new KeyValue(mapDragon.scaleYProperty(), 1.0),
+                new KeyValue(mapDragon.scaleXProperty(), Math.min(screenX, screenY) / 1000),
+                new KeyValue(mapDragon.scaleYProperty(), Math.min(screenX, screenY) / 1000),
                 new KeyValue(gaussianBlur.radiusProperty(), 20)
             )
         );
@@ -153,6 +153,10 @@ public class DragonMap {
         timeline.play();
     }
 
+
+    public Dragon getCheckDragon() {
+        return checkDragon;
+    }
 
     private void runDeselectAnimation(Dragon dragon) {
         if (isAnimating.get()) return;
@@ -181,11 +185,14 @@ public class DragonMap {
             centerPane.getChildren().remove(mapDragon);
             rootPane.getChildren().add(mapDragon);
             selected.set(false);
+            
     
             mapDragon.setLayoutX(oldX);
             mapDragon.setLayoutY(oldY);
             
             rootPane.setEffect(null);
+
+            checkDragon = null;
             isAnimating.set(false);
         });
 
@@ -206,6 +213,8 @@ public class DragonMap {
 
     public void updateDragon(Dragon dragon) {
         StackPane mapDragon = dragons.get(dragon);
+        if (mapDragon.getParent() != rootPane) return;
+
         Pair<Double,Double> screenCoord = convertFromDragonToScreen(dragon.getCoordinates().getDoublePair());
 
         mapDragon.setLayoutX(screenCoord.getValue1());
@@ -251,6 +260,10 @@ public class DragonMap {
         stage.show();
         stage.setHeight(screenY);
         stage.setWidth(screenX);
+    }
+
+    public void close() {
+        stage.close();
     }
 
 }

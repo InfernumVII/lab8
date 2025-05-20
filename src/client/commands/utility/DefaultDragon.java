@@ -18,8 +18,8 @@ public class DefaultDragon {
     public Builder get(){
         return new Dragon.Builder()
                     .withName(consoleInputHandler.promptForString("Введите имя дракона:", false))
-                    .withCoordinates(new Coordinates(consoleInputHandler.promptForLong("Введите координату x:", false, -420, Long.MAX_VALUE),
-                                                        consoleInputHandler.promptForLong("Введите координату y:", false, Long.MIN_VALUE, 699)))
+                    .withCoordinates(new Coordinates(consoleInputHandler.promptForLong("Введите координату x:", false, -1000, 1000),
+                                                        consoleInputHandler.promptForLong("Введите координату y:", false, -1000, 1000)))
                     .withAge(consoleInputHandler.promptForLong("Введите возраст дракона:", false, 0, Long.MAX_VALUE))
                     .withColor(consoleInputHandler.promptForEnum("Введите цвет дракона: %s", Color.values(), false))
                     .withType(consoleInputHandler.promptForEnum("Введите тип дракона: %s", DragonType.values(), false))

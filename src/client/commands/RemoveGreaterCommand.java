@@ -21,8 +21,8 @@ public class RemoveGreaterCommand implements Command {
     @Override
     public Object execute(Object arg){
         System.out.println("Введите координаты элемента: ");
-        long x = consoleInputHandler.promptForLong("Введите координату x:", false, -420, Long.MAX_VALUE);
-        long y = consoleInputHandler.promptForLong("Введите координату y:", false, Long.MIN_VALUE, 699);
+        long x = consoleInputHandler.promptForLong("Введите координату x:", false, -1000, 1000);
+        long y = consoleInputHandler.promptForLong("Введите координату y:", false, -1000, 1000);
         return new RemoveGreaterCommandArgs(x, y);
     }
 

@@ -22,6 +22,7 @@ import client.view.customDialog.StringPrompt;
 import client.view.message.Message;
 import client.view.message.MessageColor;
 import client.view.tableWindow.TableWindow;
+import client.view.visualizationScope.VisualizationScopeController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -53,6 +54,7 @@ import shared.network.models.User;
 
 public class TopBarButtons{
     @FXML protected Text addButton;
+    @FXML protected Text showButton;
     @FXML protected Text addIfMinButton;
     @FXML protected Text info;
     @FXML protected Menu infoMenu;
@@ -64,6 +66,8 @@ public class TopBarButtons{
     @FXML protected MenuItem removeGreaterCommand;
     @FXML protected TableView<Dragon> tableView;
 
+
+    protected VisualizationScopeController visualScope;
 
     private String preFormattedInfo;
     public static ResourceBundle cResourceBundle = LocaleController.getResourceBundle("main/main");
@@ -173,8 +177,8 @@ public class TopBarButtons{
     protected void removeGreater(ActionEvent event){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 270);
         modernInputHandlerDialog.setLabelText("RemoveGreater command");
-        LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -420, Long.MAX_VALUE);
-        LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, Long.MIN_VALUE, 699);
+        LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, -1000, 1000);
         modernInputHandlerDialog.addAll(xPrompt, yPrompt);
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
@@ -237,8 +241,8 @@ public class TopBarButtons{
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
         modernInputHandlerDialog.setLabelText(label);
         StringPrompt dragonNamePrompt = new StringPrompt(cResourceBundle.getString("dragon_name_prompt"), false);
-        LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -420, Long.MAX_VALUE);
-        LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, Long.MIN_VALUE, 699);
+        LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, -1000, 1000);
         LongPrompt agePrompt = new LongPrompt(cResourceBundle.getString("age_prompt"), false, 0, Long.MAX_VALUE);
         EnumPrompt<Color> colorPrompt = new EnumPrompt<>(cResourceBundle.getString("color_prompt"), Color.class, false);
         EnumPrompt<DragonType> typePrompt = new EnumPrompt<>(cResourceBundle.getString("type_prompt"), DragonType.class, false);
@@ -297,9 +301,26 @@ public class TopBarButtons{
         addIfMinButton.setStrokeWidth(0);
     }
 
+
+    @FXML
+    protected void onShowMouseEntered(){
+        showButton.setStrokeWidth(0.2);
+    }
+
+    @FXML
+    protected void onShowMouseExited(){
+        showButton.setStrokeWidth(0);
+    }
+
+
     @FXML
     protected void onAddMouseClicked(){
         addDragon("Creating new Dragon", this::sendAddDragonToServer, null);
+    }
+
+    @FXML
+    protected void onShowMouseClicked(){
+        visualScope.show();
     }
 
 
