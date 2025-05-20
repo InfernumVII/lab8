@@ -140,7 +140,6 @@ public class DragonMap {
         System.out.println("Select");
         StackPane mapDragon = dragons.get(dragon);
         mapDragon.toFront();
-
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.millis(500),
                 new KeyValue(mapDragon.layoutXProperty(), (screenX-dragonXShift) / 2),
@@ -155,8 +154,8 @@ public class DragonMap {
         timeline.setOnFinished(e -> {
             rootPane.getChildren().remove(mapDragon);
             centerPane.getChildren().add(mapDragon);
-            selected.set(true);
         });
+        selected.set(true);
         timeline.play();
 
     }
@@ -166,7 +165,6 @@ public class DragonMap {
         System.out.println("Deselect");
         System.out.println(dragon);
         StackPane mapDragon = dragons.get(dragon);
-        rootPane.setEffect(null);
         Pair<Double, Double> pointGoal = convertFromDragonToScreen(dragon.getCoordinates().getDoublePair());
         
         centerPane.getChildren().remove(mapDragon);
@@ -185,6 +183,7 @@ public class DragonMap {
         );
         timeline.setOnFinished(e -> {
             selected.set(false);
+            rootPane.setEffect(null);
         });
         timeline.play();
         
