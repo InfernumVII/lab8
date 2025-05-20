@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -24,19 +25,22 @@ public class ChooseLocaleWindow {
     private VBox vBox = new VBox();
     private StackPane root = new StackPane(vBox);
     private Stage stage = new Stage();
+    private MenuButton menuButton = new MenuButton("Select language");
     
     public ChooseLocaleWindow(){
         //root = FXMLLoader.load(ChooseLocaleWindow.class.getResource("resources/ChooseLocaleWindow.fxml"));
         setupScene();
         stage.setOnCloseRequest(event -> System.exit(0));
         stage.setScene(new Scene(root));
-        stage.setTitle("Choose your locale");
+        stage.setTitle("Choose a display language");
         stage.setResizable(false);
+        stage.setOnShown(e -> {
+            menuButton.show();
+        });
     }
 
     private void setupScene(){
-        StackPane.setMargin(vBox, new Insets(20));
-        MenuButton menuButton = new MenuButton("Choose your locale");
+        StackPane.setMargin(vBox, new Insets(30, 40, 160, 40));
         Stream.of(Locales.values()).forEach(l -> {
             MenuItem menuItem = new MenuItem(l.getNameInLocale());
             menuItem.setOnAction(this::changeLocale);

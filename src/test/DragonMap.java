@@ -90,7 +90,7 @@ public class DragonMap {
     }
 
     private void setupScene(){
-        rootPane.setStyle("-fx-background-color:  #37373E;");
+        mainPane.setStyle("-fx-background-color:  #37373E;");
         
         Scene scene = new Scene(mainPane, screenX, screenY);
         scene.setOnMouseClicked(event -> {
