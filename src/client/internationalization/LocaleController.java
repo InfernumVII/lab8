@@ -1,8 +1,10 @@
 package client.internationalization;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 
 public class LocaleController {
     private static Locale currentLocale;
@@ -21,7 +23,9 @@ public class LocaleController {
         return NumberFormat.getNumberInstance(currentLocale);
     }
 
-    
+    public static DateFormat getDateFormat() {
+        return DateFormat.getDateInstance(DateFormat.SHORT, currentLocale);
+    }
 
     public static Locale getCurrentLocale() {
         return currentLocale;

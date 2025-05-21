@@ -38,6 +38,7 @@ public class DragonMap {
     private final AtomicBoolean selected = new AtomicBoolean(false);
     private final AtomicBoolean isAnimating = new AtomicBoolean(false);
     private Dragon checkDragon = null;
+    private Timeline currentAnimation = null;
 
     public DragonMap(double scaleFactor, Integer sceenSizeX, Integer screenSizeY){
         this.screenX = sceenSizeX;
@@ -128,7 +129,6 @@ public class DragonMap {
 
         double oldX = mapDragon.getLayoutX();
         double oldY = mapDragon.getLayoutY();
-       
 
         rootPane.getChildren().remove(mapDragon);
         centerPane.getChildren().add(mapDragon);
@@ -136,12 +136,15 @@ public class DragonMap {
 
         mapDragon.setLayoutX(oldX);
         mapDragon.setLayoutY(oldY);
-    
 
         GaussianBlur gaussianBlur = new GaussianBlur(0);
         rootPane.setEffect(gaussianBlur);
 
-        Timeline timeline = new Timeline(
+        if (currentAnimation != null) {
+            currentAnimation.stop();
+        }
+
+        currentAnimation = new Timeline(
             new KeyFrame(Duration.millis(500),
                 new KeyValue(mapDragon.layoutXProperty(), (screenX - dragonXShift) / 2),
                 new KeyValue(mapDragon.layoutYProperty(), (screenY - dragonYShift) / 2),
@@ -151,10 +154,11 @@ public class DragonMap {
             )
         );
 
-        timeline.setOnFinished(e -> {
+        currentAnimation.setOnFinished(e -> {
             isAnimating.set(false);
+            currentAnimation = null;
         });
-        timeline.play();
+        currentAnimation.play();
     }
 
 
@@ -172,7 +176,11 @@ public class DragonMap {
         GaussianBlur gaussianBlur = new GaussianBlur(20);
         rootPane.setEffect(gaussianBlur);
 
-        Timeline timeline = new Timeline(
+        if (currentAnimation != null) {
+            currentAnimation.stop();
+        }
+
+        currentAnimation = new Timeline(
             new KeyFrame(Duration.millis(500),
                 new KeyValue(mapDragon.layoutXProperty(), pointGoal.getValue1()),
                 new KeyValue(mapDragon.layoutYProperty(), pointGoal.getValue2()),
@@ -182,15 +190,14 @@ public class DragonMap {
             )
         );
 
-        timeline.setOnFinished(e -> {
+        currentAnimation.setOnFinished(e -> {
             double oldX = mapDragon.getLayoutX();
             double oldY = mapDragon.getLayoutY();
-    
+
             centerPane.getChildren().remove(mapDragon);
             rootPane.getChildren().add(mapDragon);
             selected.set(false);
-            
-    
+
             mapDragon.setLayoutX(oldX);
             mapDragon.setLayoutY(oldY);
             
@@ -198,10 +205,10 @@ public class DragonMap {
 
             checkDragon = null;
             isAnimating.set(false);
+            currentAnimation = null;
         });
 
-        timeline.play();
-        
+        currentAnimation.play();
     }
 
     public void addDragon(Dragon dragonI, int colorShift){
@@ -233,6 +240,8 @@ public class DragonMap {
 
 
     public void syncWithList(List<Dragon> currentDragons) {
+        if (isAnimating.get()) return;
+        
         Set<Dragon> existingDragons = new HashSet<>(dragons.keySet());
 
         for (Dragon dragon : currentDragons) {
