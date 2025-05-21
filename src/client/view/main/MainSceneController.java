@@ -289,8 +289,8 @@ public class MainSceneController extends TopBarButtons implements Initializable,
                 }
             }
         } catch (IOException | ClassNotFoundException | TimeOutException e){
-            e.printStackTrace();
-            System.exit(1);
+            //e.printStackTrace();
+            //System.exit(1);
         }
     }
 
