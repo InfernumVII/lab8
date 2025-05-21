@@ -6,19 +6,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.Set;
 
+import client.internationalization.LocaleController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import shared.collection.Dragon;
@@ -40,17 +46,25 @@ public class DragonMap {
     private Dragon checkDragon = null;
     private Timeline currentAnimation = null;
 
+    private final VBox infoBox = new VBox(5);
+    private final Label nameLabel = new Label();
+    private final Label coordinatesLabel = new Label();
+    private final Label ageLabel = new Label();
+    private final Label colorLabel = new Label();
+    private final Label typeLabel = new Label();
+    private final Button editButton = new Button();
+
     public DragonMap(double scaleFactor, Integer sceenSizeX, Integer screenSizeY){
         this.screenX = sceenSizeX;
         this.screenY = screenSizeY;
         this.scaleFactor = scaleFactor;
+        setupInfoBox();
         setupScene();
     }
 
     public DragonMap(double scaleFactor){
         this(scaleFactor, 1000, 1000);
     }
-
 
     private StackPane createDragon(int colorShift){
         try {
@@ -92,6 +106,7 @@ public class DragonMap {
         });
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE && selected.get() == true){
+                checkDragon = null;
                 runDeselectAnimation(checkDragon);
             }
         });
@@ -116,8 +131,36 @@ public class DragonMap {
                 }
             }
         } else {
-            if (checkDragon != null) runDeselectAnimation (checkDragon);
+            if (checkDragon != null) {
+                checkDragon = null;
+                runDeselectAnimation (checkDragon);
+            } 
         }
+    }
+
+    private void setupInfoBox() {
+        ResourceBundle resources = LocaleController.getResourceBundle("main/main");
+        infoBox.setAlignment(Pos.CENTER);
+        infoBox.setStyle("-fx-background-color: #bebebe; -fx-padding: 20; -fx-background-radius: 10;");
+        editButton.setText(resources.getString("edit"));
+        infoBox.getChildren().addAll(nameLabel, coordinatesLabel, ageLabel, colorLabel, typeLabel, editButton);
+        infoBox.setVisible(false);
+        centerPane.getChildren().add(infoBox);
+    }
+
+    private void updateDragonInfo(Dragon dragon) {
+        ResourceBundle resources = LocaleController.getResourceBundle("main/main");
+        nameLabel.setText(resources.getString("dragon_name_info") + ": " + dragon.getName());
+        coordinatesLabel.setText(String.format(resources.getString("x_info") + ": %d, " + resources.getString("y_prompt") + ": %d", 
+            dragon.getCoordinates().getX(), dragon.getCoordinates().getY()));
+        ageLabel.setText(resources.getString("age_prompt_info") + ": " + dragon.getAge());
+        colorLabel.setText(resources.getString("color_prompt_info") + ": " + dragon.getColor());
+        typeLabel.setText(resources.getString("type_prompt_info") + ": " + dragon.getType());
+    }
+
+    public void updateSelectedDragonInfo() {
+        if (checkDragon == null) return;
+        updateDragonInfo(checkDragon);
     }
 
     private void runSelectAnimation(Dragon dragon) {
@@ -157,6 +200,10 @@ public class DragonMap {
         currentAnimation.setOnFinished(e -> {
             isAnimating.set(false);
             currentAnimation = null;
+            updateDragonInfo(dragon);
+            infoBox.setVisible(true);
+            infoBox.setLayoutX(0);
+            infoBox.setLayoutY(0);
         });
         currentAnimation.play();
     }
@@ -170,6 +217,7 @@ public class DragonMap {
         if (isAnimating.get()) return;
         isAnimating.set(true);
 
+        infoBox.setVisible(false);
         StackPane mapDragon = dragons.get(dragon);
         Pair<Double, Double> pointGoal = convertFromDragonToScreen(dragon.getCoordinates().getDoublePair());
 
@@ -203,7 +251,6 @@ public class DragonMap {
             
             rootPane.setEffect(null);
 
-            checkDragon = null;
             isAnimating.set(false);
             currentAnimation = null;
         });

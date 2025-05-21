@@ -10,7 +10,7 @@ public class VisualizationScopeController {
     private Dragon lastCheckDragon = null;
 
     public VisualizationScopeController(TableView<Dragon> dragonTable) {
-        dragonMap = new DragonMap(0.10, 500, 500);
+        dragonMap = new DragonMap(0.10, 700, 700);
         tableView = dragonTable;
     }
 
@@ -30,5 +30,9 @@ public class VisualizationScopeController {
 
     public void close() {
         dragonMap.close();
+    }
+
+    public void updateSelectedDragonInfo() {
+        dragonMap.updateSelectedDragonInfo();
     }
 }

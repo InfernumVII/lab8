@@ -148,6 +148,8 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         showButton.setText(cResourceBundle.getString("show"));
 
         //numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getNumberFormat().format(data.getValue().getHead().getEyesCount())));
+        
+        visualScope.updateSelectedDragonInfo();
         tableView.refresh();
         initInfo();
     }
@@ -157,10 +159,11 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     public void initialize(URL location, ResourceBundle resources) {
         setupColumns();
         initMenuLanguage();
-        updateSceneWithLocale();
 
         visualScope = new VisualizationScopeController(tableView);
         visualScope.show();
+
+        updateSceneWithLocale();
 
         Platform.runLater(() -> {
             updateParent();
