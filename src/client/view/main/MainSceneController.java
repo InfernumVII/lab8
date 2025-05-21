@@ -147,8 +147,8 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         removeGreaterCommand.setText(cResourceBundle.getString("remove_greater"));
         showButton.setText(cResourceBundle.getString("show"));
 
-        numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getNumberFormat().format(data.getValue().getHead().getEyesCount())));
-
+        //numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getNumberFormat().format(data.getValue().getHead().getEyesCount())));
+        tableView.refresh();
         initInfo();
     }
 
