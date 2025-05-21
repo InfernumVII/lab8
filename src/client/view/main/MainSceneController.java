@@ -296,12 +296,12 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     @FXML
     private void logoutClicked(ActionEvent event) {
         AuthController.setCheckUser(null);
-        visualScope.close();
         close();
         switchToLoginScene();
     }
 
     private void close(){
+        visualScope.close();
         timer.cancel(); // Все? Yes, that's enough
     }
 }
