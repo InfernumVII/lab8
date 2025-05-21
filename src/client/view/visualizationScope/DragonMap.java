@@ -102,16 +102,20 @@ public class DragonMap {
     }
 
     private void selectDragonByClick(Double x, Double y) {
-        for (Entry<Dragon, StackPane> entry : dragons.entrySet()) {
-            StackPane mapDragon = entry.getValue();
-            
-            Bounds bounds = mapDragon.getBoundsInParent();
-            if (bounds.contains(x, y)) {
-                if (selected.get() == false){
+        
+        if (selected.get() == false) { 
+            for (Entry<Dragon, StackPane> entry : dragons.entrySet()) {
+                StackPane mapDragon = entry.getValue();
+                
+                Bounds bounds = mapDragon.getBoundsInParent();
+                if (bounds.contains(x, y)) {
                     checkDragon = entry.getKey();
                     runSelectAnimation(checkDragon);
-                }        
+                    return;
+                }
             }
+        } else {
+            if (checkDragon != null) runDeselectAnimation (checkDragon);
         }
     }
 
