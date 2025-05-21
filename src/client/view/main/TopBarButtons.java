@@ -237,7 +237,7 @@ public class TopBarButtons{
         addButton.setStrokeWidth(0.2);
     }   
     
-    protected void addDragon(String label, Consumer<Dragon> func, Dragon defaultDragon){
+    public void addDragon(String label, Consumer<Dragon> func, Dragon defaultDragon){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
         modernInputHandlerDialog.setLabelText(label);
         StringPrompt dragonNamePrompt = new StringPrompt(cResourceBundle.getString("dragon_name_prompt"), false);
@@ -364,7 +364,7 @@ public class TopBarButtons{
         return false;
     }
 
-    private boolean sendAddDragonToServer(Dragon dragon){
+    public boolean sendAddDragonToServer(Dragon dragon){
         User user = AuthController.getCheckUser();
 
         NetCommandAuth netCommandAuth = new NetCommandAuth("add", dragon, user);

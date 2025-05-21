@@ -8,12 +8,22 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 import java.util.Set;
 
+import client.ClientMain;
 import client.internationalization.LocaleController;
+import client.view.auth.AuthController;
+import client.view.customDialog.EnumPrompt;
+import client.view.customDialog.FloatPrompt;
+import client.view.customDialog.LongPrompt;
+import client.view.customDialog.ModernInputHandlerDialog;
+import client.view.customDialog.StringPrompt;
+import client.view.main.MainSceneController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
@@ -27,8 +37,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import shared.collection.Color;
+import shared.collection.Coordinates;
 import shared.collection.Dragon;
+import shared.collection.DragonCharacter;
+import shared.collection.DragonHead;
+import shared.collection.DragonType;
+import shared.network.exceptions.TimeOutException;
+import shared.network.models.Answer;
+import shared.network.models.NetCommandAuth;
 import shared.network.models.Pair;
+import shared.network.models.User;
 
 public class DragonMap {
     private final double scaleFactor;
@@ -144,14 +163,87 @@ public class DragonMap {
         infoBox.setAlignment(Pos.CENTER);
         infoBox.setStyle("-fx-background-color: #bebebe; -fx-padding: 20; -fx-background-radius: 10;");
         editButton.setText(resources.getString("edit"));
+        editButton.setOnAction(this::onEditAction);
         infoBox.getChildren().addAll(nameLabel, coordinatesLabel, ageLabel, colorLabel, typeLabel, editButton);
         infoBox.setVisible(false);
         centerPane.getChildren().add(infoBox);
     }
 
+    private void onEditAction(ActionEvent event){
+        addDragonDialog(MainSceneController.cResourceBundle.getString("edit_dragon_title"), checkDragon);
+    }
+
+    private void addDragonDialog(String label, Dragon defaultDragon){
+        final ResourceBundle resource = MainSceneController.cResourceBundle;
+        ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
+        modernInputHandlerDialog.setLabelText(label);
+        StringPrompt dragonNamePrompt = new StringPrompt(resource.getString("dragon_name_prompt"), false);
+        LongPrompt xPrompt = new LongPrompt(resource.getString("x_prompt"), false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt(resource.getString("y_prompt"), false, -1000, 1000);
+        LongPrompt agePrompt = new LongPrompt(resource.getString("age_prompt"), false, 0, Long.MAX_VALUE);
+        EnumPrompt<Color> colorPrompt = new EnumPrompt<>(resource.getString("color_prompt"), Color.class, false);
+        EnumPrompt<DragonType> typePrompt = new EnumPrompt<>(resource.getString("type_prompt"), DragonType.class, false);
+        EnumPrompt<DragonCharacter> characterPrompt = new EnumPrompt<>(resource.getString("character_prompt"), DragonCharacter.class, false);
+        FloatPrompt eyesCountPrompt = new FloatPrompt(resource.getString("eyes_prompt"), true, -Float.MAX_VALUE, Float.MAX_VALUE);
+        
+        modernInputHandlerDialog.addAll(dragonNamePrompt, xPrompt, yPrompt, agePrompt, colorPrompt, typePrompt, characterPrompt, eyesCountPrompt);
+        
+        if (defaultDragon != null) {
+            dragonNamePrompt.setDefaultValue(defaultDragon.getName());
+            xPrompt.setDefaultValue(defaultDragon.getCoordinates().getX());
+            yPrompt.setDefaultValue(defaultDragon.getCoordinates().getY());
+            agePrompt.setDefaultValue(defaultDragon.getAge());
+            colorPrompt.setDefaultValue(defaultDragon.getColor());
+            typePrompt.setDefaultValue(defaultDragon.getType());
+            characterPrompt.setDefaultValue(defaultDragon.getCharacter());
+            eyesCountPrompt.setDefaultValue(defaultDragon.getHead().getEyesCount());
+        }
+        
+        modernInputHandlerDialog.showAndWait();
+        if (modernInputHandlerDialog.wasSubmitted()){
+            
+            Dragon createdDragon = new Dragon.Builder()
+                .withName(dragonNamePrompt.getContent())
+                .withCoordinates(new Coordinates(xPrompt.getContent(), yPrompt.getContent()))
+                .withAge(agePrompt.getContent())
+                .withColor(colorPrompt.getContent())
+                .withType(typePrompt.getContent())
+                .withCharacter(characterPrompt.getContent())
+                .withHead(new DragonHead(eyesCountPrompt.getContent()))
+                .build();
+
+            createdDragon.setId(defaultDragon.getId());
+            createdDragon.setCreationDate(defaultDragon.getCreationDate());
+            createdDragon.setOwnerId(defaultDragon.getOwnerId());
+
+            //func.accept(createdDragon);
+            runDeselectAnimation(defaultDragon);
+            //updateDragonInfo(createdDragon);
+            sendUpdateDragonToServer(createdDragon);
+        }
+    }
+
+    private boolean sendUpdateDragonToServer(Dragon dragon){
+        User user = AuthController.getCheckUser();
+
+        NetCommandAuth netCommandAuth = new NetCommandAuth("update", dragon, user);
+        try {
+            Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
+            if (!"Дракон с ID успешно обновлён!".equals((String)answer.answer())) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (ClassNotFoundException | IOException | TimeOutException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
+
     private void updateDragonInfo(Dragon dragon) {
         if (dragon == null) return;
-
+        editButton.setVisible(dragon.getOwnerId() == AuthController.getUserId());
         ResourceBundle resources = LocaleController.getResourceBundle("main/main");
         nameLabel.setText(resources.getString("dragon_name_info") + ": " + dragon.getName());
         coordinatesLabel.setText(String.format(resources.getString("x_info") + ": %d, " + resources.getString("y_info") + ": %d", 
