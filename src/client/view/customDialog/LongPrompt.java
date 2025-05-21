@@ -1,4 +1,9 @@
 package client.view.customDialog;
+
+import java.util.ResourceBundle;
+
+import client.internationalization.LocaleController;
+
 public class LongPrompt extends Handler<Long> {
     private boolean allowNull;
     private long min;
@@ -13,30 +18,31 @@ public class LongPrompt extends Handler<Long> {
 
     @Override
     public boolean validateInputAndSetContent() {
+        ResourceBundle cResourceBundle = LocaleController.getResourceBundle("dialog/dialog");
         final String input = getTextField().getText();
         if (input.isEmpty()) {
             if (allowNull) {
                 setContent(0L);
                 return true; 
             }
-            printError("The field value cannot be empty."); 
+            printError(cResourceBundle.getString("prompt_error1")); 
             return false;
         }
         try {
             if (!input.matches("-?\\d+")){
-                printError("The field must be an integer number.");
+                printError(cResourceBundle.getString("long_prompt_error1"));
                 return false;
             }
             long inputParsed = Long.parseLong(input);
 
             if (inputParsed <= min || inputParsed > max) {
-                printError(String.format("The number must be between %s and %s.", min, max));
+                printError(String.format(cResourceBundle.getString("long_prompt_error2"), min, max));
                 return false;
             }
             setContent(inputParsed);
             return true; 
         } catch (NumberFormatException e) {
-            printError(String.format("The number must be between %s and %s.", min, max)); // TODO: localisate
+            printError(String.format(cResourceBundle.getString("long_prompt_error2"), min, max)); // TODO: localisate
             return false;
         }
     }

@@ -1,5 +1,9 @@
 package client.view.customDialog;
 
+import java.util.ResourceBundle;
+
+import client.internationalization.LocaleController;
+
 public class FloatPrompt extends Handler<Float> {
     private boolean allowNull;
     private float min;
@@ -14,25 +18,26 @@ public class FloatPrompt extends Handler<Float> {
 
     @Override
     public boolean validateInputAndSetContent() {
+        ResourceBundle cResourceBundle = LocaleController.getResourceBundle("dialog/dialog");
         final String finalInput = getTextField().getText();
         if (finalInput.isEmpty()) {
             if (allowNull) {
                 setContent(0f);
                 return true;
             }
-            printError("The field value cannot be empty."); 
+            printError(cResourceBundle.getString("prompt_error1")); 
             return false;
         }
         try {
             float inputParsed = Float.parseFloat(finalInput);
             if (inputParsed <= min || inputParsed > max) {
-                printError(String.format("The number must be between %s и %s.", min, max));
+                printError(String.format(cResourceBundle.getString("long_prompt_error2"), min, max));
                 return false;
             }
             setContent(inputParsed);
             return true;
         } catch (NumberFormatException e) {
-            printError("The field must be number.");
+            printError(cResourceBundle.getString("float_prompt_error1"));
             return false;
         }
     }

@@ -1,6 +1,9 @@
 package client.view.customDialog;
 
 import java.util.Arrays;
+import java.util.ResourceBundle;
+
+import client.internationalization.LocaleController;
 
 public class EnumPrompt<E extends Enum<E>> extends Handler<E> {
     private boolean allowNull;
@@ -14,13 +17,14 @@ public class EnumPrompt<E extends Enum<E>> extends Handler<E> {
 
     @Override
     public boolean validateInputAndSetContent() {
+        ResourceBundle cResourceBundle = LocaleController.getResourceBundle("dialog/dialog");
         final String input = getTextField().getText();
         if (input.isEmpty()){
             if (allowNull){
                 setContent(enums[0]);
                 return true;
             }
-            printError("The field value cannot be empty."); 
+            printError(cResourceBundle.getString("prompt_error1")); 
             return false;
         }
         for (E enu : enums) {
@@ -29,7 +33,7 @@ public class EnumPrompt<E extends Enum<E>> extends Handler<E> {
                 return true;
             }
         }
-        printError(String.format("The field should be one of the options: (%s)", Arrays.toString(enums))); 
+        printError(String.format(cResourceBundle.getString("enum_prompt_error2") + "(%s)", Arrays.toString(enums))); 
         return false;
     }
 

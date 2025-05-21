@@ -1,5 +1,8 @@
 package client.view.customDialog;
 
+import java.util.ResourceBundle;
+
+import client.internationalization.LocaleController;
 
 public class StringPrompt extends Handler<String>{
     boolean allowNull;
@@ -11,9 +14,10 @@ public class StringPrompt extends Handler<String>{
 
     @Override
     public boolean validateInputAndSetContent() {
+        ResourceBundle cResourceBundle = LocaleController.getResourceBundle("dialog/dialog");
         final String input = getTextField().getText();
         if (!allowNull && input.isEmpty()) {
-            printError("The field value cannot be empty.");
+            printError(cResourceBundle.getString("prompt_error1"));
             return false;
         }
         setContent(input);
