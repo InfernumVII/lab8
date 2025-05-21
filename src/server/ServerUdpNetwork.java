@@ -47,6 +47,7 @@ public class ServerUdpNetwork extends UdpNetwork {
 
         while (condition) {
             final NetCommandAuth command = handleCommand();
+            System.out.println(command);
             final InetSocketAddress lastSender = getLastSender();
 
             new Thread(() -> {
@@ -54,6 +55,7 @@ public class ServerUdpNetwork extends UdpNetwork {
                     //System.out.println(command.user());
                     Answer answer = new Answer(serverCommandManager.executeCommand(command.command(),
                             new Pair<User, Object>(command.user(), command.arg())));
+                    System.out.println(answer);
                     responseSender.submit(() -> {
                         try {
                             sendObject(answer, lastSender);
