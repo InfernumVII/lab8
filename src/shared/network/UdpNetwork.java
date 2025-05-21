@@ -21,17 +21,17 @@ public abstract class UdpNetwork {
     protected Selector selector;
     protected InetSocketAddress lastSender;
 
-    public InetSocketAddress getLastSender(){
+    public synchronized InetSocketAddress getLastSender(){
         return lastSender;
     }
 
-    protected InetSocketAddress getSocketAddress(Settings settings) throws UnknownHostException{
+    protected synchronized InetSocketAddress getSocketAddress(Settings settings) throws UnknownHostException{
         InetAddress ip = InetAddress.getByName(settings.getIp());
         int port = settings.getPort();
         return new InetSocketAddress(ip, port);
     }
 
-    protected DatagramChannel createDatagramChannel() throws IOException{
+    protected synchronized DatagramChannel createDatagramChannel() throws IOException{
         DatagramChannel datagramChannel = DatagramChannel.open(); 
         datagramChannel.configureBlocking(false); //Сетевые каналы должны использоваться в неблокирующем режиме. (В рамках моего кода лучше использовать блокируемый режим)
         selector = Selector.open();
@@ -40,35 +40,35 @@ public abstract class UdpNetwork {
     }
 
 
-    protected DatagramChannel createDatagramChannel(InetSocketAddress address) throws IOException{
+    protected synchronized DatagramChannel createDatagramChannel(InetSocketAddress address) throws IOException{
         DatagramChannel datagramChannel = createDatagramChannel();
         datagramChannel.bind(inetSocketAddress);
         return datagramChannel;
     }
     
-    public void send(byte[] bytes) throws IOException{
+    public synchronized void send(byte[] bytes) throws IOException{
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         datagramChannel.send(buffer, inetSocketAddress);
     }
-    public void send(byte[] bytes, InetSocketAddress inetSocketAddress) throws IOException{
+    public synchronized void send(byte[] bytes, InetSocketAddress inetSocketAddress) throws IOException{
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         datagramChannel.send(buffer, inetSocketAddress);
     }
 
-    public void sendObject(Object object) throws IOException{
+    public synchronized void sendObject(Object object) throws IOException{
         byte[] serialized = BytesConversions.objectToBytes(object);
         //send(BytesConversions.intToBytes(serialized.length));
         send(serialized);
     }
 
-    public void sendObject(Object object, InetSocketAddress inetSocketAddress) throws IOException{
+    public synchronized void sendObject(Object object, InetSocketAddress inetSocketAddress) throws IOException{
         byte[] serialized = BytesConversions.objectToBytes(object);
         //send(BytesConversions.intToBytes(serialized.length), inetSocketAddress);
         send(serialized, inetSocketAddress);
         
     }
 
-    public byte[] receive(int len) throws IOException {
+    public synchronized byte[] receive(int len) throws IOException {
         byte[] buf = new byte[len];
         ByteBuffer byteBuffer = ByteBuffer.wrap(buf);
         selector.select(); // Блокировка до получения данных
@@ -76,7 +76,7 @@ public abstract class UdpNetwork {
         return buf;
     }
 
-    public byte[] receive(int len, long timeout) throws IOException, TimeOutException{
+    public synchronized byte[] receive(int len, long timeout) throws IOException, TimeOutException{
         byte[] buf = new byte[len];
         ByteBuffer byteBuffer = ByteBuffer.wrap(buf);
         selector.select(timeout); // Блокировка до получения данных
@@ -87,14 +87,14 @@ public abstract class UdpNetwork {
         return buf;
     }
 
-    public byte[] handleLen() throws IOException {
+    public synchronized byte[] handleLen() throws IOException {
         return receive(4);
     }
-    public byte[] handleLen(long timeout) throws IOException, TimeOutException {
+    public synchronized byte[] handleLen(long timeout) throws IOException, TimeOutException {
         return receive(4, timeout);
     }
     
-    public Object handleObject() throws IOException, ClassNotFoundException {
+    public synchronized Object handleObject() throws IOException, ClassNotFoundException {
         //byte[] lenBytes = handleLen();
         //int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
         //if (length < 0) throw new IOException();
@@ -102,7 +102,7 @@ public abstract class UdpNetwork {
         return BytesConversions.bytesToObject(buf);
     }
 
-    public Object handleObject(long timeout) throws IOException, TimeOutException, ClassNotFoundException {
+    public synchronized Object handleObject(long timeout) throws IOException, TimeOutException, ClassNotFoundException {
         //byte[] lenBytes = handleLen(timeout);
         //int length = BytesConversions.bytesToInt(lenBytes); //https://ru.stackoverflow.com/questions/817289/Как-узнать-длину-пакета-по-datagramchannel (Другой - это сначала передать int или long, содержащий размер передаваемых данных, а потом передать столько данных.)
         //if (length < 0) throw new IOException();
@@ -110,12 +110,12 @@ public abstract class UdpNetwork {
         return BytesConversions.bytesToObject(buf);
     }
 
-    public NetCommandAuth handleCommand() throws IOException, ClassNotFoundException {
+    public synchronized NetCommandAuth handleCommand() throws IOException, ClassNotFoundException {
         Object obj = handleObject();
         return (NetCommandAuth) obj;
     }
 
-    public Answer handleAnswer(long timeout) throws IOException, TimeOutException, ClassNotFoundException{
+    public synchronized Answer handleAnswer(long timeout) throws IOException, TimeOutException, ClassNotFoundException{
         Object obj = handleObject(timeout);
         return (Answer) obj;
     }

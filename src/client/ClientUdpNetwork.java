@@ -14,12 +14,11 @@ public class ClientUdpNetwork extends UdpNetwork {
         datagramChannel = createDatagramChannel();
     }
 
-    public Answer sendAndGetAnswer(Object command) throws IOException, TimeOutException, ClassNotFoundException {
+    public synchronized Answer sendAndGetAnswer(Object command) throws IOException, TimeOutException, ClassNotFoundException {
         sendObject(command);
         return handleAnswer(10000);
     }
 
-    
 }
 
 
