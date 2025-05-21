@@ -273,6 +273,7 @@ public class DragonMap {
         stage.show();
         stage.setHeight(screenY);
         stage.setWidth(screenX);
+        stage.requestFocus();
     }
 
     public void close() {
