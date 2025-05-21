@@ -132,8 +132,8 @@ public class DragonMap {
             }
         } else {
             if (checkDragon != null) {
-                checkDragon = null;
                 runDeselectAnimation (checkDragon);
+                checkDragon = null;
             } 
         }
     }
