@@ -14,7 +14,7 @@ public class ServerMain {
         try {
             settings = new server.psql.Settings.Builder()
                     .getUserAndPasswordFromHome()
-                    .withDbName("studs").build(); 
+                    .withDbName("postgres").build(); 
         } catch (BlankCreds e) {
             throw new RuntimeException(e);
         }

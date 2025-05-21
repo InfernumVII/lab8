@@ -12,6 +12,7 @@ import javax.naming.Context;
 
 import client.ClientMain;
 import client.commands.RemoveGreaterCommand;
+import client.internationalization.LocaleController;
 import client.view.auth.AuthController;
 import client.view.customDialog.EnumPrompt;
 import client.view.customDialog.FloatPrompt;
@@ -69,16 +70,16 @@ public class TopBarButtons{
     protected VisualizationScopeController visualScope;
 
     private String preFormattedInfo;
-
+    public static ResourceBundle cResourceBundle = LocaleController.getResourceBundle("main/main");
 
     public TopBarButtons() {
         initInfo();
     }
 
-    private void initInfo(){
+    protected void initInfo(){
         Platform.runLater(() -> {
             User user = AuthController.getCheckUser();
-            String infoText = "Error";
+            String infoText = cResourceBundle.getString("error");
             NetCommandAuth netCommandAuth = new NetCommandAuth("info", null, user);
             Info answerInfo = null;
             try {
@@ -86,9 +87,9 @@ public class TopBarButtons{
                 if (answer.answer().getClass() != String.class){
                     answerInfo = (Info) answer.answer();
                     StringJoiner stringJoiner = new StringJoiner("\n");
-                    stringJoiner.add("Type of collection: " + answerInfo.collectionType());
-                    stringJoiner.add("Init time: " + answerInfo.initTime());
-                    stringJoiner.add("Num of elements:  %d");
+                    stringJoiner.add(cResourceBundle.getString("info_c_1") + answerInfo.collectionType());
+                    stringJoiner.add(cResourceBundle.getString("info_c_2") + answerInfo.initTime());
+                    stringJoiner.add(cResourceBundle.getString("info_c_3")  + "%d");
                     infoText = stringJoiner.toString();
                 }
                 
@@ -119,9 +120,9 @@ public class TopBarButtons{
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             Long count = (Long)answer.answer();
             if (count == -1) {
-                new Message("Error during command execute", MessageColor.ERROR).show();
+                new Message(cResourceBundle.getString("command_error"), MessageColor.ERROR).show();
             } else {
-                new Message("Count " + menuItem.getText() + ": " + count).show();
+                new Message(cResourceBundle.getString("count_by_type_success") + menuItem.getText() + ": " + count).show();
             }
         } catch (ClassNotFoundException | IOException | TimeOutException e) {
             e.printStackTrace();
@@ -139,7 +140,7 @@ public class TopBarButtons{
         try {
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             if(answer.answer() == null) {
-                new Message("Error during command execute", MessageColor.ERROR).show();
+                new Message(cResourceBundle.getString("command_error"), MessageColor.ERROR).show();
                 return;
             }
             List<Dragon> result = (List<Dragon>)answer.answer();
@@ -160,11 +161,11 @@ public class TopBarButtons{
             Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
             String result = (String)answer.answer();
             if (result.equals("Драконы были очищены!")) {
-                new Message("Success").show();
+                new Message(cResourceBundle.getString("clear_success")).show();
             } else if (result.equals("Нет драконов для очистки")) {
-                new Message("There is not a single dragon of yours to clean.", MessageColor.ERROR).show();
+                new Message(cResourceBundle.getString("clear_error"), MessageColor.ERROR).show();
             } else {
-                new Message("Error during command execution", MessageColor.ERROR).show();
+                new Message(cResourceBundle.getString("command_error"), MessageColor.ERROR).show();
             }
         } catch (ClassNotFoundException | IOException | TimeOutException e) {
             e.printStackTrace();
@@ -175,9 +176,9 @@ public class TopBarButtons{
     @FXML
     protected void removeGreater(ActionEvent event){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 270);
-        modernInputHandlerDialog.setLabelText("RemoveGreater command");
-        LongPrompt xPrompt = new LongPrompt("Enter coordinate x", false, -1000, 1000);
-        LongPrompt yPrompt = new LongPrompt("Enter coordinate y", false, -1000, 1000);
+        modernInputHandlerDialog.setLabelText(cResourceBundle.getString("remove_greater_title"));
+        LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, -1000, 1000);
         modernInputHandlerDialog.addAll(xPrompt, yPrompt);
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
@@ -189,11 +190,11 @@ public class TopBarButtons{
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
                 String result = (String)answer.answer();
                 if (result.equals("Нет драконов для удаления")) {
-                    new Message("No dragons to delete", MessageColor.ERROR).show();
+                    new Message(cResourceBundle.getString("remove_greater_error_1"), MessageColor.ERROR).show();
                 } else if (result.equals("Ошибка удаления") || result.equals("Ошибка авторизации")) {
-                    new Message("Error during command execution", MessageColor.ERROR).show();
+                    new Message(cResourceBundle.getString("command_error"), MessageColor.ERROR).show();
                 } else {
-                    new Message(String.format("Success! You're deleted %d dragons", result.split("\n").length)).show();
+                    new Message(String.format(cResourceBundle.getString("remove_greater_success_part1") + "%d" + cResourceBundle.getString("remove_greater_success_part2"), result.split("\n").length)).show();
                 }
             } catch (ClassNotFoundException | IOException | TimeOutException e) {
                 e.printStackTrace();
@@ -205,8 +206,8 @@ public class TopBarButtons{
     @FXML
     protected void filterLessThanHead(ActionEvent event){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog(450, 150); //Q: оно кстати не делается меньше некого размера, хзхзхзх A: Из-за отступов возможно не делается
-        modernInputHandlerDialog.setLabelText("FilterLessThanHead command");
-        FloatPrompt eyesPrompt = new FloatPrompt("Enter eyes count", false, 1, Float.MAX_VALUE);
+        modernInputHandlerDialog.setLabelText(cResourceBundle.getString("filter_less_than_head_title"));
+        FloatPrompt eyesPrompt = new FloatPrompt(cResourceBundle.getString("eyes_prompt"), false, 1, Float.MAX_VALUE);
         modernInputHandlerDialog.add(eyesPrompt);
         modernInputHandlerDialog.showAndWait();
         if (modernInputHandlerDialog.wasSubmitted()){
@@ -217,7 +218,7 @@ public class TopBarButtons{
             try {
                 Answer answer = ClientMain.getClient().sendAndGetAnswer(netCommandAuth);
                 if(answer.answer() == null) {
-                    new Message("Error during command execute", MessageColor.ERROR).show();
+                    new Message(cResourceBundle.getString("command_error"), MessageColor.ERROR).show();
                     return;
                 }
                 List<Dragon> result = (List<Dragon>)answer.answer();
@@ -239,14 +240,14 @@ public class TopBarButtons{
     protected void addDragon(String label, Consumer<Dragon> func, Dragon defaultDragon){
         ModernInputHandlerDialog modernInputHandlerDialog = new ModernInputHandlerDialog();
         modernInputHandlerDialog.setLabelText(label);
-        StringPrompt dragonNamePrompt = new StringPrompt("Enter the dragon's name", false);
-        LongPrompt xPrompt = new LongPrompt("Enter the x coordinate", false, -1000, 1000);
-        LongPrompt yPrompt = new LongPrompt("Enter the y coordinate", false, -1000, 1000);
-        LongPrompt agePrompt = new LongPrompt("Enter the age of the dragon", false, 0, Long.MAX_VALUE);
-        EnumPrompt<Color> colorPrompt = new EnumPrompt<>("Enter the color of the dragon", Color.class, false);
-        EnumPrompt<DragonType> typePrompt = new EnumPrompt<>("Enter the type of the dragon", DragonType.class, false);
-        EnumPrompt<DragonCharacter> characterPrompt = new EnumPrompt<>("Enter the character of the dragon", DragonCharacter.class, false);
-        FloatPrompt eyesCountPrompt = new FloatPrompt("Enter the number of eyes of the dragon", true, -Float.MAX_VALUE, Float.MAX_VALUE);
+        StringPrompt dragonNamePrompt = new StringPrompt(cResourceBundle.getString("dragon_name_prompt"), false);
+        LongPrompt xPrompt = new LongPrompt(cResourceBundle.getString("x_prompt"), false, -1000, 1000);
+        LongPrompt yPrompt = new LongPrompt(cResourceBundle.getString("y_prompt"), false, -1000, 1000);
+        LongPrompt agePrompt = new LongPrompt(cResourceBundle.getString("age_prompt"), false, 0, Long.MAX_VALUE);
+        EnumPrompt<Color> colorPrompt = new EnumPrompt<>(cResourceBundle.getString("color_prompt"), Color.class, false);
+        EnumPrompt<DragonType> typePrompt = new EnumPrompt<>(cResourceBundle.getString("type_prompt"), DragonType.class, false);
+        EnumPrompt<DragonCharacter> characterPrompt = new EnumPrompt<>(cResourceBundle.getString("character_prompt"), DragonCharacter.class, false);
+        FloatPrompt eyesCountPrompt = new FloatPrompt(cResourceBundle.getString("eyes_prompt"), true, -Float.MAX_VALUE, Float.MAX_VALUE);
         
         modernInputHandlerDialog.addAll(dragonNamePrompt, xPrompt, yPrompt, agePrompt, colorPrompt, typePrompt, characterPrompt, eyesCountPrompt);
         
@@ -287,7 +288,7 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddIfMinMouseClicked(){
-        addDragon("AddIfMin command", this::sendAddIfMinDragonToServer, null);
+        addDragon(cResourceBundle.getString("add_if_min_title"), this::sendAddIfMinDragonToServer, null);
     }
 
     @FXML
@@ -314,7 +315,7 @@ public class TopBarButtons{
 
     @FXML
     protected void onAddMouseClicked(){
-        addDragon("Creating new Dragon", this::sendAddDragonToServer, null);
+        addDragon(cResourceBundle.getString("add_title"), this::sendAddDragonToServer, null);
     }
 
     @FXML
@@ -351,7 +352,7 @@ public class TopBarButtons{
             if ("Новый дракон успешно добавлен.".equals((String)answer.answer())) {
                 return true;
             } else if ("Ваш дракон имеет большее значение, чем у минимального элемента коллекции.".equals((String)answer.answer())){
-                new Message("It is not min!").show();
+                new Message(cResourceBundle.getString("add_if_min_error")).show();
                 return false;
             } else {
                 return false;

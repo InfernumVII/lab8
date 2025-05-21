@@ -72,7 +72,6 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     private Circle gradientCircle;
 
     private final ContextMenu contextMenu = new ContextMenu();
-    public static ResourceBundle cResourceBundle = LocaleController.getResourceBundle("main/main");
 
     private void setupColumns(){
         //Привязка колонок к данным
@@ -147,6 +146,8 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         filterLessThanHeadCommand.setText(cResourceBundle.getString("filter_less_than_head"));
         removeGreaterCommand.setText(cResourceBundle.getString("remove_greater"));
 
+
+        initInfo();
     }
 
 
@@ -193,13 +194,13 @@ public class MainSceneController extends TopBarButtons implements Initializable,
 
 
     private void setupPermittedContextMenu() {
-        MenuItem editItem = new MenuItem("Edit");
-        MenuItem deleteItem = new MenuItem("Delete");
+        MenuItem editItem = new MenuItem(cResourceBundle.getString("edit"));
+        MenuItem deleteItem = new MenuItem(cResourceBundle.getString("delete"));
     
         editItem.setOnAction(event -> {
             Dragon selectedDragon = tableView.getSelectionModel().getSelectedItem();
             if (selectedDragon != null) {
-                addDragon("Edit dragon", this::sendUpdateDragonToServer, selectedDragon);   
+                addDragon(cResourceBundle.getString("edit_dragon_title"), this::sendUpdateDragonToServer, selectedDragon);   
             }
         });
 
@@ -228,7 +229,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
 
 
     private void setupForbiddenContextMenu () {
-        MenuItem forbiddenItem = new MenuItem("You can't edit this dragon.");
+        MenuItem forbiddenItem = new MenuItem(cResourceBundle.getString("edit_error"));
         contextMenu.getItems().setAll(forbiddenItem);
     }
     
