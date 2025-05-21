@@ -151,7 +151,7 @@ public class DragonMap {
     private void updateDragonInfo(Dragon dragon) {
         ResourceBundle resources = LocaleController.getResourceBundle("main/main");
         nameLabel.setText(resources.getString("dragon_name_info") + ": " + dragon.getName());
-        coordinatesLabel.setText(String.format(resources.getString("x_info") + ": %d, " + resources.getString("y_prompt") + ": %d", 
+        coordinatesLabel.setText(String.format(resources.getString("x_info") + ": %d, " + resources.getString("y_info") + ": %d", 
             dragon.getCoordinates().getX(), dragon.getCoordinates().getY()));
         ageLabel.setText(resources.getString("age_prompt_info") + ": " + dragon.getAge());
         colorLabel.setText(resources.getString("color_prompt_info") + ": " + dragon.getColor());
