@@ -59,7 +59,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     @FXML private TableColumn<Dragon, Color> colorColumn;
     @FXML private TableColumn<Dragon, DragonType> typeColumn;
     @FXML private TableColumn<Dragon, DragonCharacter> characterColumn;
-    @FXML private TableColumn<Dragon, Float> numOfEyesColumn;
+    @FXML private TableColumn<Dragon, String> numOfEyesColumn;
     @FXML private Canvas canvas;
     @FXML private MenuItem logoutMenuItem;
     @FXML private Menu currentUserName;
@@ -94,7 +94,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         typeColumn.reorderableProperty().set(false);
         characterColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCharacter()));
         characterColumn.reorderableProperty().set(false);
-        numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getHead().getEyesCount()));
+        numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getNumberFormat().format(data.getValue().getHead().getEyesCount())));
         numOfEyesColumn.reorderableProperty().set(false);
     }
 
@@ -145,8 +145,10 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         filterByCharacterCommand.setText(cResourceBundle.getString("filter_by_character"));
         filterLessThanHeadCommand.setText(cResourceBundle.getString("filter_less_than_head"));
         removeGreaterCommand.setText(cResourceBundle.getString("remove_greater"));
+        showButton.setText(cResourceBundle.getString("show"));
 
-
+        numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getNumberFormat().format(data.getValue().getHead().getEyesCount())));
+        
         initInfo();
     }
 

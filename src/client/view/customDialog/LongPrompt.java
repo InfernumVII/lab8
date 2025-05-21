@@ -36,7 +36,7 @@ public class LongPrompt extends Handler<Long> {
             setContent(inputParsed);
             return true; 
         } catch (NumberFormatException e) {
-            printError(String.format("The number must be between %s and %s.", min, max));
+            printError(String.format("The number must be between %s and %s.", min, max)); // TODO: localisate
             return false;
         }
     }

@@ -1,5 +1,6 @@
 package client.internationalization;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -15,6 +16,12 @@ public class LocaleController {
     public static ResourceBundle getResourceBundle(String nameOfBundle){
         return ResourceBundle.getBundle("client/internationalization/resources/" + nameOfBundle, currentLocale);
     }
+
+    public static NumberFormat getNumberFormat() {
+        return NumberFormat.getNumberInstance(currentLocale);
+    }
+
+    
 
     public static Locale getCurrentLocale() {
         return currentLocale;
