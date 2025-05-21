@@ -54,7 +54,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
     @FXML private TableColumn<Dragon, String> nameColumn;
     @FXML private TableColumn<Dragon, Long> coordXColumn;
     @FXML private TableColumn<Dragon, Long> coordYColumn;
-    @FXML private TableColumn<Dragon, java.time.LocalDate> creationDateColumn;
+    @FXML private TableColumn<Dragon, String> creationDateColumn;
     @FXML private TableColumn<Dragon, Long> ageColumn;
     @FXML private TableColumn<Dragon, Color> colorColumn;
     @FXML private TableColumn<Dragon, DragonType> typeColumn;
@@ -84,7 +84,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         coordXColumn.reorderableProperty().set(false);
         coordYColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCoordinates().getY()));
         coordYColumn.reorderableProperty().set(false);
-        creationDateColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCreationDate()));
+        creationDateColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getDateFormat().format(java.sql.Date.valueOf(data.getValue().getCreationDate()))));
         creationDateColumn.reorderableProperty().set(false);
         ageColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getAge()));
         ageColumn.reorderableProperty().set(false);
@@ -148,7 +148,7 @@ public class MainSceneController extends TopBarButtons implements Initializable,
         showButton.setText(cResourceBundle.getString("show"));
 
         numOfEyesColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(LocaleController.getNumberFormat().format(data.getValue().getHead().getEyesCount())));
-        
+
         initInfo();
     }
 
