@@ -106,8 +106,8 @@ public class DragonMap {
         });
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ESCAPE && selected.get() == true){
-                checkDragon = null;
                 runDeselectAnimation(checkDragon);
+                checkDragon = null;
             }
         });
 
