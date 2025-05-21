@@ -105,7 +105,7 @@ public class DragonMap {
             selectDragonByClick(event.getX(), event.getY());
         });
         scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ESCAPE && selected.get() == true){
+            if (e.getCode() == KeyCode.ESCAPE && selected.get() == true && isAnimating.get() == false){
                 runDeselectAnimation(checkDragon);
                 checkDragon = null;
             }
@@ -118,7 +118,8 @@ public class DragonMap {
     }
 
     private void selectDragonByClick(Double x, Double y) {
-        
+        if (isAnimating.get()) return;
+
         if (selected.get() == false) { 
             for (Entry<Dragon, StackPane> entry : dragons.entrySet()) {
                 StackPane mapDragon = entry.getValue();
@@ -149,9 +150,11 @@ public class DragonMap {
     }
 
     private void updateDragonInfo(Dragon dragon) {
+        if (dragon == null) return;
+
         ResourceBundle resources = LocaleController.getResourceBundle("main/main");
         nameLabel.setText(resources.getString("dragon_name_info") + ": " + dragon.getName());
-        coordinatesLabel.setText(String.format(resources.getString("x_info") + ": %d, " + resources.getString("y_prompt") + ": %d", 
+        coordinatesLabel.setText(String.format(resources.getString("x_info") + ": %d, " + resources.getString("y_info") + ": %d", 
             dragon.getCoordinates().getX(), dragon.getCoordinates().getY()));
         ageLabel.setText(resources.getString("age_prompt_info") + ": " + dragon.getAge());
         colorLabel.setText(resources.getString("color_prompt_info") + ": " + dragon.getColor());
